@@ -1,4 +1,6 @@
 class Usuario < ActiveRecord::Base
-  #associações no banco de dados
-  belongs_to :acesso
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 end

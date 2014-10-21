@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141021191314) do
 
-  create_table "acessos", force: true do |t|
-    t.string   "nivel"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "alunos", force: true do |t|
     t.integer  "idcliente"
@@ -109,12 +104,5 @@ ActiveRecord::Schema.define(version: 20141021191314) do
     t.datetime "updated_at"
   end
 
-  create_table "usuarios", force: true do |t|
-    t.integer  "idacesso"
-    t.string   "nome"
-    t.string   "senha"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
