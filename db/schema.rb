@@ -11,13 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021191314) do
-
-  create_table "acessos", force: true do |t|
-    t.string   "nivel"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20141022014211) do
 
   create_table "alunos", force: true do |t|
     t.integer  "idcliente"
@@ -109,12 +103,15 @@ ActiveRecord::Schema.define(version: 20141021191314) do
     t.datetime "updated_at"
   end
 
-  create_table "usuarios", force: true do |t|
-    t.integer  "idacesso"
-    t.string   "nome"
-    t.string   "senha"
+  create_table "users", force: true do |t|
+    t.string   "username",         null: false
+    t.string   "crypted_password", null: false
+    t.string   "salt",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nivel"
   end
+
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
