@@ -1,4 +1,5 @@
 Conservatoriohvl::Application.routes.draw do
+  resources :user_sessions
   resources :users
 
   resources :usuarios
@@ -6,7 +7,10 @@ Conservatoriohvl::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'usuarios#index'
+  root 'users#welcome'
+
+  get 'login' => 'user_sessions#new', :as => :login
+  post 'logout' => 'user_sessions#destroy', :as => :logout
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

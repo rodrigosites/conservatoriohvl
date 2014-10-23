@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>Conservatoriohvl</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -13,6 +12,23 @@
       <h1>Conservatório Musical Heitor Villa Lobos <small>// Santos - SP</small></h1>
     </div>
 
+    <div id="nav">
+      <% if current_user %>
+        <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
+        <%= link_to "Logout", :logout, method: :post %>
+      <% else %>
+        <%= link_to "Registrar", new_user_path %>
+      <% end %>
+    </div>
+    <div>
+        <% if flash[:notice] %>
+        <p id="notice" class="alert alert-success" role="alert"><%= flash[:notice] %></p>
+        <% end %> 
+        <% if flash[:alert]%>
+        <p id="alert" class="alert alert-danger" role="alert"><%= flash[:alert] %></p>
+        <% end %>
+    </div>
+    
     <%= yield %>
   
   </div>
