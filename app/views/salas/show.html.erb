@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome da Sala:</strong>
+  <%= @sala.nome %>
+</p>
+
+<% horarios = Horario.where("idsala = #{@sala.id}").order('horario') %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Horário</th>
+      <th>Professor</th>
+      <th>Aluno</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% horarios.each do |horario| %>
+      <tr>
+        <td><%= horario.horario.to_s.slice(10..15) %></td>
+        <td>INCLUIR NOME PROFESSOR</td>
+        <td>INCLUIR NOME ALUNO</td>
+        <td><%= link_to 'Editar', edit_horario_path(horario) %></td>
+        <td><%= link_to 'Excluir', horario, method: :delete, data: { confirm: "Tem certeza que deseja excluir o horario #{horario.horario}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Controlar Horários', new_horario_path(idsala: @sala.id) %> |
+<%= link_to 'Editar', edit_sala_path(@sala) %> |
+<%= link_to 'Voltar', salas_path %>

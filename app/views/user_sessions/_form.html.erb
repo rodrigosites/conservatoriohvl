@@ -1,13 +1,13 @@
-<%= form_tag user_sessions_path, :method => :post do %>
-  <div class="field">
-    <%= label_tag :username %><br />
-    <%= text_field_tag :username %>
+<%= form_tag user_sessions_path, :method => :post, html: { class: "form-horizontal", "role" => "form" } do %>
+  <div class="form-group">
+    <%= label_tag "Usuário", nil, class: "col-sm-2 control-label" %>
+    <%= text_field_tag :username, nil, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
+  <div class="form-group">
+    <%= label_tag "Senha", nil, class: "col-sm-2 control-label" %>
+    <%= password_field_tag :password, nil, class: "form-control" %>
   </div>
-  <div class="actions">
-    <%= submit_tag "Login" %>
+  <div class="form-group">
+    <br /><%= submit_tag "Login", class: "btn btn-default" %>
   </div>
 <% end %>

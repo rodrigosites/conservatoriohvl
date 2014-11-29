@@ -1,0 +1,39 @@
+<h1>Lista de Clientes</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Endereço</th>
+      <th>RG</th>
+      <th>CPF</th>
+      <th>Telefone</th>
+      <th>Celular</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clientes.each do |cliente| %>
+      <tr>
+        <td><%= cliente.nome %></td>
+        <td><%= cliente.endereco %></td>
+        <td><%= cliente.rg %></td>
+        <td><%= cliente.cpf %></td>
+        <td><%= cliente.telefone %></td>
+        <td><%= cliente.celular %></td>
+        <td><%= link_to 'Mostrar Perfil', cliente %></td>
+        <td><%= link_to 'Editar Perfil', edit_cliente_path(cliente) %></td>
+        <td><%= link_to 'Excluir', cliente, method: :delete, data: { confirm: "Tem certeza que deseja excluir o cliente #{cliente.nome}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<b>Total de clientes cadastrados: <%= @clientes.size %></b>
+
+<br /><br />
+
+<%= link_to 'Cadastrar Novo Cliente', new_cliente_path %>

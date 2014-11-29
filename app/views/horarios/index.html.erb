@@ -1,0 +1,33 @@
+<h1>Lista de Horários</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Horários</th>
+      <th>Professor</th>
+      <th>Aluno</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horarios.each do |horario| %>
+      <tr>
+        <td><%= horario.horario.to_s.slice(10..15) %></td>
+        <td>MOSTRAR PROFESSOR</td>
+        <td>MOSTRAR ALUNO</td>
+        <td><%= link_to 'Mostrar Perfil', horario %></td>
+        <td><%= link_to 'Editar Perfil', edit_horario_path(horario) %></td>
+        <td><%= link_to 'Excluir', horario, method: :delete, data: { confirm: "Tem certeza que deseja excluir o horario #{horario.horario}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<b>Total de horários cadastrados: <%= @horarios.size %></b>
+
+<br /><br />
+
+<%= link_to 'Cadastrar Novo Horário', new_horario_path %>

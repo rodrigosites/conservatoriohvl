@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vinculado ao Cliente:</strong>
+  <%= Cliente.find(@aluno.idcliente).nome %>
+</p>
+
+<p>
+  <strong>Aluno:</strong>
+  <%= @aluno.nome %>
+</p>
+
+<p>
+  <strong>Enedereço:</strong>
+  <%= @aluno.endereco %>
+</p>
+
+<p>
+  <strong>RG:</strong>
+  <%= @aluno.rg %>
+</p>
+
+<p>
+  <strong>CPF:</strong>
+  <%= @aluno.cpf %>
+</p>
+
+<p>
+  <strong>Telefone:</strong>
+  <%= @aluno.telefone %>
+</p>
+
+<p>
+  <strong>Celular:</strong>
+  <%= @aluno.celular %>
+</p>
+
+<%= link_to 'Edit', edit_aluno_path(@aluno) %> |
+<%= link_to 'Back', alunos_path %>

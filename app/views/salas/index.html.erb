@@ -1,0 +1,29 @@
+<h1>Lista de Salas</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sala</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @salas.each do |sala| %>
+      <tr>
+        <td><%= sala.nome %></td>
+        <td><%= link_to 'Mostrar Perfil', sala %></td>
+        <td><%= link_to 'Editar Perfil', edit_sala_path(sala) %></td>
+        <td><%= link_to 'Excluir', sala, method: :delete, data: { confirm: "Tem certeza que deseja excluir o sala #{sala.nome}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<b>Total de salas cadastradas: <%= @salas.size %></b>
+
+<br /><br />
+
+<%= link_to 'Cadastrar Nova Sala', new_sala_path %>

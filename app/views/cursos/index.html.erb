@@ -1,0 +1,33 @@
+<h1>Lista de Cursos</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Curso</th>
+      <th>Valor Mensal</th>
+      <th>Nº de Semestres</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cursos.each do |curso| %>
+      <tr>
+        <td><%= curso.nome %></td>
+        <td>R$ <%= curso.valor %></td>
+        <td><%= curso.semestres %></td>
+        <td><%= link_to 'Mostrar Perfil', curso %></td>
+        <td><%= link_to 'Editar Perfil', edit_curso_path(curso) %></td>
+        <td><%= link_to 'Excluir', curso, method: :delete, data: { confirm: "Tem certeza que deseja excluir o curso #{curso.nome}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<b>Total de cursos cadastrados: <%= @cursos.size %></b>
+
+<br /><br />
+
+<%= link_to 'Cadastrar Novo Curso', new_curso_path %>

@@ -1,12 +1,12 @@
-<h1>Listing users</h1>
+<h1>Lista de Usuários</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Username</th>
-      <th>Crypted password</th>
+      <th>Usuário</th>
+      <th>Senha Criptografada</th>
       <th>Salt</th>
-      <th>Nivel</th>
+      <th>Nível</th>
       <th></th>
       <th></th>
       <th></th>
@@ -20,9 +20,9 @@
         <td><%= user.crypted_password %></td>
         <td><%= user.salt %></td>
         <td><%= user.nivel %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar Perfil', user %></td>
+        <td><%= link_to 'Editar Perfil', edit_user_path(user) %></td>
+        <td><%= link_to 'Excluir', user, method: :delete, data: { confirm: "Tem certeza que deseja excluir o usuário #{user.username}?" } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'Criar Novo Usuário', new_user_path %>

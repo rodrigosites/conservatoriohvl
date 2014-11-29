@@ -1,17 +1,21 @@
 Conservatoriohvl::Application.routes.draw do
-  resources :user_sessions
-  resources :users
+  resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios
+  #resources :salas do
+  #  resources :horarios
+  #end
 
-  resources :usuarios
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#welcome'
+  root 'application#welcome'
 
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
 
+  # Rotas passando o idsala para o controller horarios
+  get 'horarios/:idsala/cadastrar' => 'horarios#new', as: :cadastrar
+ 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

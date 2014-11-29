@@ -1,0 +1,22 @@
+<%= form_for(@horario, html: { class: "form-horizontal", "role" => "form" }) do |f| %>
+  <% if @horario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@horario.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @horario.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.hidden_field :idsala, value: "#{params[:idsala]}" %>
+    <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />
+    <%= f.time_field :horario, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <br /><%= f.submit "Cadastrar", class: "btn btn-default" %>
+  </div>
+<% end %>

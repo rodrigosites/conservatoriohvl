@@ -23,7 +23,7 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %>
   </div>
-  <% if @user.nivel == "admin" || @user.username.nil? %> 
+  <% if !current_user.nil? && current_user.nivel == "admin" %> 
     <div class="field">
       <%= f.label :nivel %><br>
       <%= f.text_field :nivel %>

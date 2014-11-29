@@ -1,0 +1,41 @@
+<h1>Lista de Alunos</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Aluno</th>
+      <th>Endereço</th>
+      <th>RG</th>
+      <th>CPF</th>
+      <th>Telefone</th>
+      <th>Celular</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alunos.each do |aluno| %>
+      <tr>
+        <td><%= Cliente.find(aluno.idcliente).nome %></td>
+        <td><%= aluno.nome %></td>
+        <td><%= aluno.endereco %></td>
+        <td><%= aluno.rg %></td>
+        <td><%= aluno.cpf %></td>
+        <td><%= aluno.telefone %></td>
+        <td><%= aluno.celular %></td>
+        <td><%= link_to 'Mostrar Perfil', aluno %></td>
+        <td><%= link_to 'Editar Perfil', edit_aluno_path(aluno) %></td>
+        <td><%= link_to 'Excluir', aluno, method: :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<b>Total de alunos cadastrados: <%= @alunos.size %></b>
+
+<br /><br />
+
+<%= link_to 'Cadastrar Novo Aluno', new_aluno_path %>
