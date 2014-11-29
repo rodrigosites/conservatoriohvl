@@ -14,45 +14,43 @@
 
   <tbody>
       <tr>
-        <td></td>
-        <td>INCLUIR NOME PROFESSOR</td>
-        <td>INCLUIR NOME ALUNO</td>
-        <td><%= link_to 'Editar', edit_horario_path(horario) %></td>
-        <td><%= link_to 'Excluir', horario, method: :delete, data: { confirm: "Tem certeza que deseja excluir o horario #{horario.horario}?" } %></td>
+        <td><%= @cliente.nome %></td>
+        <td><%= @cliente.endereco %></td>
+        <td><%= @cliente.rg %></td>
+        <td><%= @cliente.cpf %></td>
+        <td><%= @cliente.telefone %></td>
+        <td><%= @cliente.celular %></td>
+      </tr>
+  </tbody>
+</table>
+
+<% @alunos = get_clientes(@cliente.id) %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Alunos Vinculados:</th>
+      <th>Curso:</th>
+      <th>Valor Mensal:</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alunos.each do |aluno| %>
+      <tr>
+        <td><%= aluno.nome %></td>
+        <td>INCLUIR NOME CURSO</td>
+        <td>INCLUIR VALOR MENSAL</td>
+        <td><%= link_to 'Mostrar', aluno_path(aluno) %></td>
+        <td><%= link_to 'Editar', edit_aluno_path(aluno) %></td>
+        <td><%= link_to 'Excluir', aluno, method: :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<p>
-  <strong>Cliente:</strong>
-  <%= @cliente.nome %>
-</p>
-
-<p>
-  <strong>Crypted password:</strong>
-  <%= @cliente.endereco %>
-</p>
-
-<p>
-  <strong>RG:</strong>
-  <%= @cliente.rg %>
-</p>
-
-<p>
-  <strong>CPF:</strong>
-  <%= @cliente.cpf %>
-</p>
-
-<p>
-  <strong>Telefone:</strong>
-  <%= @cliente.telefone %>
-</p>
-
-<p>
-  <strong>Celular:</strong>
-  <%= @cliente.celular %>
-</p>
-
-<%= link_to 'Edit', edit_cliente_path(@cliente) %> |
-<%= link_to 'Back', clientes_path %>
+<%= link_to 'Editar Cliente', edit_cliente_path(@cliente) %> |
+<%= link_to 'Voltar', clientes_path %>

@@ -5,7 +5,7 @@
   <%= @sala.nome %>
 </p>
 
-<% horarios = Horario.where("idsala = #{@sala.id}").order('horario') %>
+<% @horarios = get_horarios(@sala.id) %>
 
 <table class="table">
   <thead>
@@ -19,7 +19,7 @@
   </thead>
 
   <tbody>
-    <% horarios.each do |horario| %>
+    <% @horarios.each do |horario| %>
       <tr>
         <td><%= horario.horario.to_s.slice(10..15) %></td>
         <td>INCLUIR NOME PROFESSOR</td>
