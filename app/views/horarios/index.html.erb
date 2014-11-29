@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Dia da Semana</th>
       <th>Horários</th>
       <th>Professor</th>
       <th>Aluno</th>
@@ -13,8 +14,9 @@
   </thead>
 
   <tbody>
-    <% @horarios.each do |horario| %>
+    <% @horarios.order("dia, horario").each do |horario| %>
       <tr>
+        <td><%= horario.dia %></td>
         <td><%= horario.horario.to_s.slice(10..15) %></td>
         <td>MOSTRAR PROFESSOR</td>
         <td>MOSTRAR ALUNO</td>

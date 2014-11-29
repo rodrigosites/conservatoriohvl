@@ -59,6 +59,6 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def horario_params
-      params.require(:horario).permit(:horario, :idsala)
+      params.require(:horario).permit(:dia, :horario, :idsala)
     end
 end

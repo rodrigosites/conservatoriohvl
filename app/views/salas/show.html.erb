@@ -10,6 +10,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Dia</th>
       <th>Horário</th>
       <th>Professor</th>
       <th>Aluno</th>
@@ -21,6 +22,7 @@
   <tbody>
     <% @horarios.each do |horario| %>
       <tr>
+        <td><%= horario.dia %>
         <td><%= horario.horario.to_s.slice(10..15) %></td>
         <td>INCLUIR NOME PROFESSOR</td>
         <td>INCLUIR NOME ALUNO</td>
