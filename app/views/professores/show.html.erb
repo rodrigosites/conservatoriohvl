@@ -1,34 +1,53 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Professor:</strong>
-  <%= @professor.nome %>
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Professor:</th>
+      <th>Endereço:</th>
+      <th>RG:</th>
+      <th>CPF:</th>
+      <th>Telefone:</th>
+      <th>Celular:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @professor.nome %></td>
+      <td><%= @professor.endereco %></td>
+      <td><%= @professor.rg %></td>
+      <td><%= @professor.cpf %></td>
+      <td><%= @professor.telefone %></td>
+      <td><%= @professor.celular %></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>
-  <strong>Crypted password:</strong>
-  <%= @professor.endereco %>
-</p>
+<table class="table">
+  <thead>
+    <tr><th>Disponibilidades do Professor</th></tr>
+    <tr>
+      <th>Dia</th>
+      <th>Horário</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>RG:</strong>
-  <%= @professor.rg %>
-</p>
+  <% @disponibilidades = get_disponibilidades(@professor.id) %>
 
-<p>
-  <strong>CPF:</strong>
-  <%= @professor.cpf %>
-</p>
+  <tbody>
+    <% @disponibilidades.each do |disponibilidade| %>
+      <tr>
+        <td><%= disponibilidade.dia %>
+        <td><%= disponibilidade.horario.to_s.slice(10..15) %></td>
+        <td><%= link_to 'Editar', edit_disponibilidade_path(disponibilidade) %></td>
+        <td><%= link_to 'Excluir', disponibilidade, method: :delete, data: { confirm: "Tem certeza que deseja excluir a disponibilidade #{disponibilidade.horario}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<p>
-  <strong>Telefone:</strong>
-  <%= @professor.telefone %>
-</p>
-
-<p>
-  <strong>Celular:</strong>
-  <%= @professor.celular %>
-</p>
-
+<%= link_to 'Controlar Disponibilidades', new_disponibilidade_path(idprofessor: @professor.id) %> |
 <%= link_to 'Edit', edit_professor_path(@professor) %> |
 <%= link_to 'Back', professores_path %>

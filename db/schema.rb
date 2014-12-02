@@ -52,14 +52,6 @@ ActiveRecord::Schema.define(version: 20141129224122) do
     t.datetime "updated_at"
   end
 
-  create_table "cursos_professores", id: false, force: true do |t|
-    t.integer "professor_id", null: false
-    t.integer "curso_id",     null: false
-  end
-
-  add_index "cursos_professores", ["curso_id"], name: "index_cursos_professores_on_curso_id", using: :btree
-  add_index "cursos_professores", ["professor_id"], name: "index_cursos_professores_on_professor_id", using: :btree
-
   create_table "disponibilidades", force: true do |t|
     t.integer  "idprofessor"
     t.datetime "horario"

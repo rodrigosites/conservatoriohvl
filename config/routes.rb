@@ -1,5 +1,7 @@
 Conservatoriohvl::Application.routes.draw do
-  resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios
+  resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios, 
+  :disponibilidades, :cursos_professores
+
   #resources :salas do
   #  resources :horarios
   #end
@@ -16,7 +18,9 @@ Conservatoriohvl::Application.routes.draw do
   # Rotas passando o idsala para o controller horarios
   get 'horarios/:idsala/cadastrar' => 'horarios#new', as: :cadastrar
  
-  # Example of regular route:
+  get 'disponibilidades/:idprofessor/disponivel' => 'disponibilidades#new', as: :disponivel
+
+   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

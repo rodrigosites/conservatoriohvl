@@ -1,0 +1,33 @@
+<h1>Lista de Disponibilidades</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Professor</th>
+      <th>Dia da Semana</th>
+      <th>Horários</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @disponibilidades.order("dia, horario").each do |disponibilidade| %>
+      <tr>
+        <td><%= disponibilidade.idprofessor %></td>
+        <td><%= disponibilidade.dia %></td>
+        <td><%= disponibilidade.horario.to_s.slice(10..15) %></td>
+        <td><%= link_to 'Mostrar Perfil', disponibilidade %></td>
+        <td><%= link_to 'Editar Perfil', edit_disponibilidade_path(disponibilidade) %></td>
+        <td><%= link_to 'Excluir', disponibilidade, method: :delete, data: { confirm: "Tem certeza que deseja excluir a disponibilidade #{disponibilidade.horario}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<b>Total de disponibilidades cadastradas: <%= @disponibilidades.size %></b>
+
+<br /><br />
+
+<%= link_to 'Cadastrar Nova Disponibilidade', new_disponibilidade_path %>

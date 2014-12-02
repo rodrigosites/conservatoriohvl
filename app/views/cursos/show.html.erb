@@ -1,19 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nome do Curso:</strong>
-  <%= @curso.nome %>
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome do Curso:</th>
+      <th>Valor Mensal:</th>
+      <th>Quantidade de Semestres:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @curso.nome %></td>
+      <td><%= @curso.valor %></td>
+      <td><%= @curso.semestres %></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>
-  <strong>Enedereço:</strong>
-  <%= @curso.valor %>
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Professor Vinculado:</th>
+       <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>RG:</strong>
-  <%= @curso.semestres %>
-</p>
+  <% @professores_vinculados = get_professores(@curso) %>
 
-<%= link_to 'Edit', edit_curso_path(@curso) %> |
-<%= link_to 'Back', cursos_path %>
+  <tbody>
+    <% @professores_vinculados.each do |professor| %>
+      <tr>
+        <td><%= professor.nome %>
+        <td><%= link_to 'Excluir', professor, method: :delete, data: { confirm: "Tem certeza que deseja excluir a professor #{professor.nome}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Vincular Professor', new_cursos_professor_path(idcurso: @curso.id) %> |
+<%= link_to 'Editar', edit_curso_path(@curso) %> |
+<%= link_to 'Voltar', cursos_path %>
