@@ -1,6 +1,6 @@
 Conservatoriohvl::Application.routes.draw do
   resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios, 
-  :disponibilidades, :cursos_professores
+  :disponibilidades, :lecionam
 
   #resources :salas do
   #  resources :horarios
@@ -19,6 +19,8 @@ Conservatoriohvl::Application.routes.draw do
   get 'horarios/:idsala/cadastrar' => 'horarios#new', as: :cadastrar
  
   get 'disponibilidades/:idprofessor/disponivel' => 'disponibilidades#new', as: :disponivel
+
+  get 'lecionam/:idcurso/lecionar' => 'lecionam#new', as: :lecionar
 
    # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

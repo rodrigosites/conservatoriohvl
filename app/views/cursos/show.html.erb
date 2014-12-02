@@ -20,24 +20,23 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Professor Vinculado:</th>
+      <th>Professores Vinculado:</th>
        <th></th>
       <th></th>
     </tr>
   </thead>
-
-  <% @professores_vinculados = get_professores(@curso) %>
-
+  
   <tbody>
-    <% @professores_vinculados.each do |professor| %>
+    <% get_professores(@curso) do |professor| %>
       <tr>
         <td><%= professor.nome %>
-        <td><%= link_to 'Excluir', professor, method: :delete, data: { confirm: "Tem certeza que deseja excluir a professor #{professor.nome}?" } %></td>
+        <td><%= link_to 'Excluir', get_leciona(@curso.id,professor.id), method: :delete, data: { confirm: "Tem certeza que deseja excluir o vinculo com o professor #{professor.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
+
 </table>
 
-<%= link_to 'Vincular Professor', new_cursos_professor_path(idcurso: @curso.id) %> |
+<%= link_to 'Vincular Professor', lecionar_path(idcurso: @curso.id) %> |
 <%= link_to 'Editar', edit_curso_path(@curso) %> |
 <%= link_to 'Voltar', cursos_path %>
