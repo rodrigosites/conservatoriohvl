@@ -1,0 +1,41 @@
+<%= form_for(@matricula, html: { class: "form-horizontal", "role" => "form" }) do |f| %>
+  <% if @matricula.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@matricula.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @matricula.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "Aluno:", class: "col-sm-0 control-label" %><br />
+    <%= f.select :idaluno, Aluno.all.collect {|a| [ a.nome,a.id ]} , { include_blank: true }, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label "Curso:", class: "col-sm-0 control-label"  %><br />
+    <%= f.select :idcurso, Curso.all.collect {|c| [ c.nome,c.id ]} , { include_blank: true }, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label ":", class: "col-sm-0 control-label" %><br />
+    <%= f.text_field :rg, class: "form-control" %>
+  </div>
+  <div class="form-group">
+      <%= f.label "CPF:", class: "col-sm-0  control-label" %><br />
+      <%= f.text_field :cpf, class: "form-control" %>
+  </div>
+  <div class="form-group">
+      <%= f.label "Telefone:", class: "col-sm-0 control-label" %><br />
+      <%= f.text_field :telefone, class: "form-control" %>
+  </div>
+  <div class="form-group">
+      <%= f.label "Celular:", class: "col-sm-0 control-label" %><br />
+      <%= f.text_field :celular, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <br /><%= f.submit "Cadastrar", class: "btn btn-default" %>
+  </div>
+<% end %>

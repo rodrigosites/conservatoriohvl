@@ -1,0 +1,30 @@
+<%= form_for(@classe, html: { class: "form-horizontal", "role" => "form" }) do |f| %>
+  <% if @classe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@classe.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @classe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "Curso:", class: "col-sm-0 control-label" %><br />
+    <%= f.collection_select :idcurso, Curso.all, :id, :nome, {}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label "Professor habilitado:", class: "col-sm-0 control-label" %><br />
+    <%= f.grouped_collection_select :idprofessor, Curso.all, :professores, :nome, :id, :nome, {}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />
+    <%= f.grouped_collection_select :idhorario, Professor.all, :disponibilidades, :nome, :id, :horario, {}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <br /><%= f.submit "Cadastrar", class: "btn btn-default" %>
+  </div>
+<% end %>
+

@@ -1,5 +1,5 @@
 class ProfessoresController < ApplicationController
-   before_action :set_professor, only: [:show, :edit, :update, :destroy]
+  before_action :set_professor, only: [:show, :edit, :update, :destroy]
 
   def index
     @professores = Professor.all

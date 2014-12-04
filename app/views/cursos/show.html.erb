@@ -27,7 +27,7 @@
   </thead>
   
   <tbody>
-    <% get_professores(@curso) do |professor| %>
+    <% get_professores(@curso).each do |professor| %>
       <tr>
         <td><%= professor.nome %>
         <td><%= link_to 'Excluir', get_leciona(@curso.id,professor.id), method: :delete, data: { confirm: "Tem certeza que deseja excluir o vinculo com o professor #{professor.nome}?" } %></td>

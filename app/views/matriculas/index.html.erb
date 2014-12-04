@@ -1,0 +1,39 @@
+<h1>Lista de Professores</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Professor</th>
+      <th>Endereço</th>
+      <th>RG</th>
+      <th>CPF</th>
+      <th>Telefone</th>
+      <th>Celular</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @professores.each do |professor| %>
+      <tr>
+        <td><%= professor.nome %></td>
+        <td><%= professor.endereco %></td>
+        <td><%= professor.rg %></td>
+        <td><%= professor.cpf %></td>
+        <td><%= professor.telefone %></td>
+        <td><%= professor.celular %></td>
+        <td><%= link_to 'Mostrar Perfil', professor %></td>
+        <td><%= link_to 'Editar Perfil', edit_professor_path(professor) %></td>
+        <td><%= link_to 'Excluir', professor, method: :delete, data: { confirm: "Tem certeza que deseja excluir o professor #{professor.nome}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<b>Total de professores cadastrados: <%= @professores.size %></b>
+
+<br /><br />
+
+<%= link_to 'Cadastrar Novo Professor', new_professor_path %>
