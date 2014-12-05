@@ -1,0 +1,10 @@
+$('#matricula_horario_id').empty();
+$('#matricula_horario_id').append( $('<option>Selecione um horário</option>'));
+<% if @horarios.any? %>
+	<% @horarios.each do |horario| %>
+	  $('#matricula_horario_id').append($('<option value="<%= horario.id %>"><%= horario.horario.to_s.slice(10..15) %></option>'));
+	<% end %>
+<% else %>
+	$('#matricula_horario_id').empty();
+	$('#matricula_horario_id').append( $('<option>Sem horários disponíveis</option>'));
+<% end %>

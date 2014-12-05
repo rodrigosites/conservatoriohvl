@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.hidden_field :curso_id, value: "#{params[:idcurso]}" %>
+    <%= f.hidden_field :curso_id, value: "#{params[:curso_id]}" %>
     <%= f.label "Professor:", class: "col-sm-0 control-label" %><br />
     <%= f.select :professor_id, Professor.all.collect {|p| [ p.nome,p.id ]} , { include_blank: true }, class: "form-control" %>
   </div>

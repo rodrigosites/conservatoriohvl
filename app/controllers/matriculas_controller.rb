@@ -46,9 +46,23 @@ class MatriculasController < ApplicationController
   def destroy
     @matricula.destroy
     respond_to do |format|
-      format.html { redirect_to matriculaes_path }
+      format.html { redirect_to matriculas_path }
       format.json { head :no_content }
     end
+  end
+
+  def busca_professores
+    @curso = Curso.find params[:curso_id]
+    @professores = @curso.professores
+  end
+
+  def busca_horarios
+    @professor = Professor.find params[:professor_id]
+    @horarios = @professor.horarios
+  end
+
+  def busca_dados_curso
+    @curso = Curso.find params[:curso_id]
   end
 
   private
@@ -59,7 +73,7 @@ class MatriculasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def matricula_params
-      params.require(:matricula).permit(:idaluno, :idcurso, :idclasse, :data_matricula, :termino_matricula, 
+      params.require(:matricula).permit(:aluno_id, :curso_id, :horario_id, :data_matricula, 
         :semestre, :valor_mensal)
     end
 end

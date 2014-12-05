@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205131432) do
+ActiveRecord::Schema.define(version: 20141205183759) do
 
   create_table "alunos", force: true do |t|
     t.integer  "cliente_id"
@@ -23,15 +23,6 @@ ActiveRecord::Schema.define(version: 20141205131432) do
     t.string   "celular"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "classes", force: true do |t|
-    t.integer  "professor_id"
-    t.integer  "horario_id"
-    t.float    "salario_professor"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "curso_id"
   end
 
   create_table "clientes", force: true do |t|
@@ -53,20 +44,13 @@ ActiveRecord::Schema.define(version: 20141205131432) do
     t.datetime "updated_at"
   end
 
-  create_table "disponibilidades", force: true do |t|
-    t.integer  "professor_id"
-    t.time     "horario"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "dia"
-  end
-
   create_table "horarios", force: true do |t|
     t.integer  "sala_id"
     t.time     "horario"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "dia"
+    t.integer  "professor_id"
   end
 
   create_table "lecionam", force: true do |t|
@@ -78,13 +62,14 @@ ActiveRecord::Schema.define(version: 20141205131432) do
 
   create_table "matriculas", force: true do |t|
     t.integer  "aluno_id"
-    t.integer  "classe_id"
     t.datetime "data_matricula"
     t.datetime "termino_matricula"
     t.integer  "semestre"
     t.float    "valor_mensal"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "horario_id"
+    t.integer  "curso_id"
   end
 
   create_table "professores", force: true do |t|

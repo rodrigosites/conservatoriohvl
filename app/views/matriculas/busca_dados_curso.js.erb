@@ -1,0 +1,6 @@
+$('#matricula_semestre').empty();
+$('#matricula_semestre').append( $('<option value>Selecione o semestre</option>'));
+<% for i in 1..@curso.semestres %>
+$('#matricula_semestre').append($('<option value="<%= i %>"><%= i %>º Semestre</option>'));
+<% end %>
+$('#matricula_valor_mensal').val("R$ <%= @curso.valor %>0")

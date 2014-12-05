@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.hidden_field :sala_id, value: "#{params[:sala_id]}" %>
+    <%= f.hidden_field :professor_id, value: "#{params[:professor_id]}" %>
     <%= f.label "Dia:", class: "col-sm-0 control-label" %><br />
     <%= f.select :dia, ["Segunda","Terça","Quarta","Quinta","Sexta","Sábado" ] , { include_blank: true }, class: "form-control" %>
     <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />

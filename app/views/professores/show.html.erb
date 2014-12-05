@@ -35,17 +35,17 @@
   </thead>
  
   <tbody>
-    <% @professor.disponibilidades.order('dia,horario').each do |disponibilidade| %>
+    <% @professor.horarios.order('dia,horario').each do |horario| %>
       <tr>
-        <td><%= disponibilidade.dia %>
-        <td><%= disponibilidade.horario.to_s.slice(10..15)  %></td>
-        <td><%= link_to 'Editar', edit_disponibilidade_path(disponibilidade) %></td>
-        <td><%= link_to 'Excluir', disponibilidade, method: :delete, data: { confirm: "Tem certeza que deseja excluir a disponibilidade #{disponibilidade.horario}?" } %></td>
+        <td><%= horario.dia %>
+        <td><%= horario.horario.to_s.slice(10..15)  %></td>
+        <td><%= link_to 'Editar', edit_horario_path(horario) %></td>
+        <td><%= link_to 'Excluir', horario, method: :delete, data: { confirm: "Tem certeza que deseja excluir a horario #{horario.horario}?" } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Controlar Disponibilidades', new_disponibilidade_path(professor_id: @professor.id) %> |
+<%= link_to 'Controlar Horários', new_horario_path(professor_id: @professor.id) %> |
 <%= link_to 'Edit', edit_professor_path(@professor) %> |
 <%= link_to 'Back', professores_path %>

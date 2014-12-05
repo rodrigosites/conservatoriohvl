@@ -13,27 +13,31 @@
 
   <div class="form-group">
     <%= f.label "Aluno:", class: "col-sm-0 control-label" %><br />
-    <%= f.select :idaluno, Aluno.all.collect {|a| [ a.nome,a.id ]} , { include_blank: true }, class: "form-control" %>
+    <%= f.collection_select :aluno_id, Aluno.all, :id, :nome, { prompt: 'Selecione o aluno' }, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label "Curso:", class: "col-sm-0 control-label"  %><br />
-    <%= f.select :idcurso, Curso.all.collect {|c| [ c.nome,c.id ]} , { include_blank: true }, class: "form-control" %>
+    <%= f.collection_select :curso_id, Curso.all, :id, :nome, { prompt: 'Selecione o curso' }, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label ":", class: "col-sm-0 control-label" %><br />
-    <%= f.text_field :rg, class: "form-control" %>
+    <%= f.label "Semestre:", class: "col-sm-0 control-label"  %><br />
+    <%= f.collection_select :semestre, [], nil, nil, { prompt: 'Primeiro selecione o curso...' }, class: "form-control" %>
   </div>
   <div class="form-group">
-      <%= f.label "CPF:", class: "col-sm-0  control-label" %><br />
-      <%= f.text_field :cpf, class: "form-control" %>
+    <%= f.label "Valor Mensal", class: "col-sm-0 control-label"  %><br />
+    <%= f.text_field :valor_mensal, { class: "form-control", :readonly => true }%>
   </div>
-  <div class="form-group">
-      <%= f.label "Telefone:", class: "col-sm-0 control-label" %><br />
-      <%= f.text_field :telefone, class: "form-control" %>
+  <div class="form-group" id="professor_div">
+  <label>Professor</label><br />
+  <%= collection_select(:professor, :id, [], :id, :nome, { prompt: 'Primeiro selecione o curso...' }, class: "form-control")%>
   </div>
-  <div class="form-group">
-      <%= f.label "Celular:", class: "col-sm-0 control-label" %><br />
-      <%= f.text_field :celular, class: "form-control" %>
+  <div class="form-group" id="horario_div">
+    <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />
+    <%= f.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor...' }, {class: "form-control"} %>
+  </div>
+  <div class="form-group" id="horario_div">
+    <%= f.label "Data da Matrícula:", class: "col-sm-0 control-label" %><br />
+    <%= f.date_select :data_matricula, {:order => [:day,:month,:year], :use_two_digit_numbers => true, :date_separator => '/'}, {class: "col-sm-0"} %>
   </div>
   <div class="form-group">
     <br /><%= f.submit "Cadastrar", class: "btn btn-default" %>

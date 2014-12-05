@@ -19,7 +19,7 @@
   <tbody>
     <% @alunos.each do |aluno| %>
       <tr>
-        <td><%= Cliente.find(aluno.idcliente).nome %></td>
+        <td><%= Cliente.find(aluno.cliente_id).nome %></td>
         <td><%= aluno.nome %></td>
         <td><%= aluno.endereco %></td>
         <td><%= aluno.rg %></td>

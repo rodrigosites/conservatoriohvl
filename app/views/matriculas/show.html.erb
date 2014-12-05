@@ -3,51 +3,25 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Professor:</th>
-      <th>Endereço:</th>
-      <th>RG:</th>
-      <th>CPF:</th>
-      <th>Telefone:</th>
-      <th>Celular:</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @professor.nome %></td>
-      <td><%= @professor.endereco %></td>
-      <td><%= @professor.rg %></td>
-      <td><%= @professor.cpf %></td>
-      <td><%= @professor.telefone %></td>
-      <td><%= @professor.celular %></td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="table">
-  <thead>
-    <tr><th>Disponibilidades do Professor</th></tr>
-    <tr>
-      <th>Dia</th>
+      <th>Aluno</th>
+      <th>Curso</th>
+      <th>Professor</th>
       <th>Horário</th>
-      <th></th>
-      <th></th>
+      <th>Semestre</th>
+      <th>Valor Mensal</th>
     </tr>
   </thead>
-
-  <% @disponibilidades = get_disponibilidades(@professor.id) %>
-
   <tbody>
-    <% @disponibilidades.each do |disponibilidade| %>
-      <tr>
-        <td><%= disponibilidade.dia %>
-        <td><%= disponibilidade.horario.to_s.slice(10..15) %></td>
-        <td><%= link_to 'Editar', edit_disponibilidade_path(disponibilidade) %></td>
-        <td><%= link_to 'Excluir', disponibilidade, method: :delete, data: { confirm: "Tem certeza que deseja excluir a disponibilidade #{disponibilidade.horario}?" } %></td>
-      </tr>
-    <% end %>
+    <tr>
+      <td><%= @matricula.aluno.nome %></td>
+      <td><%= @matricula.curso.nome %></td>
+      <td><%= @matricula.horario.professor.nome %></td>
+      <td><%= @matricula.horario.horario.to_s.slice(10..15) %></td>
+      <td><%= @matricula.semestre %></td>
+      <td><%= @matricula.valor_mensal %></td>
+    </tr>
   </tbody>
 </table>
 
-<%= link_to 'Controlar Disponibilidades', new_disponibilidade_path(idprofessor: @professor.id) %> |
-<%= link_to 'Edit', edit_professor_path(@professor) %> |
-<%= link_to 'Back', professores_path %>
+<%= link_to 'Edit', edit_matricula_path(@matricula) %> |
+<%= link_to 'Back', matriculas_path %>

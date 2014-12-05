@@ -1,0 +1,10 @@
+$('#professor_id').empty();
+$('#professor_id').append( $('<option value>Selecione um professor</option>'));
+<% if @professores.any? %>
+	<% @professores.each do |professor| %>
+	  $('#professor_id').append($('<option value="<%= professor.id %>"><%= professor.nome %></option>'));
+	<% end %>
+<% else %>
+	$('#professor_id').empty();
+	$('#professor_id').append( $('<option>Não há professores cadastrados para este curso</option>'));
+<% end %>

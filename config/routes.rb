@@ -1,6 +1,14 @@
 Conservatoriohvl::Application.routes.draw do
   resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios, 
-  :disponibilidades, :lecionam
+  :lecionam
+
+  resources :matriculas do
+    collection do
+      get 'busca_professores', to: "matriculas#busca_professores"
+      get 'busca_horarios', to: "matriculas#busca_horarios"
+      get "busca_dados_curso", to: "matriculas#busca_dados_curso"
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -12,13 +20,8 @@ Conservatoriohvl::Application.routes.draw do
   post 'logout' => 'user_sessions#destroy', :as => :logout
 
   # Rotas passando o id via parametro para as controllers 
-  get 'horarios/:sala_id/cadastrar' => 'horarios#new', as: :cadastrar
-  get 'disponibilidades/:professor_id/disponivel' => 'disponibilidades#new', as: :disponivel
+  get 'horario/:professor_id/disponivel' => 'horario#new', as: :disponivel
   get 'lecionam/:curso_id/lecionar' => 'lecionam#new', as: :lecionar
-
-  get ':controller/:action.:format'
-  get 'classes/new' => 'classes#new'
-  get 'classes' => 'classes#index'
 
    # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
