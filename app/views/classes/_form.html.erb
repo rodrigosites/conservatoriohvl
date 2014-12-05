@@ -13,13 +13,13 @@
 
   <div class="form-group">
     <%= f.label "Curso:", class: "col-sm-0 control-label" %><br />
-    <%= f.collection_select :curso_id, Curso.all, :id, :nome, {:prompt => 'Escolha o professor'}, {class: "form-control"} %>
+    <%= f.collection_select :curso_id, Curso.all, :id, :nome, {:prompt => 'Escolha o curso...'}, {class: "form-control"} %>
   </div>
-  <div class="form-group">
+  <div class="form-group" id="professor_div">
     <%= f.label "Professor habilitado:", class: "col-sm-0 control-label" %><br />
     <%= f.grouped_collection_select :professor_id, Curso.all, :professores, :nome, :id, :nome, {}, {class: "form-control"} %>
   </div>
-  <div class="form-group">
+  <div class="form-group" id="horario_div">
     <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />
     <%= f.grouped_collection_select :horario_id, Professor.all, :disponibilidades, :nome, :id, :horario, {}, {class: "form-control"} %>
   </div>

@@ -2,28 +2,31 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+# Script para controlar dinamicamente os <select> do modelo Classe.
+
 $ ->
 	professores = $('#classe_professor_id').html()
-	$('#classe_professor_id').hide()
+	$('#professor_div').hide()
 	horarios = $('#classe_horario_id').html()
-	$('#classe_horario_id').hide()
+	$('#horario_div').hide()
 	$(document).on 'change', '#classe_curso_id', (evt) ->
 		curso = $('#classe_curso_id :selected').text()
 		options_professores = $(professores).filter("optgroup[label='#{curso}']").html()
 		if options_professores
 			$('#classe_professor_id').html(options_professores)
-			$("#classe_professor_id").append('<option selected></option>');
-			$('#classe_professor_id').show()
+			$("#classe_professor_id").append('<option selected>Escolha o professor...</option>');
+			$('#professor_div').show()
 		else
 			$('#classe_professor_id').empty()
-			$('#classe_professor_id').hide()
+			$('#professor_div').hide()
+			$('#horario_div').hide()
 	
 	$(document).on 'change', '#classe_professor_id', (evt) ->
 		professor = $('#classe_professor_id :selected').text()
 		options_horarios = $(horarios).filter("optgroup[label='#{professor}']").html()
 		if options_horarios
 			$('#classe_horario_id').html(options_horarios)
-			$('#classe_horario_id').show()
+			$('#horario_div').show()
 		else
 			$('#classe_horario_id').empty()
-			$('#classe_horario_id').hide()
+			$('#horario_div').hide()

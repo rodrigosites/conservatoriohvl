@@ -33,14 +33,12 @@
       <th></th>
     </tr>
   </thead>
-
-  <% @disponibilidades = get_disponibilidades(@professor.id) %>
-
+ 
   <tbody>
-    <% @disponibilidades.each do |disponibilidade| %>
+    <% @professor.disponibilidades.order('dia,horario').each do |disponibilidade| %>
       <tr>
         <td><%= disponibilidade.dia %>
-        <td><%= disponibilidade.horario.to_s.slice(10..15) %></td>
+        <td><%= disponibilidade.horario.to_s.slice(10..15)  %></td>
         <td><%= link_to 'Editar', edit_disponibilidade_path(disponibilidade) %></td>
         <td><%= link_to 'Excluir', disponibilidade, method: :delete, data: { confirm: "Tem certeza que deseja excluir a disponibilidade #{disponibilidade.horario}?" } %></td>
       </tr>
