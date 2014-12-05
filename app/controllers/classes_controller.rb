@@ -57,7 +57,7 @@ class ClassesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def classe_params
-      params.require(:classe).permit(:idaluno, :idcurso, :idclasse, :data_classe, :termino_classe, 
+      params.require(:classe).permit(:aluno_id, :curso_id, :classe_id, :data_classe, :termino_classe, 
         :semestre, :valor_mensal)
     end
 

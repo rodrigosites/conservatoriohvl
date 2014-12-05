@@ -59,6 +59,6 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def aluno_params
-      params.require(:aluno).permit(:idcliente, :nome, :endereco, :rg, :cpf, :telefone, :celular)
+      params.require(:aluno).permit(:cliente_id, :nome, :endereco, :rg, :cpf, :telefone, :celular)
     end
 end

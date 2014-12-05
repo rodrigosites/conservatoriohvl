@@ -15,7 +15,7 @@
   <tbody>
     <% @disponibilidades.order("dia, horario").each do |disponibilidade| %>
       <tr>
-        <td><%= disponibilidade.idprofessor %></td>
+        <td><%= disponibilidade.professor_id %></td>
         <td><%= disponibilidade.dia %></td>
         <td><%= disponibilidade.horario.to_s.slice(10..15) %></td>
         <td><%= link_to 'Mostrar Perfil', disponibilidade %></td>

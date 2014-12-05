@@ -12,9 +12,9 @@ Conservatoriohvl::Application.routes.draw do
   post 'logout' => 'user_sessions#destroy', :as => :logout
 
   # Rotas passando o id via parametro para as controllers 
-  get 'horarios/:idsala/cadastrar' => 'horarios#new', as: :cadastrar
-  get 'disponibilidades/:idprofessor/disponivel' => 'disponibilidades#new', as: :disponivel
-  get 'lecionam/:idcurso/lecionar' => 'lecionam#new', as: :lecionar
+  get 'horarios/:sala_id/cadastrar' => 'horarios#new', as: :cadastrar
+  get 'disponibilidades/:professor_id/disponivel' => 'disponibilidades#new', as: :disponivel
+  get 'lecionam/:curso_id/lecionar' => 'lecionam#new', as: :lecionar
 
   get ':controller/:action.:format'
   get 'classes/new' => 'classes#new'

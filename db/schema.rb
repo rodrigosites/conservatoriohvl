@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203142457) do
+ActiveRecord::Schema.define(version: 20141204134709) do
 
   create_table "alunos", force: true do |t|
-    t.integer  "idcliente"
+    t.integer  "cliente_id"
     t.string   "nome"
     t.string   "endereco"
     t.string   "rg"
@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(version: 20141203142457) do
   end
 
   create_table "classes", force: true do |t|
-    t.integer  "idprofessor"
-    t.integer  "idhorario"
+    t.integer  "professor_id"
+    t.integer  "horario_id"
     t.float    "salario_professor"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "idcurso"
+    t.integer  "curso_id"
   end
 
   create_table "clientes", force: true do |t|
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20141203142457) do
   end
 
   create_table "disponibilidades", force: true do |t|
-    t.integer  "idprofessor"
+    t.integer  "professor_id"
     t.datetime "horario"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20141203142457) do
   end
 
   create_table "horarios", force: true do |t|
-    t.integer  "idsala"
+    t.integer  "sala_id"
     t.datetime "horario"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 20141203142457) do
   end
 
   create_table "matriculas", force: true do |t|
-    t.integer  "idaluno"
-    t.integer  "idclasse"
+    t.integer  "aluno_id"
+    t.integer  "classe_id"
     t.datetime "data_matricula"
     t.datetime "termino_matricula"
     t.integer  "semestre"

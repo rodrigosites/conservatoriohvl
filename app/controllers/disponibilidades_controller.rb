@@ -60,7 +60,7 @@ class DisponibilidadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def disponibilidade_params
-      params.require(:disponibilidade).permit(:dia, :horario, :idprofessor)
+      params.require(:disponibilidade).permit(:dia, :horario, :professor_id)
     end
 
 end
