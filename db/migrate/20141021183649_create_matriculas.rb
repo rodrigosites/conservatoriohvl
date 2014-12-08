@@ -1,9 +1,9 @@
 class CreateMatriculas < ActiveRecord::Migration
   def change
     create_table :matriculas do |t|
-      t.integer :idaluno
-      t.integer :idcurso
-      t.integer :idclasse
+      t.belongs_to :aluno
+      t.belongs_to :curso
+      t.belongs_to :horario
       t.timestamp :data_matricula
       t.timestamp :termino_matricula
       t.integer :semestre

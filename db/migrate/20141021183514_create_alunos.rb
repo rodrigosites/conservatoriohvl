@@ -1,7 +1,7 @@
 class CreateAlunos < ActiveRecord::Migration
   def change
     create_table :alunos do |t|
-      t.integer :idcliente
+      t.belongs_to :cliente
       t.string :nome
       t.string :endereco
       t.string :rg

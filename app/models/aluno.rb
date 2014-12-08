@@ -1,5 +1,5 @@
 class Aluno < ActiveRecord::Base
   #associações no banco de dados
   belongs_to :cliente
-  has_many :matriculas
+  has_many :matriculas, :dependent => :destroy
 end

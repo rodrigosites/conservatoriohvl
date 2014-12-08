@@ -1,6 +1,6 @@
 class Professor < ActiveRecord::Base
   #associações no banco de dados
-  has_many :horarios
-  has_many :lecionam
-  has_many :cursos, through: :lecionam
+  has_many :horarios, :dependent => :destroy
+  has_many :lecionam, :dependent => :destroy
+  has_many :cursos, through: :lecionam, :dependent => :destroy
 end

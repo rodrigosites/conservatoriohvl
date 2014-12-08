@@ -7,7 +7,7 @@
     </h3>
   </div>
     <ul class="list-group">
-      <li class="list-group-item"><b>Matrícula nº</b> <%= @aluno.id %></li>
+      <li class="list-group-item"><b>Matrícula nº:</b> <%= @aluno.id %></li>
       <li class="list-group-item"><b>Vinculado ao Cliente:</b> <%= Cliente.find(@aluno.cliente_id).nome %></li>
       <li class="list-group-item"><b>Endereço:</b> <%= @aluno.endereco %></li>
       <li class="list-group-item"><b>RG:</b> <%= @aluno.rg %></li>
