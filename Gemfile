@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'thin'
+
 gem 'sorcery'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

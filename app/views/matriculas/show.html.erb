@@ -9,6 +9,7 @@
       <th>Horário</th>
       <th>Semestre</th>
       <th>Valor Mensal</th>
+      <th>Data da Matrícula</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +20,7 @@
       <td><%= @matricula.horario.horario.to_s.slice(10..15) %></td>
       <td><%= @matricula.semestre %></td>
       <td><%= @matricula.valor_mensal %></td>
+      <td><%= @matricula.data_matricula.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></td>
     </tr>
   </tbody>
 </table>

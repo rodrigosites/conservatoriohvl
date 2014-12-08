@@ -39,18 +39,23 @@
   </thead>
 
   <tbody>
+    <% valor_total = 0 %>
     <% @alunos.each do |aluno| %>
-      <tr>
-        <td><%= aluno.nome %></td>
-        <td>INCLUIR NOME CURSO</td>
-        <td>INCLUIR VALOR MENSAL</td>
-        <td><%= link_to 'Mostrar', aluno_path(aluno) %></td>
-        <td><%= link_to 'Editar', edit_aluno_path(aluno) %></td>
-        <td><%= link_to 'Excluir', aluno, method: :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
-      </tr>
+      <% aluno.matriculas.each do |matricula| %>
+        <tr>
+          <td><%= aluno.nome %></td>
+          <td><%= matricula.curso.nome %></td>
+          <td>R$ <%= matricula.valor_mensal %>0</td><% valor_total = valor_total + matricula.valor_mensal %>
+          <td><%= link_to 'Mostrar', aluno_path(aluno) %></td>
+          <td><%= link_to 'Editar', edit_aluno_path(aluno) %></td>
+          <td><%= link_to 'Excluir', aluno, method: :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
+
+<b>Mensalidade Total: R$ <%= valor_total %>0</b><br /><br />
 
 <%= link_to 'Editar Cliente', edit_cliente_path(@cliente) %> |
 <%= link_to 'Voltar', clientes_path %>

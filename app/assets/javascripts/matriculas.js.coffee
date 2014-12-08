@@ -34,6 +34,7 @@ $ ->
 			  dataType: "script"
 			  data:
 			    professor_id: $('#professor_id option:selected').val()
+			    curso_id: $('#matricula_curso_id option:selected').val()
 		else
 			$('#matricula_horario_id').empty();
 			$('#matricula_horario_id').append( $('<option value>Primeiro selecione o professor...</option>'));

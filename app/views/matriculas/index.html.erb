@@ -9,6 +9,7 @@
       <th>Horário</th>
       <th>Semestre</th>
       <th>Valor Mensal</th>
+      <th>Data da Matrícula</th>
       <th></th>
       <th></th>
       <th></th>
@@ -24,6 +25,7 @@
         <td><%= matricula.horario.horario.to_s.slice(10..15) %></td>
         <td><%= matricula.semestre %></td>
         <td><%= matricula.valor_mensal %></td>
+        <td><%= matricula.data_matricula.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></td>
         <td><%= link_to 'Mostrar Perfil', matricula %></td>
         <td><%= link_to 'Editar Perfil', edit_matricula_path(matricula) %></td>
         <td><%= link_to 'Excluir', matricula, method: :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>

@@ -1,5 +1,5 @@
 class HorariosController < ApplicationController
-before_action :set_horario, only: [:show, :edit, :update, :destroy]
+before_action :set_horario, only: [:show, :edit, :update, :destroy, :atribuir_sala]
 
   def index
     @horarios = Horario.all
@@ -59,6 +59,6 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def horario_params
-      params.require(:horario).permit(:dia, :horario, :professor_id)
+      params.require(:horario).permit(:dia, :horario, :professor_id, :sala_id)
     end
 end

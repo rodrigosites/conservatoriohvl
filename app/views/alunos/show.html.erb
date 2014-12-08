@@ -1,39 +1,21 @@
 <p id="notice"><%= notice %></p>
+<br />
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b><%= @aluno.nome.upcase %></b>
+    </h3>
+  </div>
+    <ul class="list-group">
+      <li class="list-group-item"><b>Matrícula nº</b> <%= @aluno.id %></li>
+      <li class="list-group-item"><b>Vinculado ao Cliente:</b> <%= Cliente.find(@aluno.cliente_id).nome %></li>
+      <li class="list-group-item"><b>Endereço:</b> <%= @aluno.endereco %></li>
+      <li class="list-group-item"><b>RG:</b> <%= @aluno.rg %></li>
+      <li class="list-group-item"><b>CPF:</b> <%= @aluno.cpf %></li>
+      <li class="list-group-item"><b>Telefone:</b> <%= @aluno.telefone %></li>
+      <li class="list-group-item"><b>Celular:</b> <%= @aluno.celular %></li>
+    </ul>
+</div>
 
-<p>
-  <strong>Vinculado ao Cliente:</strong>
-  <%= Cliente.find(@aluno.cliente_id).nome %>
-</p>
-
-<p>
-  <strong>Aluno:</strong>
-  <%= @aluno.nome %>
-</p>
-
-<p>
-  <strong>Enedereço:</strong>
-  <%= @aluno.endereco %>
-</p>
-
-<p>
-  <strong>RG:</strong>
-  <%= @aluno.rg %>
-</p>
-
-<p>
-  <strong>CPF:</strong>
-  <%= @aluno.cpf %>
-</p>
-
-<p>
-  <strong>Telefone:</strong>
-  <%= @aluno.telefone %>
-</p>
-
-<p>
-  <strong>Celular:</strong>
-  <%= @aluno.celular %>
-</p>
-
-<%= link_to 'Edit', edit_aluno_path(@aluno) %> |
-<%= link_to 'Back', :back %>
+<%= link_to 'Editar Dados', edit_aluno_path(@aluno) %> |
+<%= link_to 'Voltar', :back %>

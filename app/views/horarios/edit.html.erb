@@ -1,5 +1,9 @@
 <h1>Editar Dados do Horário</h1>
 
-<%= render 'form' %>
+<% if request.env["HTTP_REFERER"] == "http://localhost:3000/horarios" %>
+  <%= render 'sala_form' %>
+<% else %>
+  <%= render 'form' %>
+<% end %>
 
 <%= link_to 'Voltar', :back %>
