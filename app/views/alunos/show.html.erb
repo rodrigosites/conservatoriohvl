@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-<br />
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
@@ -17,5 +15,9 @@
     </ul>
 </div>
 
-<%= link_to 'Editar Dados', edit_aluno_path(@aluno) %> |
-<%= link_to 'Voltar', :back %>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Editar Dados', edit_aluno_path(@aluno), :class => "btn btn-default", :method => :get %>
+</div>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Voltar', alunos_path, :class => "btn btn-default", :method => :get %>
+</div>

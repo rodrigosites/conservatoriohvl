@@ -1,31 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b><%= @professor.nome.upcase %></b>
+    </h3>
+  </div>
+    <ul class="list-group">
+      <li class="list-group-item"><b>Endereço:</b> <%= @professor.endereco %></li>
+      <li class="list-group-item"><b>RG:</b> <%= @professor.rg %></li>
+      <li class="list-group-item"><b>CPF:</b> <%= @professor.cpf %></li>
+      <li class="list-group-item"><b>Telefone:</b> <%= @professor.telefone %></li>
+      <li class="list-group-item"><b>Celular:</b> <%= @professor.celular %></li>
+    </ul>
+</div>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Professor:</th>
-      <th>Endereço:</th>
-      <th>RG:</th>
-      <th>CPF:</th>
-      <th>Telefone:</th>
-      <th>Celular:</th>
+      <th>Disponibilidade de Horários</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @professor.nome %></td>
-      <td><%= @professor.endereco %></td>
-      <td><%= @professor.rg %></td>
-      <td><%= @professor.cpf %></td>
-      <td><%= @professor.telefone %></td>
-      <td><%= @professor.celular %></td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="table">
-  <thead>
-    <tr><th>Disponibilidades do Professor</th></tr>
     <tr>
       <th>Dia</th>
       <th>Horário</th>
@@ -39,13 +31,18 @@
       <tr>
         <td><%= horario.dia %>
         <td><%= horario.horario.to_s.slice(10..15)  %></td>
-        <td><%= link_to 'Editar', edit_horario_path(horario) %></td>
-        <td><%= link_to 'Excluir', horario, method: :delete, data: { confirm: "Tem certeza que deseja excluir a horario #{horario.horario}?" } %></td>
+        <td><%= button_to 'Editar', edit_horario_path(horario), :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Excluir', horario, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a horario #{horario.horario}?" } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Controlar Horários', new_horario_path(professor_id: @professor.id) %> |
-<%= link_to 'Edit', edit_professor_path(@professor) %> |
-<%= link_to 'Back', professores_path %>
+<div style="float: left; margin-right: 10px;">
+<%= button_to 'Controlar Horários', new_horario_path(professor_id: @professor.id), :class => "btn btn-default", :method => :get %>
+</div>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Editar Dados', edit_professor_path(@professor), :class => "btn btn-default", :method => :get %>
+</div>
+<br /><br />
+<%= button_to 'Voltar', professores_path, :class => "btn btn-default", :method => :get  %>

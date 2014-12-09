@@ -1,42 +1,42 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b><%= @curso.nome.upcase %></b>
+    </h3>
+  </div>
+    <ul class="list-group">
+      <li class="list-group-item"><b>Valor Mensal:</b> R$ <%= @curso.valor %>0</li>
+      <li class="list-group-item"><b>Quantidade de Semestres:</b> <%= @curso.semestres %></li>
+    </ul>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Nome do Curso:</th>
-      <th>Valor Mensal:</th>
-      <th>Quantidade de Semestres:</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @curso.nome %></td>
-      <td><%= @curso.valor %></td>
-      <td><%= @curso.semestres %></td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Professores Vinculado:</th>
-       <th></th>
       <th></th>
     </tr>
   </thead>
   
   <tbody>
-    <% get_professores(@curso).each do |professor| %>
-      <tr>
-        <td><%= professor.nome %>
-        <td><%= link_to 'Excluir', get_leciona(@curso.id,professor.id), method: :delete, data: { confirm: "Tem certeza que deseja excluir o vinculo com o professor #{professor.nome}?" } %></td>
-      </tr>
+    <% if (@professores = get_professores(@curso)).size > 0 %>
+      <% @professores.each do |professor| %>
+        <tr>
+          <td><%= professor.nome %>
+          <td><%= button_to 'Excluir', get_leciona(@curso.id,professor.id), :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o vinculo com o professor #{professor.nome}?" } %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr><td>Ainda há professores vinculados neste curso...</td></tr>
     <% end %>
   </tbody>
-
 </table>
-
-<%= link_to 'Vincular Professor', lecionar_path(curso_id: @curso.id) %> |
-<%= link_to 'Editar', edit_curso_path(@curso) %> |
-<%= link_to 'Voltar', cursos_path %>
+  
+<div style="float: left; margin-right: 10px;">   
+  <%= button_to 'Vincular Professores', lecionar_path(curso_id: @curso.id), :class => "btn btn-default", :method => :get %>
+</div>
+<div style="float: left; margin-right: 10px;"> 
+  <%= button_to 'Editar', edit_curso_path(@curso), :class => "btn btn-default", :method => :get  %> 
+</div>
+<br /><br />
+<%= button_to 'Voltar', cursos_path, :class => "btn btn-default", :method => :get  %>

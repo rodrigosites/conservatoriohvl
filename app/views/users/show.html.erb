@@ -1,24 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b><%= @user.username.upcase %></b>
+    </h3>
+  </div>
+    <ul class="list-group">
+      <li class="list-group-item"><b>Senha Criptografada:</b> <%= @user.crypted_password %></li>
+      <li class="list-group-item"><b>Criptografia:</b> <%= @user.salt %></li>
+      <li class="list-group-item"><b>Nível:</b> <%= @user.nivel %></li>
+    </ul>
+</div>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Crypted password:</strong>
-  <%= @user.crypted_password %>
-</p>
-
-<p>
-  <strong>Salt:</strong>
-  <%= @user.salt %>
-</p>
-
-<p>
-  <strong>Nivel:</strong>
-  <%= @user.nivel %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div style="float: left; margin-right: 10px;">
+  <%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-default", :method => :get %>
+</div>
+<div style="float: left; margin-right: 10px;">
+  <%= link_to 'Back', users_path, :class => "btn btn-default", :method => :get %>
+</div>

@@ -1,41 +1,44 @@
   <!DOCTYPE html>
 <html>
 <head>
-  <title>Conservatoriohvl</title>
+  <title>Conservatório Musical Heitor Villa Lobos - Santos/SP</title>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="page-header">
-      <h1>Conservatório Musical Heitor Villa Lobos <small>// Santos - SP</small></h1>
-    </div>
-
-    <div id="nav">
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Heitor Villa Lobos</a>
+      </div>
       <% if current_user %>
-        <%= link_to "Alunos", alunos_path %> /
-        <%= link_to "Clientes", clientes_path %> /
-        <%= link_to "Cursos", cursos_path %> /
-        <%= link_to "Horários", horarios_path %> /
-        <%= link_to "Matrículas", matriculas_path %> /
-        <%= link_to "Professores", professores_path %> /
-        <%= link_to "Salas", salas_path %> /
-        <%= link_to "Usuários", users_path %> / 
-        <%= link_to "Desconectar", :logout, method: :post %>
+        <ul class="nav navbar-nav">
+          <li class="<%= 'active' if controller_name == "alunos" %>"><%= link_to "Alunos", alunos_path %></li>
+          <li class="<%= 'active' if controller_name == "clientes" %>"><%= link_to "Clientes", clientes_path %></li>
+          <li class="<%= 'active' if controller_name == "cursos" %>"><%= link_to "Cursos", cursos_path %></li>
+          <li class="<%= 'active' if controller_name == "horarios" %>"><%= link_to "Horários", horarios_path %></li>
+          <li class="<%= 'active' if controller_name == "matriculas" %>"><%= link_to "Matrículas", matriculas_path %></li>
+          <li class="<%= 'active' if controller_name == "professores" %>"><%= link_to "Professores", professores_path %></li>
+          <li class="<%= 'active' if controller_name == "salas" %>"><%= link_to "Salas", salas_path %></li>
+          <% if current_user.nivel == 'admin' %><li class="<%= 'active' if controller_name == "users" %>"><%= link_to "Usuários", users_path %></li><% end %>
+          <li><%= link_to "Desconectar", :logout, method: :post %></li>
+        </ul>
+        <p class="navbar-text navbar-right">@<%= current_user.username.split[0] %></p>
       <% end %>
-    </div>
-    <div>
-        <% if flash[:notice] %>
-        <p id="notice" class="alert alert-success" role="alert"><%= flash[:notice] %></p>
-        <% end %> 
-        <% if flash[:alert]%>
-        <p id="alert" class="alert alert-danger" role="alert"><%= flash[:alert] %></p>
-        <% end %>
-    </div>
+     </div>
+  </nav>
+
+  <div class="container">
+    <% if flash[:notice] %>
+      <p id="notice" class="alert alert-success" role="alert"><%= flash[:notice] %></p>
+    <% end %> 
+    <% if flash[:alert]%>
+      <p id="alert" class="alert alert-danger" role="alert"><%= flash[:alert] %></p>
+    <% end %>
     
     <%= yield %>
-  
   </div>
 </body>
 </html>

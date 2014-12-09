@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_filter :require_login, only: [:new]
+  before_filter :verifica_nivel
 
   # GET /users
   # GET /users.json
@@ -72,4 +73,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation, :nivel)
     end
+
 end

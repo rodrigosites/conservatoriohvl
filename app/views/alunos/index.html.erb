@@ -1,12 +1,12 @@
 <h1>Lista de Alunos</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Aluno</th>
       <th>Telefone</th>
       <th>Celular</th>
-      <th>Nº de Matrículas</th>
+      <th>Matrículas</th>
       <th></th>
       <th></th>
       <th></th>
@@ -20,9 +20,9 @@
         <td><%= aluno.telefone %></td>
         <td><%= aluno.celular %></td>
         <td><%= aluno.matriculas.size %>
-        <td><%= link_to 'Ver Ficha', aluno %></td>
-        <td><%= link_to 'Editar', edit_aluno_path(aluno) %></td>
-        <td><%= link_to 'Excluir', aluno, method: :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
+        <td><%= button_to "Abrir a Ficha", aluno, :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to "Editar Dados", edit_aluno_path(aluno), :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to "Excluir Aluno", aluno, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br /><br />
 
-<%= link_to 'Cadastrar Novo Aluno', new_aluno_path %>
+<%= button_to 'Cadastrar Novo Aluno', new_aluno_path, :class => "btn btn-default", :method => :get %>

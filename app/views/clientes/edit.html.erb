@@ -1,6 +1,5 @@
-<h1>Editar Dados do Cliente</h1>
+<h3><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados do Cliente</h3>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @cliente %> |
-<%= link_to 'Back', cliente_path %>
+<%= button_to 'Voltar', cliente_path, :class => "btn btn-default", :method => :get %>

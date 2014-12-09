@@ -1,6 +1,5 @@
-<h1>Editar Dados do Sala</h1>
+<h1><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados do Sala</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @sala %> |
-<%= link_to 'Back', sala_path %>
+<%= button_to 'Voltar', sala_path, :class => "btn btn-default", :method => :get %>

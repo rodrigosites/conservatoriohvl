@@ -1,6 +1,6 @@
 <h1>Lista de Clientes</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Cliente</th>
@@ -24,9 +24,9 @@
         <td><%= cliente.cpf %></td>
         <td><%= cliente.telefone %></td>
         <td><%= cliente.celular %></td>
-        <td><%= link_to 'Mostrar Perfil', cliente %></td>
-        <td><%= link_to 'Editar Perfil', edit_cliente_path(cliente) %></td>
-        <td><%= link_to 'Excluir', cliente, method: :delete, data: { confirm: "Tem certeza que deseja excluir o cliente #{cliente.nome}?" } %></td>
+        <td><%= button_to "Abrir a Ficha", cliente, :class => "btn btn-default btn-xs", :method => :get  %></td>
+        <td><%= button_to "Editar Dados", edit_cliente_path(cliente), :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to "Excluir Cliente", cliente, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o cliente #{cliente.nome}? Fazer isso excluirá todos os alunos vinculados." } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +36,4 @@
 
 <br /><br />
 
-<%= link_to 'Cadastrar Novo Cliente', new_cliente_path %>
+<%= button_to 'Cadastrar Novo Cliente', new_cliente_path, :class => "btn btn-default", :method => :get   %>

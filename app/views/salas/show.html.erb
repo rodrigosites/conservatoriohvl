@@ -1,37 +1,51 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Nome da Sala:</strong>
-  <%= @sala.nome %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b><%= @sala.nome.upcase %> - UTILIZAÇÃO</b>
+    </h3>
+  </div>
+</div>
 
 <% @horarios = get_horarios(@sala.id) %>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Dia</th>
       <th>Horário</th>
+      <th>Curso</th>
       <th>Professor</th>
       <th>Aluno</th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @horarios.each do |horario| %>
+    <% if @horarios.size > 0 %>
+      <% @horarios.each do |horario| %>
+        <% horario.matriculas.each do |matricula| %>
+          <tr>
+            <td><%= horario.dia %>
+            <td><%= horario.horario.to_s.slice(10..15) %></td>
+            <td><%= matricula.curso.nome %></td>
+            <td><%= horario.professor.nome %></td>
+            <td><%= matricula.aluno.nome %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% else %>
       <tr>
-        <td><%= horario.dia %>
-        <td><%= horario.horario.to_s.slice(10..15) %></td>
-        <td>INCLUIR NOME PROFESSOR</td>
-        <td>INCLUIR NOME ALUNO</td>
-        <td><%= link_to 'Editar', edit_horario_path(horario) %></td>
-        <td><%= link_to 'Excluir', horario, method: :delete, data: { confirm: "Tem certeza que deseja excluir o horario #{horario.horario}?" } %></td>
-      </tr>
+        <td>Esta sala ainda não tem aulas vinculadas a ela.</td>
+        <td></td>
+        <td></td>
+        <td></td>
+     </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Editar', edit_sala_path(@sala) %> |
-<%= link_to 'Voltar', salas_path %>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Editar', edit_sala_path(@sala), :class => "btn btn-default", :method => :get %>
+</div>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Voltar', salas_path, :class => "btn btn-default", :method => :get %>
+</div>

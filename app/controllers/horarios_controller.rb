@@ -1,5 +1,5 @@
 class HorariosController < ApplicationController
-before_action :set_horario, only: [:show, :edit, :update, :destroy, :atribuir_sala]
+before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala]
 
   def index
     @horarios = Horario.all
@@ -49,6 +49,11 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :atribuir_sa
       format.html { redirect_to horarios_path}
       format.json { head :no_content }
     end
+  end
+
+  def remove_sala
+    @horario.sala_id = ""
+    @horario.save
   end
 
   private

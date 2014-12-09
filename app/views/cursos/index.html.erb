@@ -1,6 +1,6 @@
 <h1>Lista de Cursos</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Curso</th>
@@ -18,9 +18,9 @@
         <td><%= curso.nome %></td>
         <td>R$ <%= curso.valor %></td>
         <td><%= curso.semestres %></td>
-        <td><%= link_to 'Mostrar Perfil', curso %></td>
-        <td><%= link_to 'Editar Perfil', edit_curso_path(curso) %></td>
-        <td><%= link_to 'Excluir', curso, method: :delete, data: { confirm: "Tem certeza que deseja excluir o curso #{curso.nome}?" } %></td>
+        <td><%= button_to "Abrir a Ficha", curso, :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to "Editar Dados", edit_curso_path(curso), :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to "Excluir Curso", curso, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o curso #{curso.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br /><br />
 
-<%= link_to 'Cadastrar Novo Curso', new_curso_path %>
+<%= button_to 'Cadastrar Novo Curso', new_curso_path, :class => "btn btn-default", :method => :get %>

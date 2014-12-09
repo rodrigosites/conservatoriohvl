@@ -1,4 +1,4 @@
-<%= form_for(@curso, html: { class: "form-horizontal", "role" => "form" }) do |f| %>
+<%= form_for(@curso, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
   <% if @curso.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@curso.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -24,7 +24,6 @@
     <%= f.text_field :semestres, class: "form-control" %>
   </div>
   <div class="form-group">
-    <div class="form-group">
     <br /><%= f.submit "Cadastrar", class: "btn btn-default" %>
   </div>
 <% end %>

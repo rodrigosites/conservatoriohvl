@@ -1,4 +1,4 @@
-<%= form_for(@aluno, html: { class: "form-horizontal", "role" => "form" }) do |f| %>
+<%= form_for(@aluno, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
   <% if @aluno.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@aluno.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="form-group">
     <%= f.label "Vinculado ao Cliente:", class: "col-sm-0 control-label" %><br />
     <%= f.select :cliente_id, Cliente.all.collect {|c| [ c.nome, c.id ] }, { include_blank: true }, class: "form-control" %>

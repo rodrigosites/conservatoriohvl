@@ -1,6 +1,6 @@
 <h1>Lista de Matrículas</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Aluno</th>
@@ -26,9 +26,9 @@
         <td><%= matricula.semestre %></td>
         <td><%= matricula.valor_mensal %></td>
         <td><%= matricula.data_matricula.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></td>
-        <td><%= link_to 'Mostrar Perfil', matricula %></td>
-        <td><%= link_to 'Editar Perfil', edit_matricula_path(matricula) %></td>
-        <td><%= link_to 'Excluir', matricula, method: :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>
+        <td><%= button_to 'Mostrar Perfil', matricula, :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Editar Perfil', edit_matricula_path(matricula), :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Excluir', matricula, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +38,4 @@
 
 <br /><br />
 
-<%= link_to 'Cadastrar Nova Matrícula', new_matricula_path %>
+<%= button_to 'Cadastrar Nova Matrícula', new_matricula_path, :class => "btn btn-default", :method => :get  %>

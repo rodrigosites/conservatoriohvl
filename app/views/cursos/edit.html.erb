@@ -1,6 +1,5 @@
-<h1>Editar Dados do Curso</h1>
+<h1><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados do Curso</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @curso %> |
-<%= link_to 'Back', curso_path %>
+<%= button_to 'Voltar', curso_path, :class => "btn btn-default", :method => :get %>

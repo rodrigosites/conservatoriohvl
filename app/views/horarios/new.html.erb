@@ -2,4 +2,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Voltar', professor_path(params[:professor_id]) %>
+<%= button_to 'Voltar', professor_path(params[:professor_id]), :class => "btn btn-default", :method => :get  %>

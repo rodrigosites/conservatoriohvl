@@ -1,4 +1,4 @@
-<%= form_for(@sala, html: { class: "form-horizontal", "role" => "form" }) do |f| %>
+<%= form_for(@sala, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
   <% if @sala.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sala.errors.count, "error") %> prohibited this user from being saved:</h2>

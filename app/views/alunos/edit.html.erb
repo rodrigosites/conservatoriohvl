@@ -1,8 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<h3><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados do Aluno</h3>
+<h1><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados do Aluno</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @aluno %> |
-<%= link_to 'Back', aluno_path %>
+<%= button_to 'Voltar', aluno_path, :class => "btn btn-default", :method => :get %>

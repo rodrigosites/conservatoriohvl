@@ -1,6 +1,6 @@
 <h1>Lista de Professores</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Professor</th>
@@ -24,9 +24,9 @@
         <td><%= professor.cpf %></td>
         <td><%= professor.telefone %></td>
         <td><%= professor.celular %></td>
-        <td><%= link_to 'Mostrar Perfil', professor %></td>
-        <td><%= link_to 'Editar Perfil', edit_professor_path(professor) %></td>
-        <td><%= link_to 'Excluir', professor, method: :delete, data: { confirm: "Tem certeza que deseja excluir o professor #{professor.nome}?" } %></td>
+        <td><%= button_to 'Mostrar Perfil', professor, :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Editar Perfil', edit_professor_path(professor), :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Excluir', professor, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o professor #{professor.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +36,4 @@
 
 <br /><br />
 
-<%= link_to 'Cadastrar Novo Professor', new_professor_path %>
+<%= button_to 'Cadastrar Novo Professor', new_professor_path, :class => "btn btn-default", :method => :get %>

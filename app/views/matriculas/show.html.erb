@@ -1,29 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b>MATRÍCULA Nº <%= @matricula.id %></b>
+    </h3>
+  </div>
+    <ul class="list-group">
+      <li class="list-group-item"><b>Aluno:</b> <%= @matricula.aluno.nome %></li>
+      <li class="list-group-item"><b>Curso:</b> <%= @matricula.curso.nome  %></li>
+      <li class="list-group-item"><b>Professor:</b> <%= @matricula.horario.professor.nome %></li>
+      <li class="list-group-item"><b>Horário:</b> <%= @matricula.horario.horario.to_s.slice(10..15)%></li>
+      <li class="list-group-item"><b>Semestre:</b> <%= @matricula.semestre %></li>
+      <li class="list-group-item"><b>Valor Mensal:</b> <%= @matricula.valor_mensal %></li>
+      <li class="list-group-item"><b>Data da Matrícula:</b> <%= @matricula.data_matricula.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></li>
+    </ul>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Aluno</th>
-      <th>Curso</th>
-      <th>Professor</th>
-      <th>Horário</th>
-      <th>Semestre</th>
-      <th>Valor Mensal</th>
-      <th>Data da Matrícula</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @matricula.aluno.nome %></td>
-      <td><%= @matricula.curso.nome %></td>
-      <td><%= @matricula.horario.professor.nome %></td>
-      <td><%= @matricula.horario.horario.to_s.slice(10..15) %></td>
-      <td><%= @matricula.semestre %></td>
-      <td><%= @matricula.valor_mensal %></td>
-      <td><%= @matricula.data_matricula.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></td>
-    </tr>
-  </tbody>
-</table>
-
-<%= link_to 'Edit', edit_matricula_path(@matricula) %> |
-<%= link_to 'Back', matriculas_path %>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Edit', edit_matricula_path(@matricula), :class => "btn btn-default", :method => :get %>
+</div>
+<div style="float: left; margin-right: 10px;">
+<%= button_to 'Back', matriculas_path, :class => "btn btn-default", :method => :get %>
+</div>

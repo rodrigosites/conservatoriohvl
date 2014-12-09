@@ -1,9 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Nome da Horário:</strong>
-  <%= @horario.horario %>
-</p>
-
-<%= link_to 'Edit', edit_horario_path(@horario) %> |
-<%= link_to 'Back', horarios_path %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b><%= horario.horario%></h3>
+  </div>
+<%= button_to 'Editar', edit_horario_path(@horario), :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Voltar', horarios_path, :class => "btn btn-default", :method => :get  %>

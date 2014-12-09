@@ -1,6 +1,6 @@
 <h1>Lista de Salas</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Sala</th>
@@ -14,9 +14,9 @@
     <% @salas.each do |sala| %>
       <tr>
         <td><%= sala.nome %></td>
-        <td><%= link_to 'Mostrar Perfil', sala %></td>
-        <td><%= link_to 'Editar Perfil', edit_sala_path(sala) %></td>
-        <td><%= link_to 'Excluir', sala, method: :delete, data: { confirm: "Tem certeza que deseja excluir o sala #{sala.nome}?" } %></td>
+        <td><%= button_to 'Ver Utilização', sala, :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Editar Dados', edit_sala_path(sala), :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Excluir', sala, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o sala #{sala.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br /><br />
 
-<%= link_to 'Cadastrar Nova Sala', new_sala_path %>
+<%= button_to 'Cadastrar Nova Sala', new_sala_path, :class => "btn btn-default", :method => :get  %>

@@ -1,61 +1,59 @@
-<p id="notice"><%= notice %></p>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Cliente:</th>
-      <th>Endereço:</th>
-      <th>RG:</th>
-      <th>CPF:</th>
-      <th>Telefone:</th>
-      <th>Celular:</th>
-    </tr>
-  </thead>
-
-  <tbody>
-      <tr>
-        <td><%= @cliente.nome %></td>
-        <td><%= @cliente.endereco %></td>
-        <td><%= @cliente.rg %></td>
-        <td><%= @cliente.cpf %></td>
-        <td><%= @cliente.telefone %></td>
-        <td><%= @cliente.celular %></td>
-      </tr>
-  </tbody>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b><%= @cliente.nome.upcase %></b>
+    </h3>
+  </div>
+    <ul class="list-group">
+      <li class="list-group-item"><b>Endereço:</b> <%= @cliente.endereco %></li>
+      <li class="list-group-item"><b>RG:</b> <%= @cliente.rg %></li>
+      <li class="list-group-item"><b>CPF:</b> <%= @cliente.cpf %></li>
+      <li class="list-group-item"><b>Telefone:</b> <%= @cliente.telefone %></li>
+      <li class="list-group-item"><b>Celular:</b> <%= @cliente.celular %></li>
+    </ul>
+</div>
 
 <% @alunos = get_clientes(@cliente.id) %>
+<% if @alunos.size > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Alunos Vinculados:</th>
+        <th>Curso:</th>
+        <th>Valor Mensal:</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Alunos Vinculados:</th>
-      <th>Curso:</th>
-      <th>Valor Mensal:</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% valor_total = 0 %>
-    <% @alunos.each do |aluno| %>
-      <% aluno.matriculas.each do |matricula| %>
-        <tr>
-          <td><%= aluno.nome %></td>
-          <td><%= matricula.curso.nome %></td>
-          <td>R$ <%= matricula.valor_mensal %>0</td><% valor_total = valor_total + matricula.valor_mensal %>
-          <td><%= link_to 'Mostrar', aluno_path(aluno) %></td>
-          <td><%= link_to 'Editar', edit_aluno_path(aluno) %></td>
-          <td><%= link_to 'Excluir', aluno, method: :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
-        </tr>
+    <tbody>
+      <% valor_total = 0 %>
+      <% @alunos.each do |aluno| %>
+        <% aluno.matriculas.each do |matricula| %>
+          <tr>
+            <td><%= aluno.nome %></td>
+            <td><%= matricula.curso.nome %></td>
+            <td>R$ <%= matricula.valor_mensal %>0</td><% valor_total = valor_total + matricula.valor_mensal %>
+            <td><%= link_to 'Mostrar', aluno_path(aluno) %></td>
+            <td><%= link_to 'Editar', edit_aluno_path(aluno) %></td>
+            <td><%= link_to 'Excluir', aluno, method: :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
 
-<b>Mensalidade Total: R$ <%= valor_total %>0</b><br /><br />
+  <% unless valor_total == 0 %>
+    <b>Mensalidade Total: R$ <%= valor_total %>0</b><br /><br />
+  <% else %>
+    <tr><td>Alunos vinculados ainda não foram matriculados em cursos.</td></tr>
+  <% end %>
+    </tbody>
+  </table>
+<% end %>
 
-<%= link_to 'Editar Cliente', edit_cliente_path(@cliente) %> |
-<%= link_to 'Voltar', clientes_path %>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Editar Cliente', edit_cliente_path(@cliente), :class => "btn btn-default", :method => :get %>
+</div>
+<div style="float: left;">
+<%= button_to 'Voltar', clientes_path, :class => "btn btn-default", :method => :get %>
+</div>

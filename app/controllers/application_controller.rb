@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def not_authenticated
     redirect_to root_path, alert: "Você não pode acessar esta página sem estar autenticado."
   end
+
+  def verifica_nivel
+    not_authenticated unless current_user.nivel == "admin"
+  end
 end
