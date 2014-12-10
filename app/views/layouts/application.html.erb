@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Conservatório Musical Heitor Villa Lobos - Santos/SP</title>
@@ -11,21 +11,16 @@
   <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Heitor Villa Lobos</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"># Heitor Villa Lobos</a>
       </div>
       <% if current_user %>
-        <ul class="nav navbar-nav">
-          <li class="<%= 'active' if controller_name == "alunos" %>"><%= link_to "Alunos", alunos_path %></li>
-          <li class="<%= 'active' if controller_name == "clientes" %>"><%= link_to "Clientes", clientes_path %></li>
-          <li class="<%= 'active' if controller_name == "cursos" %>"><%= link_to "Cursos", cursos_path %></li>
-          <li class="<%= 'active' if controller_name == "horarios" %>"><%= link_to "Horários", horarios_path %></li>
-          <li class="<%= 'active' if controller_name == "matriculas" %>"><%= link_to "Matrículas", matriculas_path %></li>
-          <li class="<%= 'active' if controller_name == "professores" %>"><%= link_to "Professores", professores_path %></li>
-          <li class="<%= 'active' if controller_name == "salas" %>"><%= link_to "Salas", salas_path %></li>
-          <% if current_user.nivel == 'admin' %><li class="<%= 'active' if controller_name == "users" %>"><%= link_to "Usuários", users_path %></li><% end %>
-          <li><%= link_to "Desconectar", :logout, method: :post %></li>
-        </ul>
-        <p class="navbar-text navbar-right">@<%= current_user.username.split[0] %></p>
+        <%= render 'layouts/menu' %>
       <% end %>
      </div>
   </nav>
@@ -37,7 +32,6 @@
     <% if flash[:alert]%>
       <p id="alert" class="alert alert-danger" role="alert"><%= flash[:alert] %></p>
     <% end %>
-    
     <%= yield %>
   </div>
 </body>

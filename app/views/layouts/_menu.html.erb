@@ -1,0 +1,72 @@
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="menu">
+  <ul class="nav navbar-nav">
+    <!-- Alunos -->
+    <li class="dropdown <%= 'active' if controller_name == "alunos" %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Alunos <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to "Cadastrar", new_aluno_path %></li>
+        <li><%= link_to "Listar", alunos_path %></li>
+      </ul>
+    </li>
+    <!-- Clientes -->
+    <li class="dropdown <%= 'active' if controller_name == "clientes" %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Clientes <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to "Cadastrar", new_cliente_path %></li>
+        <li><%= link_to "Listar", clientes_path %></li>
+      </ul>
+    </li>
+    <!-- Cursos -->
+    <li class="dropdown <%= 'active' if controller_name == "cursos" %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cursos <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to "Cadastrar", new_curso_path %></li>
+        <li><%= link_to "Listar", cursos_path %></li>
+      </ul>
+    </li>
+    <!-- Horários -->
+    <li class="dropdown <%= 'active' if controller_name == "horarios" %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Horarios <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to "Atribuir Salas", horarios_path %></li>
+      </ul>
+    </li>
+    <!-- Matrículas -->
+    <li class="dropdown <%= 'active' if controller_name == "matriculas" %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Matriculas <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to "Cadastrar", new_matricula_path %></li>
+        <li><%= link_to "Listar", matriculas_path %></li>
+      </ul>
+    </li>
+    <!-- Professores -->
+    <li class="dropdown <%= 'active' if controller_name == "professores" %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Professores <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to "Cadastrar", new_professor_path %></li>
+        <li><%= link_to "Listar", professores_path %></li>
+      </ul>
+    </li>
+    <!-- Salas -->
+    <li class="dropdown <%= 'active' if controller_name == "salas" %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Salas <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to "Cadastrar", new_sala_path %></li>
+        <li><%= link_to "Listar", salas_path %></li>
+      </ul>
+    </li>
+    <!-- Usuários -->
+    <% if current_user.nivel == 'admin' %>
+      <li class="dropdown <%= 'active' if controller_name == "users" %>">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuários <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to "Cadastrar", new_user_path %></li>
+          <li><%= link_to "Listar", users_path %></li>
+        </ul>
+      </li>
+    <% end %>
+    <li><%= link_to "Desconectar", :logout, method: :post %></li>
+  </ul>
+  <p class="navbar-text navbar-right">@<%= current_user.username.split[0] %></p>
+</div>
