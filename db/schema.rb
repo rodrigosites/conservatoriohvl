@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202180428) do
+ActiveRecord::Schema.define(version: 20141212173014) do
 
   create_table "alunos", force: true do |t|
     t.integer  "cliente_id"
@@ -70,6 +70,15 @@ ActiveRecord::Schema.define(version: 20141202180428) do
     t.float    "valor_mensal"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "notificacoes", force: true do |t|
+    t.string   "conteudo"
+    t.boolean  "visualizado"
+    t.string   "tipo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "professores", force: true do |t|

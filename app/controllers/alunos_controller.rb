@@ -17,9 +17,10 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
   def create
     @aluno = Aluno.new(aluno_params)
-
+  
     respond_to do |format|
       if @aluno.save
+        gera_notificacao("aviso","admin",@aluno)
         format.html { redirect_to @aluno, notice: "Aluno #{@aluno.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @aluno }
       else

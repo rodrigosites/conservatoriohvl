@@ -19,6 +19,9 @@ Conservatoriohvl::Application.routes.draw do
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
 
+  get 'inicial', to: "funcionalidades#inicial"
+  get 'notificacao_lida', to: "funcionalidades#notificacao_lida"
+ 
   # Rotas passando o id via parametro para as controllers 
   get 'horario/:professor_id/disponivel' => 'horario#new', as: :disponivel
   get 'lecionam/:curso_id/lecionar' => 'lecionam#new', as: :lecionar

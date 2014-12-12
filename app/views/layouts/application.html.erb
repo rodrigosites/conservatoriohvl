@@ -5,6 +5,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -17,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#"># Heitor Villa Lobos</a>
+        <%= link_to "#Heitor Villa Lobos", inicial_path, class: "navbar-brand" %>
       </div>
       <% if current_user %>
         <%= render 'layouts/menu' %>
@@ -34,5 +35,9 @@
     <% end %>
     <%= yield %>
   </div>
+  
+  <script type="text/javascript">
+    <%= yield :js %>
+  </script>  
 </body>
 </html>

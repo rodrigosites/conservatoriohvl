@@ -18,4 +18,19 @@ class ApplicationController < ActionController::Base
   def verifica_nivel
     not_authenticated unless current_user.nivel == "admin"
   end
+
+  def gera_notificacao(tipo,destinatario,modelo)
+    @notificacao = Notificacao.new
+    @notificacao.conteudo = "#{Date.today.to_formatted_s(:rfc822)} - #{current_user.username} cadastrou o(a) #{controller_name.capitalize.singularize} #{modelo.nome}."
+    @notificacao.tipo = tipo
+    @notificacao.visualizado = false
+    @destinatarios = User.where("nivel = '#{destinatario}'")
+    
+    @destinatarios.each do |destinatario|
+      @notificacao.user_id = destinatario.id
+      @notificacao.save
+    end
+    
+  end
+
 end
