@@ -9,9 +9,10 @@
       <li class="list-group-item"><b>Curso:</b> <%= @matricula.curso.nome  %></li>
       <li class="list-group-item"><b>Professor:</b> <%= @matricula.horario.professor.nome %></li>
       <li class="list-group-item"><b>Horário:</b> <%= @matricula.horario.horario.to_s.slice(10..15)%></li>
-      <li class="list-group-item"><b>Semestre:</b> <%= @matricula.semestre %></li>
+      <li class="list-group-item"><b>Ano do Curso:</b> <%= @matricula.ano %>º Ano</li>
       <li class="list-group-item"><b>Valor Mensal:</b> <%= @matricula.valor_mensal %></li>
       <li class="list-group-item"><b>Data da Matrícula:</b> <%= @matricula.data_matricula.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></li>
+      <li class="list-group-item"><b>Data de Encerramento da Matrícula:</b> <%= @matricula.termino_matricula.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></li>
     </ul>
 </div>
 

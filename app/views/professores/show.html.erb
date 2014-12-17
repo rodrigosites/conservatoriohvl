@@ -17,10 +17,15 @@
   <thead>
     <tr>
       <th>Disponibilidade de Horários</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <tr>
       <th>Dia</th>
       <th>Horário</th>
+      <th>Nº Alunos</th>
       <th></th>
       <th></th>
     </tr>
@@ -30,7 +35,8 @@
     <% @professor.horarios.order('dia,horario').each do |horario| %>
       <tr>
         <td><%= horario.dia %>
-        <td><%= horario.horario.to_s.slice(10..15)  %></td>
+        <td><%= horario.horario.to_s.slice(10..15) %></td>
+        <td><%= horario.matriculas.size %></td>
         <td><%= button_to 'Editar', edit_horario_path(horario), :class => "btn btn-default btn-xs", :method => :get %></td>
         <td><%= button_to 'Excluir', horario, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a horario #{horario.horario}?" } %></td>
       </tr>
@@ -39,7 +45,7 @@
 </table>
 
 <div style="float: left; margin-right: 10px;">
-<%= button_to 'Controlar Horários', new_horario_path(professor_id: @professor.id), :class => "btn btn-default", :method => :get %>
+<%= button_to 'Controlar Horários', disponivel_path(professor_id: @professor.id), :class => "btn btn-default", :method => :get %>
 </div>
 <div style="float: left; margin-right: 10px;">
   <%= button_to 'Editar Dados', edit_professor_path(@professor), :class => "btn btn-default", :method => :get %>

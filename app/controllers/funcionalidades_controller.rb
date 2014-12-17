@@ -1,6 +1,6 @@
 class FuncionalidadesController < ApplicationController
   def inicial
-    @notificacoes = Notificacao.all
+    @notificacoes = Notificacao.where("user_id = '#{current_user.id}'")
   end
 
   def notificacao_lida

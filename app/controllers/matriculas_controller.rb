@@ -1,8 +1,8 @@
 class MatriculasController < ApplicationController
-  before_action :set_matricula, only: [:show, :edit, :update, :destroy]
+  before_action :set_matricula, only: [:show, :edit, :update, :destroy, :encerrar]
 
   def index
-    @matriculas = Matricula.all
+    @matriculas = Matricula.where("termino_matricula is NULL")
   end
 
   def show
@@ -65,6 +65,13 @@ class MatriculasController < ApplicationController
     @curso = Curso.find params[:curso_id]
   end
 
+  def encerrar
+  end
+
+  def encerradas
+    @matriculas = Matricula.where("termino_matricula is not NULL")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_matricula
@@ -74,6 +81,6 @@ class MatriculasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def matricula_params
       params.require(:matricula).permit(:aluno_id, :curso_id, :horario_id, :data_matricula, 
-        :semestre, :valor_mensal)
+        :ano, :valor_mensal, :termino_matricula)
     end
 end

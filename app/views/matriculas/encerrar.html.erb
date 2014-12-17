@@ -1,0 +1,12 @@
+<h1>Encerrar Matrícula</h1>
+
+<%= form_for(@matricula, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
+
+  <div class="form-group">
+    <%= f.label "Data de Encerramento da Matrícula:", class: "col-sm-0 control-label" %><br />
+    <%= f.date_select :termino_matricula, {:order => [:day,:month,:year], :use_two_digit_numbers => true, :date_separator => '/'}, {class: "col-sm-0"} %>
+  </div>
+  <div class="form-group">
+    <br /><%= f.submit "Cadastrar", class: "btn btn-default" %>
+  </div>
+<% end %>

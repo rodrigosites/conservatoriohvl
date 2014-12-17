@@ -1,17 +1,17 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <p><h4><b><center>Notificações do Sistema</center></b></h4><p>
-      <% @notificacoes.each do |notificacao| %>
-        <% unless notificacao.visualizado %>
-          <p><%= link_to notificacao.conteudo, {:controller => "funcionalidades", :action => "notificacao_lida", :id => notificacao.id}, id: "notificacao#{notificacao.id}", :remote => true %></p>
-          <% content_for :js do%>
-            $('#notificacao<%= notificacao.id %> ').bind('ajax:success', function(){
-              $('#notificacao<%= notificacao.id %> ').remove();
-            });
-          <% end %>
-        <% end %>
+<div class="col-md-8" style="background-color:#F5F0EB;border: 1px solid;">
+  <center><p><h4><b>Notificações do Sistema</b></h4><p>
+  <% @notificacoes.each do |notificacao| %>
+    <% unless notificacao.visualizado %>
+      <p><%= link_to notificacao.conteudo, {:controller => "funcionalidades", :action => "notificacao_lida", :id => notificacao.id}, id: "notificacao#{notificacao.id}", :remote => true %></p>
+      <% content_for :js do%>
+        $('#notificacao<%= notificacao.id %> ').bind('ajax:success', function(){
+          $('#notificacao<%= notificacao.id %> ').remove();
+        });
       <% end %>
-    </div>
-    <div class="col-md-4" align="center" style="background-color:#EBD7C5"><h4><b>Agenda de Eventos</b></h4></div>
+    <% end %>
+  <% end %>
+  </center>
 </div>
+<div class="col-md-4" align="center" style="background-color:#EBD7C5;border: 1px solid;"><h4><b>Agenda de Eventos</b></h4></div>
+
+

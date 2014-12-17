@@ -1,6 +1,5 @@
 Conservatoriohvl::Application.routes.draw do
-  resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios, 
-  :lecionam
+  resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios, :lecionam
 
   resources :matriculas do
     collection do
@@ -19,12 +18,14 @@ Conservatoriohvl::Application.routes.draw do
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
 
+  # Rotas passando o id via parametro para as controllers 
+  get 'horario/:professor_id/disponivel' => 'horarios#new', as: :disponivel
+  get 'lecionam/:curso_id/lecionar' => 'lecionam#new', as: :lecionar
+  get 'matricula/:id/encerrar', to: 'matriculas#encerrar', as: :encerrar
+
   get 'inicial', to: "funcionalidades#inicial"
   get 'notificacao_lida', to: "funcionalidades#notificacao_lida"
- 
-  # Rotas passando o id via parametro para as controllers 
-  get 'horario/:professor_id/disponivel' => 'horario#new', as: :disponivel
-  get 'lecionam/:curso_id/lecionar' => 'lecionam#new', as: :lecionar
+  get 'encerradas', to: "matriculas#encerradas"
 
    # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

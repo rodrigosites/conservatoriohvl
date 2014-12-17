@@ -12,9 +12,13 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.hidden_field :professor_id, value: "#{params[:professor_id]}" %>
+    <% if params[:professor_id] %>
+      <%= f.hidden_field :professor_id, value: "#{params[:professor_id]}" %>
+    <% else %>
+      <%= f.hidden_field :professor_id %>
+    <% end %>
     <%= f.label "Dia:", class: "col-sm-0 control-label" %><br />
-    <%= f.select :dia, ["Segunda","Terça","Quarta","Quinta","Sexta","Sábado" ] , { include_blank: true }, class: "form-control" %>
+    <%= f.select :dia, ["1-Segunda","2-Terça","3-Quarta","4-Quinta","5-Sexta","6-Sábado" ] , { include_blank: true }, class: "form-control" %>
     <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />
     <%= f.time_field :horario, class: "form-control" %>
   </div>

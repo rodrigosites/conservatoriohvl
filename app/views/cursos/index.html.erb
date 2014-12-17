@@ -5,7 +5,7 @@
     <tr>
       <th>Curso</th>
       <th>Valor Mensal</th>
-      <th>Nº de Semestres</th>
+      <th>Nº de Anos</th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= curso.nome %></td>
         <td>R$ <%= curso.valor %></td>
-        <td><%= curso.semestres %></td>
+        <td><%= curso.anos %></td>
         <td><%= button_to "Abrir a Ficha", curso, :class => "btn btn-default btn-xs", :method => :get %></td>
         <td><%= button_to "Editar Dados", edit_curso_path(curso), :class => "btn btn-default btn-xs", :method => :get %></td>
         <td><%= button_to "Excluir Curso", curso, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o curso #{curso.nome}?" } %></td>

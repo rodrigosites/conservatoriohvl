@@ -6,10 +6,20 @@
   </div>
     <ul class="list-group">
       <li class="list-group-item"><b>Endereço:</b> <%= @cliente.endereco %></li>
+      <li class="list-group-item"><b>Bairro:</b> <%= @cliente.bairro %></li>
+      <li class="list-group-item"><b>Cidade:</b> <%= @cliente.cidade %></li>
+      <li class="list-group-item"><b>Estado:</b> <%= @cliente.uf %></li>
+      <li class="list-group-item"><b>CEP:</b> <%= @cliente.cep %></li>
       <li class="list-group-item"><b>RG:</b> <%= @cliente.rg %></li>
       <li class="list-group-item"><b>CPF:</b> <%= @cliente.cpf %></li>
+      <li class="list-group-item"><b>E-mail:</b> <%= @cliente.email %></li>
       <li class="list-group-item"><b>Telefone:</b> <%= @cliente.telefone %></li>
       <li class="list-group-item"><b>Celular:</b> <%= @cliente.celular %></li>
+      <li class="list-group-item"><b>Nascimento:</b> <%= @cliente.nascimento.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></li>
+      <li class="list-group-item"><b>Nome do Pai:</b> <%= @cliente.pai %></li>
+      <li class="list-group-item"><b>Nome da Mãe:</b> <%= @cliente.mae %></li>
+      <li class="list-group-item"><b>Nacionalidade:</b> <%= @cliente.nacionalidade %></li>
+      <li class="list-group-item"><b>Profissão:</b> <%= @cliente.profissao %></li>
     </ul>
 </div>
 
