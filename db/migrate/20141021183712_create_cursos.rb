@@ -3,7 +3,7 @@ class CreateCursos < ActiveRecord::Migration
     create_table :cursos do |t|
       t.string :nome
       t.float :valor
-      t.integer :semestres
+      t.integer :anos
       t.timestamps
     end
   end

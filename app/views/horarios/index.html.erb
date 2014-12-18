@@ -21,7 +21,7 @@
           <td><%= horario.horario.to_s.slice(10..15) %></td>
           <td><%= horario.professor.nome %></td>
           <td><%= aluno.aluno.nome %></td>
-          <td><%= aluno.curso.nome %></td>
+          <td><%= horario.aulas.first.teoria ? "Teoria" : aluno.curso.nome %></td>
           <td><%= horario.sala.nome unless horario.sala.nil? %></td>
           <td><%= button_to 'Atribuir uma sala', edit_horario_path(horario), :class => "btn btn-default btn-xs", :method => :get  %></td>
         </tr>

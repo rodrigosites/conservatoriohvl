@@ -36,5 +36,17 @@ $ ->
 			    professor_id: $('#professor_id option:selected').val()
 			    curso_id: $('#matricula_curso_id option:selected').val()
 		else
-			$('#matricula_horario_id').empty();
-			$('#matricula_horario_id').append( $('<option value>Primeiro selecione o professor...</option>'));
+			$('#pratica_horario_id').empty();
+			$('#pratica_horario_id').append( $('<option value>Primeiro selecione o professor...</option>'));
+
+	$(document).on 'change', '#professor_teoria_id', (evt) ->
+		if $('#professor_teoria_id option:selected').val().length
+			$.ajax
+			  url: "/matriculas/busca_horarios_teoria"
+			  type: "GET"
+			  dataType: "script"
+			  data:
+			    professor_id: $('#professor_teoria_id option:selected').val()
+		else
+			$('#teorica_horario_id').empty();
+			$('#teorica_horario_id').append( $('<option value>Primeiro selecione o professor de teoria...</option>'));

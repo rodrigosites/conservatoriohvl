@@ -3,10 +3,9 @@ class CreateMatriculas < ActiveRecord::Migration
     create_table :matriculas do |t|
       t.belongs_to :aluno
       t.belongs_to :curso
-      t.belongs_to :horario
       t.timestamp :data_matricula
       t.timestamp :termino_matricula
-      t.integer :semestre
+      t.integer :ano
       t.float :valor_mensal
       t.timestamps
     end

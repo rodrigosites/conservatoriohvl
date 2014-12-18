@@ -17,9 +17,21 @@ class MatriculasController < ApplicationController
 
   def create
     @matricula = Matricula.new(matricula_params)
-
+    
     respond_to do |format|
       if @matricula.save
+
+        @aula = Aula.new
+        @aula.horario_id = params[:pratica][:horario_id]
+        @aula.matricula_id = @matricula.id
+        @aula.teoria = false
+        @aula.save
+        @aula = Aula.new
+        @aula.horario_id = params[:teorica][:horario_id]
+        @aula.matricula_id = @matricula.id
+        @aula.teoria = true
+        @aula.save
+
         format.html { redirect_to @matricula, notice: "Matricula criada com sucesso." }
         format.json { render action: 'show', status: :created, location: @matricula }
       else
@@ -61,6 +73,11 @@ class MatriculasController < ApplicationController
     @horarios = @professor.horarios
   end
 
+  def busca_horarios_teoria
+    @professor = Professor.find params[:professor_id]
+    @horarios = @professor.horarios
+  end
+
   def busca_dados_curso
     @curso = Curso.find params[:curso_id]
   end
@@ -80,7 +97,7 @@ class MatriculasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def matricula_params
-      params.require(:matricula).permit(:aluno_id, :curso_id, :horario_id, :data_matricula, 
-        :ano, :valor_mensal, :termino_matricula)
+      params.require(:matricula).permit(:aluno_id, :curso_id, :data_matricula, :ano, :valor_mensal, :termino_matricula,
+        :teoria_ano)
     end
 end

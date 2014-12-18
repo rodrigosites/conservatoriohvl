@@ -27,15 +27,33 @@
     <%= f.label "Valor Mensal", class: "col-sm-0 control-label"  %><br />
     <%= f.text_field :valor_mensal, { class: "form-control", :readonly => true }%>
   </div>
-  <div class="form-group" id="professor_div">
-  <label>Professor</label><br />
-  <%= collection_select(:professor, :id, [], :id, :nome, { prompt: 'Primeiro selecione o curso...' }, class: "form-control")%>
+  <div class="form-group">
+    <label>Professor do Curso</label><br />
+    <%= collection_select(:professor, :id, [], :id, :nome, { prompt: 'Primeiro selecione o curso...' }, class: "form-control")%>
   </div>
-  <div class="form-group" id="horario_div">
-    <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />
-    <%= f.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor...' }, {class: "form-control"} %>
+  <%= fields_for(:pratica, @matricula.aulas.build) do |u| %>
+    <div class="form-group">
+      <%= u.label "Horário do Curso:", class: "col-sm-0 control-label" %><br />
+      <%= u.hidden_field :matricula_id, value: Matricula.maximum(:id).to_i + 1 %>
+      <%= u.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor...' }, {class: "form-control"} %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label "Ano de Teoria", class: "col-sm-0 control-label"  %><br />
+    <%= f.select :teoria_ano, options_for_select([["Formado em Teoria",0],["1º Ano",1],["2º Ano",2],["3º Ano",3]]), { prompt: "Selecione o ano de teoria..." }, class: "form-control" %>
   </div>
-  <div class="form-group" id="horario_div">
+  <div class="form-group">
+    <label>Professor de Teoria</label><br />
+    <%= collection_select(:professor_teoria, :id, professores_teoria, :id, :nome, { prompt: 'Selecione o professor de teoria...'}, class: "form-control")%>
+  </div>
+  <%= fields_for(:teorica, @matricula.aulas.build) do |v| %>
+    <div class="form-group">
+      <%= v.label "Horário de Teoria:", class: "col-sm-0 control-label" %><br />
+      <%= v.hidden_field :matricula_id, value: Matricula.maximum(:id).to_i + 1 %>
+      <%= v.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor de teoria...' }, {class: "form-control"} %>
+    </div>
+  <% end %>
+  <div class="form-group">
     <%= f.label "Data da Matrícula:", class: "col-sm-0 control-label" %><br />
     <%= f.date_select :data_matricula, {:order => [:day,:month,:year], :use_two_digit_numbers => true, :date_separator => '/'}, {class: "col-sm-0"} %>
   </div>

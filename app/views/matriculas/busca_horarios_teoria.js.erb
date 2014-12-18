@@ -1,0 +1,21 @@
+$('#teorica_horario_id').empty();
+$('#teorica_horario_id').append( $('<option>Selecione um horário</option>'));
+<% if @horarios.any? %>
+	<% tem_horario = false %>
+	<% @horarios.each do |horario| %>
+	  <% if !horario.matriculas.any? %>
+	  	<% tem_horario = true %>
+	  	$('#teorica_horario_id').append($('<option value="<%= horario.id %>"><%= horario.dia %> - <%= horario.horario.to_s.slice(10..15) %></option>'));
+	  <% elsif horario.aulas.where(teoria: true).any? %>
+	  	<% tem_horario = true %>
+	  	$('#teorica_horario_id').append($('<option value="<%= horario.id %>"><%= horario.dia %> - <%= horario.horario.to_s.slice(10..15) %> - Classe</option>'));
+	  <% end %>
+	<% end %>
+	<% unless tem_horario %>
+		$('#teorica_horario_id').empty();
+		$('#teorica_horario_id').append( $('<option>Sem horários disponíveis</option>'));
+	<% end %>
+<% else %>
+	$('#teorica_horario_id').empty();
+	$('#teorica_horario_id').append( $('<option>Sem horários disponíveis</option>'));
+<% end %>

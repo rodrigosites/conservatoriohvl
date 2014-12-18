@@ -2,6 +2,6 @@ class Matricula < ActiveRecord::Base
   #associações no banco de dados
   belongs_to :aluno
   belongs_to :curso
-  belongs_to :horario
-
+  has_many :aulas
+  has_many :horarios, through: :aulas, :dependent => :destroy
 end
