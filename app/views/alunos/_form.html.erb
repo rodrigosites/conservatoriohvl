@@ -12,7 +12,7 @@
   <% end %>
   <div class="form-group">
     <%= f.label "Vinculado ao Cliente:", class: "col-sm-0 control-label" %><br />
-    <%= f.select :cliente_id, Cliente.all.collect {|c| [ c.nome, c.id ] }, { include_blank: true }, class: "form-control" %>
+    <%= f.collection_select :cliente_id, Cliente.all, :id, :nome, { include_blank: true }, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label "Nome:", class: "col-sm-0 control-label" %><br />

@@ -3,4 +3,4 @@ $('#matricula_ano').append( $('<option value>Selecione o ano</option>'));
 <% for i in 1..@curso.anos %>
 $('#matricula_ano').append($('<option value="<%= i %>"><%= i %>º Ano</option>'));
 <% end %>
-$('#matricula_valor_mensal').val("<%= @curso.valor %>0")
+$('#matricula_valor_mensal').val("<%= number_to_currency(@curso.valor) %>")

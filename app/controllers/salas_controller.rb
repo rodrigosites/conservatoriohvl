@@ -20,6 +20,7 @@ class SalasController < ApplicationController
 
     respond_to do |format|
       if @sala.save
+        gera_notificacao("admin",@sala)
         format.html { redirect_to @sala, notice: "sala #{@sala.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @sala }
       else

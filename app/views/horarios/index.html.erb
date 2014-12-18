@@ -10,6 +10,7 @@
       <th>Curso</th>
       <th>Sala</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -17,13 +18,14 @@
     <% @horarios.order("dia, horario").each do |horario| %>
       <% horario.matriculas.each do |aluno| %>
         <tr>
-          <td><%= horario.dia %></td>
-          <td><%= horario.horario.to_s.slice(10..15) %></td>
+          <td><%= dia(horario.dia) %></td>
+          <td><%= hora(horario.horario) %></td>
           <td><%= horario.professor.nome %></td>
           <td><%= aluno.aluno.nome %></td>
           <td><%= horario.aulas.first.teoria ? "Teoria" : aluno.curso.nome %></td>
           <td><%= horario.sala.nome unless horario.sala.nil? %></td>
           <td><%= button_to 'Atribuir uma sala', edit_horario_path(horario), :class => "btn btn-default btn-xs", :method => :get  %></td>
+          <td><%= button_to 'Desvincular Sala', remove_sala_path(id: horario.id), :class => "btn btn-default btn-xs" %></td>
         </tr>
         <% end %>
     <% end %>

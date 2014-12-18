@@ -20,7 +20,8 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
 
     respond_to do |format|
       if @horario.save
-        format.html { redirect_to @horario, notice: "Horario #{@horario.horario} criado com sucesso." }
+        gera_notificacao("admin",@horario)
+        format.html { redirect_to @horario, notice: "Horario #{@horario.dia.slice(2,@horario.dia.length-1)} - #{@horario.horario.to_s.slice(10..15)} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @horario }
       else
         format.html { render action: 'new' }
@@ -32,7 +33,7 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
   def update
     respond_to do |format|
       if @horario.update(horario_params)
-        format.html { redirect_to @horario, notice: "Dados da horario #{@horario.horario} foram atualizados com sucesso." }
+        format.html { redirect_to horarios_path, notice: "Dados da horario #{@horario.dia.slice(2,@horario.dia.length-1)} - #{@horario.horario.to_s.slice(10..15)} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -52,8 +53,14 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
   end
 
   def remove_sala
-    @horario.sala_id = ""
-    @horario.save
+    respond_to do |format|
+      if @horario.update_attribute(:sala_id,"")
+        format.html { redirect_to horarios_path, notice: "Sala desvinculada com sucesso." }
+      else
+        format.html { redirect_to horarios_path, alert: "Erro ao tentar desvincular a sala." }
+        format.json { render json: @horario.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

@@ -14,11 +14,11 @@
   <div class="form-group">
     <%= f.hidden_field :professor_id %>
     <%= f.label "Sala:", class: "col-sm-0 control-label" %><br />
-    <%= f.collection_select :sala_id, Sala.all, :id, :nome, { prompt: 'Selecione a sala...' }, class: "form-control" %>
+    <%= f.collection_select :sala_id, disponibilidade_salas(@horario), :id, :nome, { prompt: 'Selecione a sala...' }, class: "form-control" %>
     <%= f.label "Professor:", class: "col-sm-0 control-label" %><br />
     <%= text_field(@horario,:professor, {class: "form-control", value: @horario.professor.nome, :readonly => true}) %>
     <%= f.label "Dia:", class: "col-sm-0 control-label" %><br />
-    <%= f.select :dia, ["Segunda","Terça","Quarta","Quinta","Sexta","Sábado" ] , { include_blank: true }, {class: "form-control", :disabled => true } %>
+    <%= f.text_field :dia, {class: "form-control", :disabled => true } %>
     <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />
     <%= f.time_field :horario, {class: "form-control",:readonly => true} %>
   </div>

@@ -16,7 +16,7 @@
     <% @cursos.each do |curso| %>
       <tr>
         <td><%= curso.nome %></td>
-        <td>R$ <%= curso.valor %></td>
+        <td><%= number_to_currency(curso.valor) %></td>
         <td><%= curso.anos %></td>
         <td><%= button_to "Abrir a Ficha", curso, :class => "btn btn-default btn-xs", :method => :get %></td>
         <td><%= button_to "Editar Dados", edit_curso_path(curso), :class => "btn btn-default btn-xs", :method => :get %></td>

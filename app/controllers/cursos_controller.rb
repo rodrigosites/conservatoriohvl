@@ -20,6 +20,7 @@ class CursosController < ApplicationController
 
     respond_to do |format|
       if @curso.save
+        gera_notificacao("admin",@curso)
         format.html { redirect_to @curso, notice: "curso #{@curso.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @curso }
       else

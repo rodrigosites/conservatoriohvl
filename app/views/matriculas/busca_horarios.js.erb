@@ -5,10 +5,10 @@ $('#pratica_horario_id').append( $('<option>Selecione um horário</option>'));
 	<% @horarios.each do |horario| %>
 	  <% if !horario.matriculas.any? %>
 	  	<% tem_horario = true %>
-	  	$('#pratica_horario_id').append($('<option value="<%= horario.id %>"><%= horario.dia %> - <%= horario.horario.to_s.slice(10..15) %></option>'));
+	  	$('#pratica_horario_id').append($('<option value="<%= horario.id %>"><%= dia(horario.dia) %> - <%= hora(horario.horario) %></option>'));
 	  <% elsif horario.matriculas.where(curso_id: params[:curso_id]).any? %>
 	  	<% tem_horario = true %>
-	  	$('#pratica_horario_id').append($('<option value="<%= horario.id %>"><%= horario.dia %> - <%= horario.horario.to_s.slice(10..15) %> - Classe</option>'));
+	  	$('#pratica_horario_id').append($('<option value="<%= horario.id %>"><%= dia(horario.dia) %> - <%= hora(horario.horario) %> - Classe</option>'));
 	  <% end %>
 	<% end %>
 	<% unless tem_horario %>

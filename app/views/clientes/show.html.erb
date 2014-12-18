@@ -15,7 +15,7 @@
       <li class="list-group-item"><b>E-mail:</b> <%= @cliente.email %></li>
       <li class="list-group-item"><b>Telefone:</b> <%= @cliente.telefone %></li>
       <li class="list-group-item"><b>Celular:</b> <%= @cliente.celular %></li>
-      <li class="list-group-item"><b>Nascimento:</b> <%= @cliente.nascimento.to_s.slice(0..9).to_date.to_formatted_s(:rfc822) %></li>
+      <li class="list-group-item"><b>Nascimento:</b> <%= I18n.l(@cliente.nascimento.to_date) %></li>
       <li class="list-group-item"><b>Nome do Pai:</b> <%= @cliente.pai %></li>
       <li class="list-group-item"><b>Nome da Mãe:</b> <%= @cliente.mae %></li>
       <li class="list-group-item"><b>Nacionalidade:</b> <%= @cliente.nacionalidade %></li>
@@ -44,7 +44,7 @@
           <tr>
             <td><%= aluno.nome %></td>
             <td><%= matricula.curso.nome %></td>
-            <td>R$ <%= matricula.valor_mensal %>0</td><% valor_total = valor_total + matricula.valor_mensal %>
+            <td><%= number_to_currency(matricula.valor_mensal) %></td><% valor_total = valor_total + matricula.valor_mensal %>
             <td><%= link_to 'Mostrar', aluno_path(aluno) %></td>
             <td><%= link_to 'Editar', edit_aluno_path(aluno) %></td>
             <td><%= link_to 'Excluir', aluno, method: :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
@@ -53,7 +53,7 @@
       <% end %>
 
   <% unless valor_total == 0 %>
-    <b>Mensalidade Total: R$ <%= valor_total %>0</b><br /><br />
+    <b>Mensalidade Total: <%= number_to_currency(valor_total) %></b><br /><br />
   <% else %>
     <tr><td>Alunos vinculados ainda não foram matriculados em cursos.</td></tr>
   <% end %>

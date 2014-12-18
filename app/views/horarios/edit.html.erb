@@ -1,9 +1,9 @@
-<h1>Editar Dados do Horário</h1>
-
-<% if request.env["HTTP_REFERER"] == "http://localhost:3000/horarios" %>
+<% if request.env["HTTP_REFERER"] == "http://localhost:3000/horarios" || request.env["HTTP_REFERER"] == "http://localhost:3000/horarios?" %>
+  <h1>Atribuir Sala</h1>
   <%= render 'sala_form' %>
 <% else %>
+  <h1>Editar Dados do Horário</h1>
   <%= render 'form' %>
 <% end %>
 
-<%= button_to 'Voltar', :back, :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Voltar', horarios_path, :class => "btn btn-default", :method => :get  %>

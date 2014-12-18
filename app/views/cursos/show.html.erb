@@ -5,7 +5,7 @@
     </h3>
   </div>
     <ul class="list-group">
-      <li class="list-group-item"><b>Valor Mensal:</b> R$ <%= @curso.valor %>0</li>
+      <li class="list-group-item"><b>Valor Mensal:</b> <%= number_to_currency(@curso.valor) %></li>
       <li class="list-group-item"><b>Quantidade de Anos:</b> <%= @curso.anos %></li>
     </ul>
 </div>

@@ -20,6 +20,7 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       if @cliente.save
+        gera_notificacao("admin",@cliente)
         format.html { redirect_to @cliente, notice: "Cliente #{@cliente.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @cliente }
       else

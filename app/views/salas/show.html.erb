@@ -24,8 +24,8 @@
       <% @horarios.each do |horario| %>
         <% horario.matriculas.each do |matricula| %>
           <tr>
-            <td><%= horario.dia %>
-            <td><%= horario.horario.to_s.slice(10..15) %></td>
+            <td><%= dia(horario.dia) %>
+            <td><%= hora(horario.horario) %></td>
             <td><%= matricula.curso.nome %></td>
             <td><%= horario.professor.nome %></td>
             <td><%= matricula.aluno.nome %></td>

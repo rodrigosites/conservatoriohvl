@@ -20,6 +20,7 @@ class ProfessoresController < ApplicationController
 
     respond_to do |format|
       if @professor.save
+        gera_notificacao("admin",@professor)
         format.html { redirect_to @professor, notice: "professor #{@professor.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @professor }
       else

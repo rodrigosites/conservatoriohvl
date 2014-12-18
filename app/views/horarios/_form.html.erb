@@ -18,7 +18,7 @@
       <%= f.hidden_field :professor_id %>
     <% end %>
     <%= f.label "Dia:", class: "col-sm-0 control-label" %><br />
-    <%= f.select :dia, ["1-Segunda","2-Terça","3-Quarta","4-Quinta","5-Sexta","6-Sábado" ] , { include_blank: true }, class: "form-control" %>
+    <%= f.select :dia, options_for_select([["Segunda","1-Segunda"],["Terça","2-Terça"],["Quarta","3-Quarta"],["Quinta","4-Quinta"],["Sexta","5-Sexta"],["Sábado","6-Sábado"]]), { include_blank: true }, class: "form-control" %>
     <%= f.label "Horário:", class: "col-sm-0 control-label" %><br />
     <%= f.time_field :horario, class: "form-control" %>
   </div>

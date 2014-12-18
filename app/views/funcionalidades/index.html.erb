@@ -1,0 +1,24 @@
+<h1>Lista de Notificações</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tipo</th>
+      <th>Notificação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notificacoes.each do |notificacao| %>
+      <tr>
+        <td><%= notificacao.tipo %></td>
+        <td><%= notificacao.conteudo %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<br /><br />
+
+<%= button_to 'Voltar', :back, :class => "btn btn-default", :method => :get %>

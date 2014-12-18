@@ -21,6 +21,9 @@ class MatriculasController < ApplicationController
     respond_to do |format|
       if @matricula.save
 
+        gera_notificacao("admin",@matricula)
+
+        # salva na tabela many_to_many
         @aula = Aula.new
         @aula.horario_id = params[:pratica][:horario_id]
         @aula.matricula_id = @matricula.id

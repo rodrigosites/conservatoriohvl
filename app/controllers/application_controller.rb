@@ -19,12 +19,18 @@ class ApplicationController < ActionController::Base
     not_authenticated unless current_user.nivel == "admin"
   end
 
-  def gera_notificacao(tipo,destinatario,modelo)
+  def gera_notificacao(destinatario,modelo,tipo="aviso")
     @destinatarios = User.where("nivel = '#{destinatario}'")
     
     @destinatarios.each do |destinatario|
       @notificacao = Notificacao.new
-      @notificacao.conteudo = "#{Date.today.to_formatted_s(:rfc822)} - #{current_user.username} cadastrou o(a) #{controller_name.capitalize.singularize} #{modelo.nome}."
+      if controller_name == "matriculas"
+        @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou a #{controller_name.capitalize.singularize} nº #{modelo.id} - #{modelo.aluno.nome}."
+      elsif controller_name == "horarios"
+        @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou o #{controller_name.capitalize.singularize} #{modelo.dia} às #{modelo.horario.to_s.slice(10..15)} - Professor #{modelo.professor.nome}."
+      else
+        @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou #{controller_name.capitalize.singularize} #{modelo.nome}."
+      end
       @notificacao.tipo = tipo
       @notificacao.visualizado = false
       @notificacao.user_id = destinatario.id

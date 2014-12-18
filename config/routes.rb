@@ -26,6 +26,8 @@ Conservatoriohvl::Application.routes.draw do
 
   get 'inicial', to: "funcionalidades#inicial"
   get 'notificacao_lida', to: "funcionalidades#notificacao_lida"
+  post 'remove_sala', to: "horarios#remove_sala"
+  get 'funcionalidades/index', to: "funcionalidades#index", as: :funcionalidades
   get 'encerradas', to: "matriculas#encerradas"
 
    # Example of regular route:

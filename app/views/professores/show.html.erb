@@ -34,8 +34,8 @@
   <tbody>
     <% @professor.horarios.order('dia,horario').each do |horario| %>
       <tr>
-        <td><%= horario.dia %>
-        <td><%= horario.horario.to_s.slice(10..15) %></td>
+        <td><%= dia(horario.dia) %>
+        <td><%= hora(horario.horario) %></td>
         <td><%= horario.matriculas.size %></td>
         <td><%= button_to 'Editar', edit_horario_path(horario), :class => "btn btn-default btn-xs", :method => :get %></td>
         <td><%= button_to 'Excluir', horario, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a horario #{horario.horario}?" } %></td>

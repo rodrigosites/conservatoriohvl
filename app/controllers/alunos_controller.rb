@@ -20,7 +20,7 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
   
     respond_to do |format|
       if @aluno.save
-        gera_notificacao("aviso","admin",@aluno)
+        gera_notificacao("admin",@aluno)
         format.html { redirect_to @aluno, notice: "Aluno #{@aluno.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @aluno }
       else
