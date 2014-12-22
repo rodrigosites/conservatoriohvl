@@ -10,9 +10,9 @@
       <li class="list-group-item"><b>Professor:</b> <%= @matricula.horarios.first.professor.nome %></li>
       <li class="list-group-item"><b>Horário:</b> <%= hora(@matricula.horarios.first.horario) %></li>
       <li class="list-group-item"><b>Professor Teoria:</b> <%= @matricula.horarios.last.professor.nome %></li>
-      <li class="list-group-item"><b>Horário Teoria:</b> <%= horario(@matricula.horarios.last.horario) %></li>
+      <li class="list-group-item"><b>Horário Teoria:</b> <%= @matricula.teoria_ano > 0 ? hora(@matricula.horarios.last.horario) : "Formado em Teoria" %></li>
       <li class="list-group-item"><b>Ano do Curso:</b> <%= @matricula.ano %>º Ano</li>
-      <li class="list-group-item"><b>Ano de Teoria:</b> <%= @matricula.teoria_ano %>º Ano</li>
+      <li class="list-group-item"><b>Ano de Teoria:</b> <%= @matricula.teoria_ano > 0 ? "#{@matricula.teoria_ano}º Ano" : "Formado em Teoria" %></li>
       <li class="list-group-item"><b>Valor Mensal:</b> <%= number_to_currency(@matricula.valor_mensal) %></li>
       <li class="list-group-item"><b>Data da Matrícula:</b> <%= I18n.l(@matricula.data_matricula.to_date) %></li>
       <% if @matricula.termino_matricula %>

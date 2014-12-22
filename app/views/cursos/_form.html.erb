@@ -1,16 +1,11 @@
 <%= form_for(@curso, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
   <% if @curso.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@curso.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @curso.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+    <% flash.now[:alert] = "Erro ao tentar salvar as informações." %>
+      <b style="color: red">Problemas encontrados: </b><br>
+    <% @curso.errors.full_messages.each do |msg| %>
+      <li style="color: red"><b><%= msg %></b></li>
+    <% end %>
   <% end %>
-
   <div class="form-group">
     <%= f.label "Nome:", class: "col-sm-0 control-label" %><br />
     <%= f.text_field :nome, class: "form-control" %>

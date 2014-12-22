@@ -1,16 +1,11 @@
 <%= form_for(@cliente, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
   <% if @cliente.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@cliente.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @cliente.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+    <% flash.now[:alert] = "Erro ao tentar salvar as informações." %>
+      <b style="color: red">Problemas encontrados: </b><br>
+    <% @cliente.errors.full_messages.each do |msg| %>
+      <li style="color: red"><b><%= msg %></b></li>
+    <% end %>
   <% end %>
-
 
   <div class="form-group">
     <%= f.label "Nome:", class: "col-sm-0 control-label" %><br />
@@ -58,7 +53,7 @@
   </div>
   <div class="form-group">
     <%= f.label "Data da Nascimento:", class: "col-sm-0 control-label" %><br />
-    <%= f.date_select :nascimento, {:order => [:day,:month,:year], :use_two_digit_numbers => true, :date_separator => '/', :start_year => Date.today.year - 80, :end_year => Date.today.year}, {class: "col-sm-0"} %>
+    <%= f.text_field :nascimento, class: "form-control" %>
   </div>
   <div class="form-group">
       <%= f.label "Nacionalidade:", class: "col-sm-0 control-label" %><br />

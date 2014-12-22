@@ -26,6 +26,16 @@ $ ->
 			  data:
 			    curso_id: $('#matricula_curso_id option:selected').val()
 
+	$(document).on 'change', '#matricula_curso_id', (evt) ->
+		if ($.trim($('#matricula_curso_id option:selected').text()) == 'Teoria')
+			$('#matricula_teoria_div').hide()
+			$('#professor_teoria_div').hide()
+			$('#horario_teoria_div').hide()
+		else
+			$('#matricula_teoria_div').show()
+			$('#professor_teoria_div').show()
+			$('#horario_teoria_div').show()
+
 	$(document).on 'change', '#professor_id', (evt) ->
 		if $('#professor_id option:selected').val().length
 			$.ajax
@@ -50,3 +60,14 @@ $ ->
 		else
 			$('#teorica_horario_id').empty();
 			$('#teorica_horario_id').append( $('<option value>Primeiro selecione o professor de teoria...</option>'));
+
+	$(document).on 'change', '#matricula_teoria_ano', (evt) ->
+		if $.trim($('#matricula_teoria_ano option:selected').text()) == 'Formado em Teoria'
+			$('#professor_teoria_div').hide()
+			$('#horario_teoria_div').hide()
+		else
+			$('#professor_teoria_div').show()
+			$('#horario_teoria_div').show()
+
+	$(document).on 'ready page:load', (evt) ->
+  		$('#matricula_data_matricula').mask('00/00/0000');

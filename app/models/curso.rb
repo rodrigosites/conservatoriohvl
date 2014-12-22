@@ -4,4 +4,7 @@ class Curso < ActiveRecord::Base
   has_many :matriculas, :dependent => :destroy
   has_many :professores, through: :lecionam
 
+  #validações
+  validates :nome, uniqueness: true
+  validates :nome, :valor, :anos, presence: true
 end
