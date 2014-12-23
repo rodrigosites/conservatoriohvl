@@ -47,6 +47,13 @@ class MatriculasController < ApplicationController
   def update
     respond_to do |format|
       if @matricula.update(matricula_params)
+        @matricula.aulas.each do |aula|
+          if aula.teoria
+            aula.update_attribute(:horario_id,params[:teorica][:horario_id])
+          else
+            aula.update_attribute(:horario_id,params[:pratica][:horario_id])
+          end
+        end
         format.html { redirect_to @matricula, notice: "Dados do matricula foram atualizados com sucesso." }
         format.json { head :no_content }
       else

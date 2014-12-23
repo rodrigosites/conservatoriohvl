@@ -5,6 +5,8 @@
 # Acompanha a mudança dos selects e faz requisições Ajax para preenchimento dinâmico.
 
 $ ->
+	valor_normal = 0
+
 	$(document).on 'change', '#matricula_curso_id', (evt) ->
 		if $('#matricula_curso_id option:selected').val().length
 			$.ajax
@@ -68,6 +70,13 @@ $ ->
 		else
 			$('#professor_teoria_div').show()
 			$('#horario_teoria_div').show()
+
+	$(document).on 'change', '#desconto_check', (evt) ->
+		if $('#desconto_check').prop('checked')
+			valor_normal = $('#matricula_valor_mensal').val()
+			$('#matricula_valor_mensal').val(280.00)
+		else
+			$('#matricula_valor_mensal').val(valor_normal)
 
 	$(document).on 'ready page:load', (evt) ->
   		$('#matricula_data_matricula').mask('00/00/0000');

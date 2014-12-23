@@ -52,6 +52,10 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
     end
   end
 
+  def busca_dados_cliente
+    @cliente = Cliente.find params[:cliente_id]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_aluno

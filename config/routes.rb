@@ -29,8 +29,9 @@ Conservatoriohvl::Application.routes.draw do
   post 'remove_sala', to: "horarios#remove_sala"
   get 'funcionalidades/index', to: "funcionalidades#index", as: :funcionalidades
   get 'encerradas', to: "matriculas#encerradas"
+  get 'aluno/busca_dados_cliente', to: "alunos#busca_dados_cliente"
 
-   # Example of regular route:
+  # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

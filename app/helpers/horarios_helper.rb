@@ -3,7 +3,7 @@ module HorariosHelper
     salas = Sala.all
     disponiveis = []
     salas.each do |sala|
-      unless sala.horarios.where(dia: horario.dia, horario: horario.horario.to_s.slice(10..15)).any?
+      unless sala.horarios.where(dia: horario.dia, horario: hora(horario.horario)).any?
         disponiveis << sala
       end
     end

@@ -25,9 +25,11 @@ class ApplicationController < ActionController::Base
     @destinatarios.each do |destinatario|
       @notificacao = Notificacao.new
       if controller_name == "matriculas"
-        @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou a #{controller_name.capitalize.singularize} nº #{modelo.id} - #{modelo.aluno.nome}."
+        @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou a Matrícula nº #{modelo.id} - #{modelo.aluno.nome}."
       elsif controller_name == "horarios"
-        @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou o #{controller_name.capitalize.singularize} #{modelo.dia} às #{modelo.horario.to_s.slice(10..15)} - Professor #{modelo.professor.nome}."
+        @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou o Horário às #{modelo.horario.to_s.slice(10..15)} - Professor #{modelo.professor.nome}."
+      elsif controller_name == "users"
+        @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou o Usuário #{modelo.username}."  
       else
         @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username} cadastrou #{controller_name.capitalize.singularize} #{modelo.nome}."
       end

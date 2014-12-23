@@ -1,5 +1,9 @@
 <div class="col-md-8" style="background-color:#F5F0EB;border: 1px solid;">
-  <center><p><h4><b>Notificações do Sistema</b></h4><p>
+  <center><h4><b>Novas Notificações</b></h4></center>
+</div>
+<div class="col-md-4" align="center" style="background-color:#EBD7C5;border: 1px solid;"><h4><b>Agenda de Eventos</b></h4></div>
+<div class="col-md-8">
+  <center>
   <% @notificacoes.each do |notificacao| %>
     <% unless notificacao.visualizado %>
       <p><%= link_to notificacao.conteudo, {:controller => "funcionalidades", :action => "notificacao_lida", :id => notificacao.id}, id: "notificacao#{notificacao.id}", :remote => true %></p>
@@ -12,6 +16,4 @@
   <% end %>
   </center>
 </div>
-<div class="col-md-4" align="center" style="background-color:#EBD7C5;border: 1px solid;"><h4><b>Agenda de Eventos</b></h4></div>
-
 
