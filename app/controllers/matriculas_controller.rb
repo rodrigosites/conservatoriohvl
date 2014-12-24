@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class MatriculasController < ApplicationController
   before_action :set_matricula, only: [:show, :edit, :update, :destroy, :encerrar]
 
@@ -29,12 +31,13 @@ class MatriculasController < ApplicationController
         @aula.matricula_id = @matricula.id
         @aula.teoria = false
         @aula.save
-        @aula = Aula.new
-        @aula.horario_id = params[:teorica][:horario_id]
-        @aula.matricula_id = @matricula.id
-        @aula.teoria = true
-        @aula.save
-
+        unless params[:teorica][:horario_id].blank?
+          @aula = Aula.new
+          @aula.horario_id = params[:teorica][:horario_id]
+          @aula.matricula_id = @matricula.id
+          @aula.teoria = true
+          @aula.save
+          end
         format.html { redirect_to @matricula, notice: "Matricula criada com sucesso." }
         format.json { render action: 'show', status: :created, location: @matricula }
       else
@@ -92,6 +95,28 @@ class MatriculasController < ApplicationController
     @curso = Curso.find params[:curso_id]
   end
 
+  def tipo_teoria
+    if params[:tipo_teoria] == "Teoria"
+      @curso = Curso.where(nome: params[:tipo_teoria]).first
+      if @curso.try(:professores)
+        @professores = @curso.professores
+      else
+        @professor = Professor.new
+        @professor.nome = "Sem professores de teoria cadastrados..."
+        @professores = [@professor]
+      end
+    elsif params[:tipo_teoria] == "Musicalização Infantil"
+      @curso = Curso.where(nome: params[:tipo_teoria]).first
+      if @curso.try(:professores)
+        @professores = @curso.professores
+      else
+        @professor = Professor.new
+        @professor.nome = "Sem professores de musicalização infantil cadastrados..."
+        @professores = [@professor]
+      end
+    end
+  end
+
   def encerrar
   end
 
@@ -110,4 +135,5 @@ class MatriculasController < ApplicationController
       params.require(:matricula).permit(:aluno_id, :curso_id, :data_matricula, :ano, :valor_mensal, :termino_matricula,
         :teoria_ano)
     end
+
 end

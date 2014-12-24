@@ -4,9 +4,6 @@
   <thead>
     <tr>
       <th>Cliente</th>
-      <th>Endereço</th>
-      <th>RG</th>
-      <th>CPF</th>
       <th>Telefone</th>
       <th>Celular</th>
       <th></th>
@@ -19,9 +16,6 @@
     <% @clientes.each do |cliente| %>
       <tr>
         <td><%= cliente.nome %></td>
-        <td><%= cliente.endereco %></td>
-        <td><%= cliente.rg %></td>
-        <td><%= cliente.cpf %></td>
         <td><%= cliente.telefone %></td>
         <td><%= cliente.celular %></td>
         <td><%= button_to "Abrir a Ficha", cliente, :class => "btn btn-default btn-xs", :method => :get  %></td>

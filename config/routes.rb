@@ -7,6 +7,7 @@ Conservatoriohvl::Application.routes.draw do
       get 'busca_horarios', to: "matriculas#busca_horarios"
       get 'busca_horarios_teoria', to: "matriculas#busca_horarios_teoria"
       get "busca_dados_curso", to: "matriculas#busca_dados_curso"
+      get "tipo_teoria", to: "matriculas#tipo_teoria"
     end
   end
 

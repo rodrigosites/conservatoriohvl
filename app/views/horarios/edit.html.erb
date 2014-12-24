@@ -1,4 +1,4 @@
-<% if request.env["HTTP_REFERER"] == "http://localhost:3000/horarios" || request.env["HTTP_REFERER"] == "http://localhost:3000/horarios?" %>
+<% if request.env["HTTP_REFERER"].include? "/horarios" %>
   <h1>Atribuir Sala</h1>
   <%= render 'sala_form' %>
 <% else %>

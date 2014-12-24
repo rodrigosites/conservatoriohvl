@@ -1,0 +1,29 @@
+$('#professor_teoria_id').empty();
+$('#professor_teoria_id').append( $('<option value>Selecione um professor de teoria</option>'));
+<% if @professores.any? %>
+	<% @professores.each do |professor| %>
+	  $('#professor_teoria_id').append($('<option value="<%= professor.id %>"><%= professor.nome %></option>'));
+	<% end %>
+<% else %>
+	$('#professor_teoria_id').empty();
+	$('#professor_teoria_id').append($('<option>Não há professores cadastrados para este curso</option>'));
+<% end %>
+<% if params[:tipo_teoria] == "Teoria" %>
+	$('#matricula_teoria_ano').empty();
+	$('#matricula_teoria_ano').append( $('<option>Selecione o ano de teoria...</option>'));
+	$('#matricula_teoria_ano').append($('<option value="0">Formado em Teoria</option>'));
+	$('#matricula_teoria_ano').append($('<option value="1">1º Ano</option>'));
+	$('#matricula_teoria_ano').append($('<option value="2">2º Ano</option>'));
+	$('#matricula_teoria_ano').append($('<option value="3">3º Ano</option>'));
+<% elsif params[:tipo_teoria] == "Musicalização Infantil" %>
+	$('#matricula_teoria_ano').empty();
+	$('#matricula_teoria_ano').append( $('<option>Selecione o ano de teoria...</option>'));
+	$('#matricula_teoria_ano').append($('<option value="1">Baby</option>'));
+	$('#matricula_teoria_ano').append($('<option value="2">First 1</option>'));
+	$('#matricula_teoria_ano').append($('<option value="3">First 2</option>'));
+	$('#matricula_teoria_ano').append($('<option value="4">Módulo 1</option>'));
+	$('#matricula_teoria_ano').append($('<option value="5">Módulo 2</option>'));
+	$('#matricula_teoria_ano').append($('<option value="6">Módulo 3</option>'));
+	$('#matricula_teoria_ano').append($('<option value="7">Módulo 4</option>'));
+	$('#matricula_teoria_ano').append($('<option value="8">Módulo 5</option>'));
+<% end %>
