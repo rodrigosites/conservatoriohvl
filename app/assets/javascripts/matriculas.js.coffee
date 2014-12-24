@@ -16,9 +16,11 @@ $ ->
 			  dataType: "script"
 			  data:
 			    curso_id: $('#matricula_curso_id option:selected').val()
+			$('#pratica_horario_id').empty();
+			$('#pratica_horario_id').append($('<option value>Primeiro selecione o professor...</option>'));
 		else
 			$('#professor_id').empty();
-			$('#professor_id').append( $('<option value>Primeiro selecione o curso...</option>'));
+			$('#professor_id').append($('<option value>Primeiro selecione o curso...</option>'));
 
 	# controla as mudanças no <select> Curso e reflete nos <text> do curso.
 	$(document).on 'change', '#matricula_curso_id', (evt) ->

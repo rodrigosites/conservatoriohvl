@@ -31,6 +31,8 @@ Conservatoriohvl::Application.routes.draw do
   get 'funcionalidades/index', to: "funcionalidades#index", as: :funcionalidades
   get 'encerradas', to: "matriculas#encerradas"
   get 'aluno/busca_dados_cliente', to: "alunos#busca_dados_cliente"
+  get 'matricula_nova', to: "matriculas#new"
+  get 'matricula_extra', to: "matriculas#new"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
