@@ -1,5 +1,5 @@
 $('#teorica_horario_id').empty();
-$('#teorica_horario_id').append( $('<option>Selecione um horário</option>'));
+$('#teorica_horario_id').append( $('<option value>Selecione um horário</option>'));
 <% if @horarios.any? %>
 	<% tem_horario = false %>
 	<% @horarios.each do |horario| %>
@@ -13,9 +13,9 @@ $('#teorica_horario_id').append( $('<option>Selecione um horário</option>'));
 	<% end %>
 	<% unless tem_horario %>
 		$('#teorica_horario_id').empty();
-		$('#teorica_horario_id').append( $('<option>Sem horários disponíveis</option>'));
+		$('#teorica_horario_id').append( $('<option value>Sem horários disponíveis</option>'));
 	<% end %>
 <% else %>
 	$('#teorica_horario_id').empty();
-	$('#teorica_horario_id').append( $('<option>Sem horários disponíveis</option>'));
+	$('#teorica_horario_id').append( $('<option value>Sem horários disponíveis</option>'));
 <% end %>

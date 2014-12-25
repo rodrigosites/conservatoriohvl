@@ -5,9 +5,6 @@ class Matricula < ActiveRecord::Base
   has_many :aulas, :dependent => :destroy
   has_many :horarios, through: :aulas, :dependent => :destroy
 
-  #acessa o <text> :horario_id e possibilita validação abaixo
-  attr_accessor :horario_id
-  
   #validações
-  validates :aluno_id, :curso_id, :ano, :valor_mensal, :horario_id, presence: true
+  validates :aluno_id, :curso_id, :ano, :valor_mensal, presence: true
 end

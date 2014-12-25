@@ -52,6 +52,7 @@
   <%= fields_for(:teorica, @matricula.aulas.build) do |v| %>
     <div class="form-group" id="horario_teoria_div">
       <%= v.label "Horário de Teoria:", class: "col-sm-0 control-label" %><br />
+      <%= v.hidden_field :teoria %>
       <%= v.hidden_field :matricula_id, value: Matricula.maximum(:id).to_i + 1 %>
       <%= v.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor de teoria...' }, {class: "form-control"} %>
     </div>

@@ -22,7 +22,7 @@
         <td><%= matricula.aluno.nome %></td>
         <td><%= matricula.curso.nome %></td>
         <td><%= matricula.ano %>º Ano</td>
-        <td><%= matricula.teoria_ano == 0 ? "Formado" : "#{matricula.teoria_ano}º Ano" %></td>
+        <td><%= matricula.teoria_ano == 0 || matricula.teoria_ano == 99 ? "-" : "#{matricula.teoria_ano}º Ano" %></td>
         <td><%= number_to_currency(matricula.valor_mensal) %></td>
         <td><%= I18n.l(matricula.data_matricula.to_date) %></td>
         <td><%= button_to 'Mostrar Perfil', matricula, :class => "btn btn-default btn-xs", :method => :get %></td>

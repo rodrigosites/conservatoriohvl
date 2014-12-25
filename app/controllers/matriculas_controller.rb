@@ -18,13 +18,14 @@ class MatriculasController < ApplicationController
   end
 
   def create
+    if params[:pratica][:horario_id].blank?
+      redirect_to new_matricula_path, alert: "O campo Horário do curso principal não pode ficar em branco"
+      return
+    end
     @matricula = Matricula.new(matricula_params)
-    
     respond_to do |format|
       if @matricula.save
-
         gera_notificacao("admin",@matricula)
-
         # salva na tabela many_to_many
         @aula = Aula.new
         @aula.horario_id = params[:pratica][:horario_id]
@@ -35,9 +36,13 @@ class MatriculasController < ApplicationController
           @aula = Aula.new
           @aula.horario_id = params[:teorica][:horario_id]
           @aula.matricula_id = @matricula.id
-          @aula.teoria = true
-          @aula.save
+          if params[:teorica][:teoria] == "Teoria"
+            @aula.teoria = true
+          elsif params[:teorica][:teoria] == "Musicalização Infantil"
+            @aula.musicalizacao = true
           end
+          @aula.save
+        end
         format.html { redirect_to @matricula, notice: "Matricula criada com sucesso." }
         format.json { render action: 'show', status: :created, location: @matricula }
       else
@@ -83,12 +88,12 @@ class MatriculasController < ApplicationController
 
   def busca_horarios
     @professor = Professor.find params[:professor_id]
-    @horarios = @professor.horarios
+    @horarios = @professor.horarios.order("dia, horario")
   end
 
   def busca_horarios_teoria
     @professor = Professor.find params[:professor_id]
-    @horarios = @professor.horarios
+    @horarios = @professor.horarios.order("dia, horario")
   end
 
   def busca_dados_curso

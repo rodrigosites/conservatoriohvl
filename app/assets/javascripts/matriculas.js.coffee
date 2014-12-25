@@ -41,11 +41,12 @@ $ ->
 			  dataType: "script"
 			  data:
 			    tipo_teoria: $('#tipo_teoria option:selected').val()
+			$('#teorica_teoria').val($('#tipo_teoria option:selected').val())
 		else
 			$('#professor_teoria_id').empty();
 			$('#professor_teoria_id').append($('<option value>Primeiro selecione o professor...</option>'));
 			$('#matricula_teoria_ano').empty();
-			$('#matricula_teoria_ano').append($('<option>Selecione o tipo de teoria...</option>'));
+			$('#matricula_teoria_ano').append($('<option value>Selecione o tipo de teoria...</option>'));
 			$('#professor_teoria_div').show()
 			$('#horario_teoria_div').show()
 
@@ -56,6 +57,8 @@ $ ->
 			$('#professor_teoria_div').hide()
 			$('#horario_teoria_div').hide()
 			$('#tipo_teoria_div').hide()
+			$('#matricula_teoria_ano').append($('<option value=99>99</option>'))
+			$('#matricula_teoria_ano').val(99)
 		else
 			$('#matricula_teoria_div').show()
 			$('#professor_teoria_div').show()
