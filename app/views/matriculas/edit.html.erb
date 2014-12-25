@@ -1,5 +1,13 @@
 <h1><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados da Matrícula</h1>
 
+<% if @matricula.valor_mensal == 195 %>
+
+<%= render 'form_extra' %>
+
+<% else %>
+
 <%= render 'form' %>
+
+<% end %>
 
 <%= button_to 'Back', matricula_path, :class => "btn btn-default", :method => :get  %>

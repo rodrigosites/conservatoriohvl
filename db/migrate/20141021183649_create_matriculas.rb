@@ -7,6 +7,7 @@ class CreateMatriculas < ActiveRecord::Migration
       t.timestamp :termino_matricula
       t.integer :ano
       t.float :valor_mensal
+      t.integer :teoria_ano
       t.timestamps
     end
   end

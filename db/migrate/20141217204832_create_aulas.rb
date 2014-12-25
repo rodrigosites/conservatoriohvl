@@ -4,6 +4,7 @@ class CreateAulas < ActiveRecord::Migration
       t.belongs_to :matricula
       t.belongs_to :horario
       t.boolean :teoria
+      t.boolean :musicalizacao
       t.timestamps
     end
   end
