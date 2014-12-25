@@ -1,9 +1,9 @@
 <% if request.env["HTTP_REFERER"].include? "/horarios" %>
-  <h1>Atribuir Sala</h1>
+  <h2>Atribuir Sala</h2>
   <%= render 'sala_form' %>
 <% else %>
-  <h1>Editar Dados do Horário</h1>
+  <h2>Editar Dados do Horário</h2>
   <%= render 'form' %>
 <% end %>
 
-<%= button_to 'Voltar', horarios_path, :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Voltar', :back, :class => "btn btn-default", :method => :get  %>

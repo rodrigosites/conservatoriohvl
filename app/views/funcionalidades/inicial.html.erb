@@ -7,7 +7,7 @@
   <% @notificacoes.each do |notificacao| %>
     <% unless notificacao.visualizado %>
       <p><%= link_to notificacao.conteudo, {:controller => "funcionalidades", :action => "notificacao_lida", :id => notificacao.id}, id: "notificacao#{notificacao.id}", :remote => true %></p>
-      <% content_for :js do%>
+      <% content_for :js do %>
         $('#notificacao<%= notificacao.id %> ').bind('ajax:success', function(){
           $('#notificacao<%= notificacao.id %> ').remove();
         });

@@ -1,8 +1,9 @@
-<h1>Lista de Clientes</h1>
+<h2>Lista de Clientes</h2>
 
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Nº</th>
       <th>Cliente</th>
       <th>Telefone</th>
       <th>Celular</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @clientes.each do |cliente| %>
       <tr>
+        <td><%= cliente.id %></td>
         <td><%= cliente.nome %></td>
         <td><%= cliente.telefone %></td>
         <td><%= cliente.celular %></td>

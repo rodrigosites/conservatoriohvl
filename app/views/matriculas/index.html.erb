@@ -1,8 +1,9 @@
-<h1>Lista de Matrículas Ativas</h1>
+<h2>Lista de Matrículas Ativas</h2>
 
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Nº</th>
       <th>Aluno</th>
       <th>Curso</th>
       <th>Ano</th>
@@ -19,6 +20,7 @@
   <tbody>
     <% @matriculas.each do |matricula| %>
       <tr>
+        <td><%= matricula.id %></td>
         <td><%= matricula.aluno.nome %></td>
         <td><%= matricula.curso.nome %></td>
         <td><%= matricula.ano %>º Ano</td>

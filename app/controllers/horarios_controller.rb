@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class HorariosController < ApplicationController
 before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala]
 
@@ -21,7 +23,8 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
     respond_to do |format|
       if @horario.save
         gera_notificacao("admin",@horario)
-        format.html { redirect_to @horario, notice: "Horario #{@horario.dia.slice(2,@horario.dia.length-1)} - #{@horario.horario.to_s.slice(10..15)} criado com sucesso." }
+        format.html { redirect_to @horario.professor, notice: "Horário #{@horario.dia.slice(2,@horario.dia.length-1)} - 
+        #{@horario.horario.to_s.slice(10..15)} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @horario }
       else
         format.html { render action: 'new' }
@@ -33,7 +36,8 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
   def update
     respond_to do |format|
       if @horario.update(horario_params)
-        format.html { redirect_to horarios_path, notice: "Dados da horario #{@horario.dia.slice(2,@horario.dia.length-1)} - #{@horario.horario.to_s.slice(10..15)} foram atualizados com sucesso." }
+        format.html { redirect_to @horario.professor, notice: "Horário #{@horario.dia.slice(2,@horario.dia.length-1)} - 
+        #{@horario.horario.to_s.slice(10..15)} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -45,10 +49,13 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @horario.destroy
     respond_to do |format|
-      format.html { redirect_to horarios_path}
-      format.json { head :no_content }
+      if @horario.destroy
+        format.html { redirect_to @horario.professor}
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @horario.professor, alert: "Não foi possível excluir o horário pois existem matrículas atreladas a ele."}
+      end
     end
   end
 
