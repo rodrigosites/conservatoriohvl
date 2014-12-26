@@ -27,8 +27,8 @@
         <td><%= matricula.teoria_ano == 0 || matricula.teoria_ano == 99 ? "-" : "#{matricula.teoria_ano}º Ano" %></td>
         <td><%= number_to_currency(matricula.valor_mensal) %></td>
         <td><%= I18n.l(matricula.data_matricula.to_date) %></td>
-        <td><%= button_to 'Mostrar Perfil', matricula, :class => "btn btn-default btn-xs", :method => :get %></td>
-        <td><%= button_to 'Editar Perfil', edit_matricula_path(matricula), :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Abrir Ficha', matricula, :class => "btn btn-default btn-xs", :method => :get %></td>
+        <td><%= button_to 'Editar Dados', edit_matricula_path(matricula), :class => "btn btn-default btn-xs", :method => :get %></td>
         <td><%= button_to 'Encerrar', encerrar_path(matricula), :class => "btn btn-default btn-xs", :method => :get %></td>
         <td><%= button_to 'Excluir', matricula, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>
       </tr>

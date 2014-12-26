@@ -6,10 +6,21 @@
   </div>
     <ul class="list-group">
       <li class="list-group-item"><b>Endereço:</b> <%= @professor.endereco %></li>
+      <li class="list-group-item"><b>Bairro:</b> <%= @professor.bairro %></li>
+      <li class="list-group-item"><b>Cidade:</b> <%= @professor.cidade %></li>
+      <li class="list-group-item"><b>Estado:</b> <%= @professor.uf %></li>
+      <li class="list-group-item"><b>CEP:</b> <%= @professor.cep %></li>
       <li class="list-group-item"><b>RG:</b> <%= @professor.rg %></li>
       <li class="list-group-item"><b>CPF:</b> <%= @professor.cpf %></li>
+      <li class="list-group-item"><b>E-mail:</b> <%= @professor.email %></li>
       <li class="list-group-item"><b>Telefone:</b> <%= @professor.telefone %></li>
       <li class="list-group-item"><b>Celular:</b> <%= @professor.celular %></li>
+      <li class="list-group-item"><b>Nascimento:</b> <%= I18n.l(@professor.nascimento.to_date) %></li>
+      <li class="list-group-item"><b>Nome do Pai:</b> <%= @professor.pai %></li>
+      <li class="list-group-item"><b>Nome da Mãe:</b> <%= @professor.mae %></li>
+      <li class="list-group-item"><b>Nacionalidade:</b> <%= @professor.nacionalidade %></li>
+      <li class="list-group-item"><b>Profissão:</b> <%= @professor.profissao %></li>
+      <li class="list-group-item"><b>Escolaridade:</b> <%= @professor.escolaridade %></li>
     </ul>
 </div>
 
@@ -36,7 +47,7 @@
       <tr>
         <td><%= dia(horario.dia) %>
         <td><%= hora(horario.horario) %></td>
-        <td><a href="#" data-toggle="modal" data-target="#myModal"><%= horario.matriculas.size %></a></td>
+        <td><a href="/professores" data-toggle="modal" data-target="#myModal" conteudo="teste"><%= horario.matriculas.size %></a></td>
         <td><%= button_to 'Editar', edit_horario_path(horario), :class => "btn btn-default btn-xs", :method => :get %></td>
         <td><%= button_to 'Excluir', horario, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a horario #{horario.horario}?" } %></td>
       </tr>

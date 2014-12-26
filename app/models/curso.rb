@@ -7,4 +7,8 @@ class Curso < ActiveRecord::Base
   #validações
   validates :nome, uniqueness: true
   validates :nome, :valor, :anos, presence: true
+
+  def nome=(s)
+    super s.titleize
+  end
 end

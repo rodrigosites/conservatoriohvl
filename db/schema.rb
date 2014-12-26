@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217204832) do
+ActiveRecord::Schema.define(version: 20141226151118) do
 
   create_table "alunos", force: true do |t|
     t.integer  "cliente_id"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20141217204832) do
     t.string   "celular"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
+    t.date     "nascimento"
+    t.string   "bairro"
+    t.string   "uf"
+    t.string   "cidade"
+    t.string   "cep"
+    t.string   "pai"
+    t.string   "mae"
+    t.string   "nacionalidade"
+    t.string   "profissao"
   end
 
   create_table "aulas", force: true do |t|
@@ -109,6 +119,17 @@ ActiveRecord::Schema.define(version: 20141217204832) do
     t.string   "celular"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
+    t.date     "nascimento"
+    t.string   "bairro"
+    t.string   "uf"
+    t.string   "cidade"
+    t.string   "cep"
+    t.string   "pai"
+    t.string   "mae"
+    t.string   "nacionalidade"
+    t.string   "profissao"
+    t.string   "escolaridade"
   end
 
   create_table "salas", force: true do |t|

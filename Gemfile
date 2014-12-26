@@ -4,6 +4,8 @@ gem 'thin'
 
 gem 'sorcery'
 
+gem 'docx', '~> 0.2.07', :require => ["docx"]
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 

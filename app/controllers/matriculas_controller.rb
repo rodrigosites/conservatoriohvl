@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'docx'
 
 class MatriculasController < ApplicationController
   before_action :set_matricula, only: [:show, :edit, :update, :destroy, :encerrar]
@@ -22,6 +23,7 @@ class MatriculasController < ApplicationController
       redirect_to new_matricula_path, alert: "O campo Horário do curso principal não pode ficar em branco"
       return
     end
+    
     @matricula = Matricula.new(matricula_params)
     respond_to do |format|
       if @matricula.save
@@ -43,7 +45,11 @@ class MatriculasController < ApplicationController
           end
           @aula.save
         end
-        format.html { redirect_to @matricula, notice: "Matricula criada com sucesso." }
+
+        gera_contrato(@matricula)
+
+        format.html { redirect_to @matricula, notice: "Matricula criada com sucesso. O contrato pode ser acessado em 
+          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome}.docx\"." }
         format.json { render action: 'show', status: :created, location: @matricula }
       else
         format.html { render action: 'new' }
@@ -62,7 +68,11 @@ class MatriculasController < ApplicationController
             aula.update_attribute(:horario_id,params[:pratica][:horario_id])
           end
         end
-        format.html { redirect_to @matricula, notice: "Dados do matricula foram atualizados com sucesso." }
+
+        gera_contrato(@matricula)
+
+        format.html { redirect_to @matricula, notice: "Dados do matricula foram atualizados com sucesso. O novo contrato foi 
+          gerado em \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome}.docx\"." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -141,4 +151,40 @@ class MatriculasController < ApplicationController
         :teoria_ano)
     end
 
+    def gera_contrato(matricula)
+      doc = Docx::Document.open("#{Rails.root}/private/contratos/template.docx")
+      
+      doc.bookmarks['cliente_id'].insert_text_after(@matricula.id)
+      doc.bookmarks['dia_pratica'].insert_text_after(@matricula.horarios.first.dia.slice(2,@matricula.horarios.first.dia.length-1).pluralize)
+      doc.bookmarks['horario_pratica'].insert_text_after(@matricula.horarios.first.horario.to_s.slice(10..15))
+      doc.bookmarks['termino_pratica'].insert_text_after((@matricula.horarios.first.horario + 50*60).to_s.slice(10..15))
+      doc.bookmarks['professor_pratica'].insert_text_after(@matricula.horarios.first.professor.nome)
+      if @matricula.horarios.size > 1
+        doc.bookmarks['dia_teoria'].insert_text_after(@matricula.horarios.last.dia.slice(2,@matricula.horarios.last.dia.length-1).pluralize)
+        doc.bookmarks['horario_teoria'].insert_text_after(@matricula.horarios.last.horario.to_s.slice(10..15))
+        doc.bookmarks['termino_teoria'].insert_text_after((@matricula.horarios.first.horario + 50*60).to_s.slice(10..15))
+        doc.bookmarks['professor_teoria'].insert_text_after(@matricula.horarios.last.professor.nome)
+      end
+      doc.bookmarks['cliente_email'].insert_text_after(@matricula.aluno.cliente.email)
+      doc.bookmarks['aluno_nome'].insert_text_after(@matricula.aluno.nome)
+      doc.bookmarks['aluno_nascimento'].insert_text_after(I18n.l(@matricula.aluno.nascimento))
+      doc.bookmarks['aluno_pai'].insert_text_after(@matricula.aluno.pai)
+      doc.bookmarks['aluno_mae'].insert_text_after(@matricula.aluno.mae)
+      doc.bookmarks['aluno_endereco'].insert_text_after(@matricula.aluno.endereco)
+      doc.bookmarks['aluno_bairro'].insert_text_after(@matricula.aluno.bairro)
+      doc.bookmarks['aluno_cep'].insert_text_after(@matricula.aluno.cep)
+      doc.bookmarks['aluno_cidade'].insert_text_after(@matricula.aluno.cidade)
+      doc.bookmarks['aluno_uf'].insert_text_after(@matricula.aluno.uf)
+      doc.bookmarks['aluno_telefone'].insert_text_after(@matricula.aluno.telefone)
+      doc.bookmarks['aluno_celular'].insert_text_after(@matricula.aluno.celular)
+      doc.bookmarks['curso_nome'].insert_text_after(@matricula.curso.nome.upcase)
+      doc.bookmarks['valor_total'].insert_text_after("R$ #{(@matricula.valor_mensal * 12).to_i},00")
+      doc.bookmarks['valor_mensal'].insert_text_after("R$ #{@matricula.valor_mensal.to_i},00")
+      doc.bookmarks['data_matricula'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))
+
+      dir = "#{Rails.root}/private/contratos/#{Time.now.year}"
+      Dir.mkdir(dir) unless File.exists?(dir)
+
+      doc.save("#{Rails.root}/private/contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome}.docx")
+    end
 end

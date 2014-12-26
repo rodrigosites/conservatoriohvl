@@ -17,7 +17,7 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
   def create
     @aluno = Aluno.new(aluno_params)
-  
+
     respond_to do |format|
       if @aluno.save
         gera_notificacao("admin",@aluno)
@@ -64,6 +64,7 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def aluno_params
-      params.require(:aluno).permit(:cliente_id, :nome, :endereco, :rg, :cpf, :telefone, :celular)
+      params.require(:aluno).permit(:cliente_id, :nome, :endereco, :rg, :cpf, :telefone, :celular, :email, :nascimento, :bairro, :cidade,
+        :uf, :cep, :pai, :mae, :nacionalidade, :profissao)
     end
 end

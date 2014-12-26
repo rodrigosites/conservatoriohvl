@@ -39,5 +39,4 @@ class ApplicationController < ActionController::Base
       @notificacao.save
     end  
   end
-
 end
