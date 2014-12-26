@@ -1,4 +1,6 @@
-<h2><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados da Matrícula</h2>
+<div class="page-header">
+  <h2><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados da Matrícula</h2>
+</div>
 
 <% if @matricula.valor_mensal == 195 %>
 
@@ -10,4 +12,4 @@
 
 <% end %>
 
-<%= button_to 'Voltar', matricula_path, :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Voltar', matricula_path, :class => "btn btn-primary", :method => :get  %>

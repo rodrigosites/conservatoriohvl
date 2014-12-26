@@ -1,4 +1,6 @@
-<h2>Lista de Matrículas Inativas</h2>
+<div class="page-header">
+  <h2>Lista de Matrículas Inativas</h2>
+</div>
 
 <table class="table table-striped">
   <thead>
@@ -25,8 +27,8 @@
         <td><%= number_to_currency(matricula.valor_mensal) %></td>
         <td><%= I18n.l(matricula.data_matricula.to_date) %></td>
         <td><%= I18n.l(matricula.termino_matricula.to_date) %></td>
-        <td><%= button_to 'Mostrar Perfil', matricula, :class => "btn btn-default btn-xs", :method => :get %></td>
-        <td><%= button_to 'Excluir', matricula, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>
+        <td><%= button_to 'Mostrar Perfil', matricula, :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to 'Excluir', matricula, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +38,4 @@
 
 <br /><br />
 
-<%= button_to 'Cadastrar Nova Matrícula', new_matricula_path, :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Cadastrar Nova Matrícula', new_matricula_path, :class => "btn btn-primary", :method => :get  %>

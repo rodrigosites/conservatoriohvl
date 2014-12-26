@@ -1,10 +1,12 @@
-<h2>Lista de Clientes</h2>
+<div class="page-header">
+  <h2>Lista de Clientes <small>// clientes cadastrados: <%= @clientes.size %></small></h2>
+</div>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Nº</th>
-      <th>Cliente</th>
+      <th>Nome</th>
       <th>Telefone</th>
       <th>Celular</th>
       <th></th>
@@ -20,16 +22,14 @@
         <td><%= cliente.nome %></td>
         <td><%= cliente.telefone %></td>
         <td><%= cliente.celular %></td>
-        <td><%= button_to "Abrir a Ficha", cliente, :class => "btn btn-default btn-xs", :method => :get  %></td>
-        <td><%= button_to "Editar Dados", edit_cliente_path(cliente), :class => "btn btn-default btn-xs", :method => :get %></td>
-        <td><%= button_to "Excluir Cliente", cliente, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o cliente #{cliente.nome}? Fazer isso excluirá todos os alunos vinculados." } %></td>
+        <td><%= button_to "Abrir a Ficha", cliente, :class => "btn btn-primary btn-xs", :method => :get  %></td>
+        <td><%= button_to "Editar Dados", edit_cliente_path(cliente), :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to "Excluir Cliente", cliente, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o cliente #{cliente.nome}? Fazer isso excluirá todos os alunos vinculados." } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<b>Total de clientes cadastrados: <%= @clientes.size %></b>
+<br />
 
-<br /><br />
-
-<%= button_to 'Cadastrar Novo Cliente', new_cliente_path, :class => "btn btn-default", :method => :get   %>
+<%= button_to 'Cadastrar Novo Cliente', new_cliente_path, :class => "btn btn-primary", :method => :get   %>

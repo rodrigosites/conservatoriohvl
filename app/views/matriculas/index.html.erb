@@ -1,4 +1,6 @@
-<h2>Lista de Matrículas Ativas</h2>
+<div class="page-header">
+  <h2>Lista de Matrículas Ativas <small>// matrículas ativas: <%= Matricula.all.size %></small></h2>
+</div>
 
 <table class="table table-striped">
   <thead>
@@ -27,17 +29,17 @@
         <td><%= matricula.teoria_ano == 0 || matricula.teoria_ano == 99 ? "-" : "#{matricula.teoria_ano}º Ano" %></td>
         <td><%= number_to_currency(matricula.valor_mensal) %></td>
         <td><%= I18n.l(matricula.data_matricula.to_date) %></td>
-        <td><%= button_to 'Abrir Ficha', matricula, :class => "btn btn-default btn-xs", :method => :get %></td>
-        <td><%= button_to 'Editar Dados', edit_matricula_path(matricula), :class => "btn btn-default btn-xs", :method => :get %></td>
-        <td><%= button_to 'Encerrar', encerrar_path(matricula), :class => "btn btn-default btn-xs", :method => :get %></td>
-        <td><%= button_to 'Excluir', matricula, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>
+        <td><%= button_to 'Abrir Ficha', matricula, :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to 'Editar Dados', edit_matricula_path(matricula), :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to 'Encerrar', encerrar_path(matricula), :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to 'Excluir', matricula, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<b>Total de matrículas ativas: <%= @matriculas.size %></b>
+<%= will_paginate @matriculas, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
 
 <br /><br />
 
-<%= button_to 'Cadastrar Nova Matrícula', new_matricula_path, :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Cadastrar Nova Matrícula', new_matricula_path, :class => "btn btn-primary", :method => :get  %>

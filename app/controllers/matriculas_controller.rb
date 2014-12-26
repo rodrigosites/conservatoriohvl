@@ -5,7 +5,7 @@ class MatriculasController < ApplicationController
   before_action :set_matricula, only: [:show, :edit, :update, :destroy, :encerrar]
 
   def index
-    @matriculas = Matricula.where("termino_matricula is NULL")
+    @matriculas = Matricula.where("termino_matricula is NULL").paginate(page: params[:page]).per_page(10)
   end
 
   def show

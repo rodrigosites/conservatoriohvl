@@ -1,15 +1,23 @@
 <% if request.original_url.include? "/matricula_nova" %>
-  <h2>Matricular Aluno - Curso Principal e Teoria</h2>
+  <div class="page-header">
+    <h2>Matricular Aluno - Curso Principal e Teoria</h2>
+  </div>
   <%= render 'form' %>
 <% elsif request.original_url.include? "/matricula_extra" %>
-  <h2>Matricular Aluno - Instrumento Extra</h2>
+  <div class="page-header">
+    <h2>Matricular Aluno - Instrumento Extra</h2>
+  </div>
   <%= render 'form_extra' %>
 <% elsif request.env["HTTP_REFERER"].include? "/matricula_nova" %>
-  <h2>Matricular Aluno - Curso Principal e Teoria</h2>
+  <div class="page-header">
+    <h2>Matricular Aluno - Curso Principal e Teoria</h2>
+  </div>
   <%= render 'form' %>
 <% elsif request.env["HTTP_REFERER"].include? "/matricula_extra" %>
-  <h2>Matricular Aluno - Instrumento Extra</h2>
+  <div class="page-header">
+    <h2>Matricular Aluno - Instrumento Extra</h2>
+  </div>
   <%= render 'form_extra' %>
 <% end %>
 
-<%= button_to 'Voltar', matriculas_path, :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Voltar', matriculas_path, :class => "btn btn-primary", :method => :get  %>

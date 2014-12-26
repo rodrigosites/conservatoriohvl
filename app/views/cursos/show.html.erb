@@ -1,3 +1,5 @@
+<div class="page-header"></div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
@@ -23,7 +25,7 @@
       <% @professores.each do |professor| %>
         <tr>
           <td><%= professor.nome %>
-          <td><%= button_to 'Excluir', get_leciona(@curso.id,professor.id), :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o vinculo com o professor #{professor.nome}?" } %></td>
+          <td><%= button_to 'Excluir', get_leciona(@curso.id,professor.id), :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o vinculo com o professor #{professor.nome}?" } %></td>
         </tr>
       <% end %>
     <% else %>
@@ -33,10 +35,10 @@
 </table>
   
 <div style="float: left; margin-right: 10px;">   
-  <%= button_to 'Vincular Professores', lecionar_path(curso_id: @curso.id), :class => "btn btn-default", :method => :get %>
+  <%= button_to 'Vincular Professores', lecionar_path(curso_id: @curso.id), :class => "btn btn-primary", :method => :get %>
 </div>
 <div style="float: left; margin-right: 10px;"> 
-  <%= button_to 'Editar', edit_curso_path(@curso), :class => "btn btn-default", :method => :get  %> 
+  <%= button_to 'Editar', edit_curso_path(@curso), :class => "btn btn-primary", :method => :get  %> 
 </div>
 <br /><br />
-<%= button_to 'Voltar', cursos_path, :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Voltar', cursos_path, :class => "btn btn-primary", :method => :get  %>

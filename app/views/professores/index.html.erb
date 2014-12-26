@@ -1,9 +1,11 @@
-<h2>Lista de Professores</h2>
+<div class="page-header">
+  <h2>Lista de Professores <small>// professores cadastrados: <%= @professores.size %></small></h2>
+</div>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Professor</th>
+      <th>Nome</th>
       <th>Telefone</th>
       <th>Celular</th>
       <th></th>
@@ -18,16 +20,14 @@
         <td><%= professor.nome %></td>
         <td><%= professor.telefone %></td>
         <td><%= professor.celular %></td>
-        <td><%= button_to 'Abrir Ficha', professor, :class => "btn btn-default btn-xs", :method => :get %></td>
-        <td><%= button_to 'Editar Dados', edit_professor_path(professor), :class => "btn btn-default btn-xs", :method => :get %></td>
-        <td><%= button_to 'Excluir', professor, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o professor #{professor.nome}?" } %></td>
+        <td><%= button_to 'Abrir Ficha', professor, :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to 'Editar Dados', edit_professor_path(professor), :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to 'Excluir', professor, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o professor #{professor.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<b>Total de professores cadastrados: <%= @professores.size %></b>
-
 <br /><br />
 
-<%= button_to 'Cadastrar Novo Professor', new_professor_path, :class => "btn btn-default", :method => :get %>
+<%= button_to 'Cadastrar Novo Professor', new_professor_path, :class => "btn btn-primary", :method => :get %>

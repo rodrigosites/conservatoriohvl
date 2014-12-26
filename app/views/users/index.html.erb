@@ -1,4 +1,6 @@
-<h2>Lista de Usuários</h2>
+<div class="page-header">
+  <h2>Lista de Usuários <small>// usuários cadastrados: <%= @users.size %></small></h2>
+</div>
 
 <table class="table">
   <thead>
@@ -20,11 +22,11 @@
         <td><%= user.crypted_password %></td>
         <td><%= user.salt %></td>
         <td><%= user.nivel %></td>
-        <td><%= button_to 'Editar Perfil', edit_user_path(user), :class => "btn btn-default btn-xs", :method => :get  %></td>
-        <td><%= button_to 'Excluir', user, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o usuário #{user.username}?" } %></td>
+        <td><%= button_to 'Editar Perfil', edit_user_path(user), :class => "btn btn-primary btn-xs", :method => :get  %></td>
+        <td><%= button_to 'Excluir', user, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o usuário #{user.username}?" } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= button_to 'Criar Novo Usuário', new_user_path, :class => "btn btn-default", :method => :get  %>
+<%= button_to 'Criar Novo Usuário', new_user_path, :class => "btn btn-primary", :method => :get  %>

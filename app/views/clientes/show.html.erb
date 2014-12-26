@@ -1,3 +1,5 @@
+<div class="page-header"></div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">
@@ -46,9 +48,9 @@
             <td><%= aluno.nome %></td>
             <td><%= matricula.curso.nome %></td>
             <td><%= number_to_currency(matricula.valor_mensal) %></td><% valor_total = valor_total + matricula.valor_mensal %>
-            <td><%= button_to 'Abrir Ficha', aluno_path(aluno), :class => "btn btn-default btn-xs", :method => :get %></td>
-            <td><%= button_to 'Editar Dados', edit_aluno_path(aluno), :class => "btn btn-default btn-xs", :method => :get %></td>
-            <td><%= button_to 'Excluir', aluno, :class => "btn btn-default btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
+            <td><%= button_to 'Abrir Ficha', aluno_path(aluno), :class => "btn btn-primary btn-xs", :method => :get %></td>
+            <td><%= button_to 'Editar Dados', edit_aluno_path(aluno), :class => "btn btn-primary btn-xs", :method => :get %></td>
+            <td><%= button_to 'Excluir', aluno, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
           </tr>
         <% end %>
       <% end %>
@@ -63,8 +65,8 @@
 <% end %>
 
 <div style="float: left; margin-right: 10px;">
-  <%= button_to 'Editar Cliente', edit_cliente_path(@cliente), :class => "btn btn-default", :method => :get %>
+  <%= button_to 'Editar Cliente', edit_cliente_path(@cliente), :class => "btn btn-primary", :method => :get %>
 </div>
 <div style="float: left;">
-<%= button_to 'Voltar', clientes_path, :class => "btn btn-default", :method => :get %>
+<%= button_to 'Voltar', clientes_path, :class => "btn btn-primary", :method => :get %>
 </div>

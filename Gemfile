@@ -6,6 +6,10 @@ gem 'sorcery'
 
 gem 'docx', '~> 0.2.07', :require => ["docx"]
 
+gem 'will_paginate', '~> 3.0.7'
+
+gem 'will_paginate-bootstrap'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 

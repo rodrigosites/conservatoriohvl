@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   validates :nivel, presence: true
 
   validates :username, uniqueness: true
+
+  has_many :notificacoes, :dependent => :destroy
 end

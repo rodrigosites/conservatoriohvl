@@ -6,10 +6,11 @@
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <%= stylesheet_link_tag("main") %>
 </head>
-<body style="padding-top: 60px;">
+<body style="padding-top: 30px;">
   
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
@@ -29,9 +30,11 @@
   <div class="container">
     <div class="row">
       <% if flash[:notice] %>
+        <div class="page-header"></div>
         <p id="notice" class="alert alert-success" role="alert"><%= flash[:notice] %></p>
       <% end %> 
       <% if flash[:alert]%>
+        <div class="page-header"></div>
         <p id="alert" class="alert alert-danger" role="alert"><%= flash[:alert] %></p>
       <% end %>
       <%= yield %>

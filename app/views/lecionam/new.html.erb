@@ -1,14 +1,10 @@
-<%= form_for(@leciona, html: { class: "form-horizontal", "role" => "form" }) do |f| %>
+<%= form_for(@leciona, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
   <% if @leciona.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@curso.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @leciona.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+    <% flash.now[:alert] = "Erro ao tentar salvar as informações." %>
+      <b style="color: red">Problemas encontrados: </b><br>
+    <% @leciona.errors.full_messages.each do |msg| %>
+      <li style="color: red"><b><%= msg %></b></li>
+    <% end %>
   <% end %>
 
   <div class="form-group">
@@ -18,7 +14,7 @@
   </div>
   <div class="form-group">
     <div class="form-group">
-    <br /><%= f.submit "Cadastrar", class: "btn btn-default" %>
+    <br /><%= f.submit "Cadastrar", class: "btn btn-primary" %>
   </div>
 <% end %>
 
