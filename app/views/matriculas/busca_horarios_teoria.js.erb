@@ -6,7 +6,10 @@ $('#teorica_horario_id').append( $('<option value>Selecione um horário</option>
 	  <% if !horario.matriculas.any? %>
 	  	<% tem_horario = true %>
 	  	$('#teorica_horario_id').append($('<option value="<%= horario.id %>"><%= dia(horario.dia) %> - <%= hora(horario.horario) %></option>'));
-	  <% elsif horario.aulas.where(teoria: true).any? %>
+	  <% elsif params[:tipo_teoria] == "Teoria" && horario.aulas.where(teoria: true).any? %>
+	  	<% tem_horario = true %>
+	  	$('#teorica_horario_id').append($('<option value="<%= horario.id %>"><%= dia(horario.dia) %> - <%= hora(horario.horario) %> - Classe</option>'));
+	  <% elsif params[:tipo_teoria] == "Musicalização Infantil" && horario.aulas.where(musicalizacao: true).any? %>
 	  	<% tem_horario = true %>
 	  	$('#teorica_horario_id').append($('<option value="<%= horario.id %>"><%= dia(horario.dia) %> - <%= hora(horario.horario) %> - Classe</option>'));
 	  <% end %>

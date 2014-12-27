@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Salas <small>// salas cadastradas: <%= @salas.size %></small></h2>
+  <h2>Lista de Salas <small>// salas cadastradas: <%= Sala.all.size %></small></h2>
 </div>
 
 <table class="table table-striped">
@@ -24,6 +24,8 @@
   </tbody>
 </table>
 
-<br /><br />
+<%= will_paginate @salas, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
+
+<br />
 
 <%= button_to 'Cadastrar Nova Sala', new_sala_path, :class => "btn btn-primary", :method => :get  %>

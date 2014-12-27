@@ -2,7 +2,7 @@ class SalasController < ApplicationController
   before_action :set_sala, only: [:show, :edit, :update, :destroy]
 
   def index
-    @salas = Sala.all
+    @salas = Sala.all.paginate(page: params[:page]).per_page(10)
   end
 
   def show

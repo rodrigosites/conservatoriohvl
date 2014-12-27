@@ -1,3 +1,7 @@
+<div class="page-header">
+  <h3>Vincular Professor ao Curso de <%= Curso.find(params[:curso_id]).nome %></h3>
+</div>
+
 <%= form_for(@leciona, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
   <% if @leciona.errors.any? %>
     <% flash.now[:alert] = "Erro ao tentar salvar as informações." %>
@@ -13,10 +17,9 @@
     <%= f.select :professor_id, Professor.all.collect {|p| [ p.nome,p.id ]} , { include_blank: true }, class: "form-control" %>
   </div>
   <div class="form-group">
-    <div class="form-group">
     <br /><%= f.submit "Cadastrar", class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<%= link_to 'Voltar', :back %>
+<%= button_to 'Voltar', cursos_path, :class => "btn btn-primary", :method => :get %>
 

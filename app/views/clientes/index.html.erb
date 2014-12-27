@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Clientes <small>// clientes cadastrados: <%= @clientes.size %></small></h2>
+  <h2>Lista de Clientes <small>// clientes cadastrados: <%= Cliente.all.size %></small></h2>
 </div>
 
 <table class="table table-striped">
@@ -29,6 +29,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @clientes, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
 
 <br />
 

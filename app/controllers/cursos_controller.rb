@@ -2,7 +2,7 @@ class CursosController < ApplicationController
   before_action :set_curso, only: [:show, :edit, :update, :destroy]
 
   def index
-    @cursos = Curso.all
+    @cursos = Curso.all.paginate(page: params[:page]).per_page(10)
   end
 
   def show

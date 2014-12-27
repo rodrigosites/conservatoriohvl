@@ -155,6 +155,7 @@ class MatriculasController < ApplicationController
       doc = Docx::Document.open("#{Rails.root}/private/contratos/template.docx")
       
       doc.bookmarks['cliente_id'].insert_text_after(@matricula.id)
+      doc.bookmarks['curso_nome1'].insert_text_after(@matricula.curso.nome)
       doc.bookmarks['dia_pratica'].insert_text_after(@matricula.horarios.first.dia.slice(2,@matricula.horarios.first.dia.length-1).pluralize)
       doc.bookmarks['horario_pratica'].insert_text_after(@matricula.horarios.first.horario.to_s.slice(10..15))
       doc.bookmarks['termino_pratica'].insert_text_after((@matricula.horarios.first.horario + 50*60).to_s.slice(10..15))
@@ -177,7 +178,7 @@ class MatriculasController < ApplicationController
       doc.bookmarks['aluno_uf'].insert_text_after(@matricula.aluno.uf)
       doc.bookmarks['aluno_telefone'].insert_text_after(@matricula.aluno.telefone)
       doc.bookmarks['aluno_celular'].insert_text_after(@matricula.aluno.celular)
-      doc.bookmarks['curso_nome'].insert_text_after(@matricula.curso.nome.upcase)
+      doc.bookmarks['curso_nome2'].insert_text_after(@matricula.curso.nome.upcase)
       doc.bookmarks['valor_total'].insert_text_after("R$ #{(@matricula.valor_mensal * 12).to_i},00")
       doc.bookmarks['valor_mensal'].insert_text_after("R$ #{@matricula.valor_mensal.to_i},00")
       doc.bookmarks['data_matricula'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))

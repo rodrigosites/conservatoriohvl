@@ -88,6 +88,7 @@ $ ->
 			  dataType: "script"
 			  data:
 			    professor_id: $('#professor_teoria_id option:selected').val()
+			    tipo_teoria: $('#tipo_teoria option:selected').val()
 		else
 			$('#teorica_horario_id').empty();
 			$('#teorica_horario_id').append( $('<option value>Primeiro selecione o professor de teoria...</option>'));

@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Usuários <small>// usuários cadastrados: <%= @users.size %></small></h2>
+  <h2>Lista de Usuários <small>// usuários cadastrados: <%= User.all.size %></small></h2>
 </div>
 
 <table class="table">
@@ -28,5 +28,7 @@
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @users, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
 
 <%= button_to 'Criar Novo Usuário', new_user_path, :class => "btn btn-primary", :method => :get  %>

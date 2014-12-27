@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Alunos <small>// alunos cadastrados: <%= @alunos.size %></small></h2>
+  <h2>Lista de Alunos <small>// alunos cadastrados: <%= Aluno.all.size %></small></h2>
 </div>
 
 <table class="table table-striped">
@@ -30,6 +30,8 @@
   </tbody>
 </table>
 
-<br /><br />
+<%= will_paginate @alunos, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
+
+<br />
 
 <%= button_to 'Cadastrar Novo Aluno', new_aluno_path, :class => "btn btn-primary", :method => :get %>
