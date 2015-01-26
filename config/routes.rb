@@ -6,9 +6,9 @@ Conservatoriohvl::Application.routes.draw do
       get 'busca_professores', to: "matriculas#busca_professores"
       get 'busca_horarios', to: "matriculas#busca_horarios"
       get 'busca_horarios_teoria', to: "matriculas#busca_horarios_teoria"
-      get "busca_dados_curso", to: "matriculas#busca_dados_curso"
-      get "tipo_teoria", to: "matriculas#tipo_teoria"
-    end
+      get 'busca_dados_curso', to: "matriculas#busca_dados_curso"
+      get 'tipo_teoria', to: "matriculas#tipo_teoria"
+     end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -33,6 +33,7 @@ Conservatoriohvl::Application.routes.draw do
   get 'aluno/busca_dados_cliente', to: "alunos#busca_dados_cliente"
   get 'matricula_nova', to: "matriculas#new"
   get 'matricula_extra', to: "matriculas#new"
+  post 'refaz_contrato', to: "matriculas#refaz_contrato"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

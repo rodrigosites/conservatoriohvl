@@ -31,6 +31,9 @@
 </div>
 
 <div style="float: left; margin-right: 10px;">
+  <%= button_to 'Gerar Contrato', refaz_contrato_path(id: @matricula.id), :class => "btn btn-primary", :method => :post %>
+</div>
+<div style="float: left; margin-right: 10px;">
   <%= button_to 'Editar', edit_matricula_path(@matricula), :class => "btn btn-primary", :method => :get %>
 </div>
 <div style="float: left; margin-right: 10px;">

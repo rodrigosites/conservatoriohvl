@@ -2,7 +2,7 @@
 require 'docx'
 
 class MatriculasController < ApplicationController
-  before_action :set_matricula, only: [:show, :edit, :update, :destroy, :encerrar]
+  before_action :set_matricula, only: [:show, :edit, :update, :destroy, :encerrar, :refaz_contrato]
 
   def index
     @matriculas = Matricula.where("termino_matricula is NULL").paginate(page: params[:page]).per_page(10)
@@ -139,6 +139,17 @@ class MatriculasController < ApplicationController
     @matriculas = Matricula.where("termino_matricula is not NULL")
   end
 
+  def refaz_contrato
+    respond_to do |format|
+      if gera_contrato(@matricula)
+        format.html { redirect_to @matricula, notice: "O contrato foi gerado com sucesso e pode ser acessado em 
+          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome}.docx\"." }
+      else
+        format.html { redirect_to @matricula, alert: "Erro ao tentar gerar o contrato." }
+      end
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_matricula
@@ -154,6 +165,7 @@ class MatriculasController < ApplicationController
     def gera_contrato(matricula)
       doc = Docx::Document.open("#{Rails.root}/private/contratos/template.docx")
       
+      # página 1
       doc.bookmarks['cliente_id'].insert_text_after(@matricula.id)
       doc.bookmarks['curso_nome1'].insert_text_after(@matricula.curso.nome)
       doc.bookmarks['dia_pratica'].insert_text_after(@matricula.horarios.first.dia.slice(2,@matricula.horarios.first.dia.length-1).pluralize)
@@ -182,10 +194,30 @@ class MatriculasController < ApplicationController
       doc.bookmarks['valor_total'].insert_text_after("R$ #{(@matricula.valor_mensal * 12).to_i},00")
       doc.bookmarks['valor_mensal'].insert_text_after("R$ #{@matricula.valor_mensal.to_i},00")
       doc.bookmarks['data_matricula'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))
+      # página 2
+      doc.bookmarks['cliente_id2'].insert_text_after(@matricula.id)
+      doc.bookmarks['aluno_nome2'].insert_text_after(@matricula.aluno.nome)
+      doc.bookmarks['curso_nome3'].insert_text_after(@matricula.curso.nome)
+      doc.bookmarks['cliente_nome1'].insert_text_after(@matricula.aluno.cliente.nome)
+      doc.bookmarks['cliente_nacionalidade'].insert_text_after(@matricula.aluno.cliente.nacionalidade)
+      doc.bookmarks['cliente_profissao'].insert_text_after(@matricula.aluno.cliente.profissao)
+      doc.bookmarks['cliente_rg'].insert_text_after(@matricula.aluno.cliente.rg)
+      doc.bookmarks['cliente_cpf'].insert_text_after(@matricula.aluno.cliente.cpf)
+      doc.bookmarks['cliente_endereco'].insert_text_after(@matricula.aluno.cliente.endereco)
+      doc.bookmarks['cliente_bairro'].insert_text_after(@matricula.aluno.cliente.bairro)
+      doc.bookmarks['cliente_cep'].insert_text_after(@matricula.aluno.cliente.cep)
+      doc.bookmarks['cliente_cidade'].insert_text_after(@matricula.aluno.cliente.cidade)
+      doc.bookmarks['cliente_uf'].insert_text_after(@matricula.aluno.cliente.uf)
+      # página 5
+      doc.bookmarks['valor_total2'].insert_text_after("R$ #{(@matricula.valor_mensal * 12).to_i},00")
+      doc.bookmarks['valor_mensal2'].insert_text_after("R$ #{@matricula.valor_mensal.to_i},00")
+      # página 6
+      doc.bookmarks['data_matricula2'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))
 
       dir = "#{Rails.root}/private/contratos/#{Time.now.year}"
       Dir.mkdir(dir) unless File.exists?(dir)
 
       doc.save("#{Rails.root}/private/contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome}.docx")
+      true
     end
 end
