@@ -1,21 +1,27 @@
-<div class="page-header"></div>
-
-<div class="col-md-8" style="background-color:#F5F0EB;border: 1px solid;">
-  <center><h4><b>Novas Notificações</b></h4></center>
+<div class="col-md-8" style="background-color:#F0F0F0;">
+  <center><h4><b><br><br>Novas Notificações<br><br></b></h4></center>
 </div>
-<div class="col-md-4" align="center" style="background-color:#EBD7C5;border: 1px solid;"><h4><b>Agenda de Eventos</b></h4></div>
-<div class="col-md-8">
-  <center>
-  <% @notificacoes.each do |notificacao| %>
-    <% unless notificacao.visualizado %>
-      <p><%= link_to notificacao.conteudo, {:controller => "funcionalidades", :action => "notificacao_lida", :id => notificacao.id}, id: "notificacao#{notificacao.id}", :remote => true %></p>
-      <% content_for :js do %>
-        $('#notificacao<%= notificacao.id %> ').bind('ajax:success', function(){
-          $('#notificacao<%= notificacao.id %> ').remove();
-        });
+<div class="col-md-4" align="center" style="background-color:#0070a0; color:#FFFFFF">
+  <h4><b><br><br>Agenda de Eventos<br><br></b></h4>
+</div>
+<div class="col-md-8" style="background-color:#F9F9F9;">
+  <center><br>
+  <% if @notificacoes.size > 0 %>
+    <% @notificacoes.each do |notificacao| %>
+      <% unless notificacao.visualizado %>
+        <p><%= link_to notificacao.conteudo, {:controller => "funcionalidades", :action => "notificacao_lida", :id => notificacao.id}, id: "notificacao#{notificacao.id}", :remote => true %></p>
+        <% content_for :js do %>
+          $('#notificacao<%= notificacao.id %> ').bind('ajax:success', function(){
+            $('#notificacao<%= notificacao.id %> ').remove();
+          });
+        <% end %>
       <% end %>
     <% end %>
+  <% else %>
+    <p>Sem novas notificações.</p>
   <% end %>
   </center>
 </div>
-
+<div class="col-md-4" align="center" style="background-color:#0070a0; color:#FFFFFF">
+  <p>Sem eventos programados.</p><br>
+</div>

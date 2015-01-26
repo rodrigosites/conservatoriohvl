@@ -8,6 +8,9 @@ $(document).on 'ready page:load', (evt) ->
   $('#aluno_cpf').mask('000.000.000-00', {reverse: true});
   $('#aluno_telefone').mask('(00) 0000-0000');
   $('#aluno_celular').mask('(00) 00000-0000');
+  $('#aluno_cep').mask('00000-000');
+  $('#aluno_uf').mask('AA');
+  $('#aluno_nascimento').mask('00/00/0000');
 
 # Monitora o checkbox e requisita via Ajax os dados do cliente selecionado no select
 $(document).on 'change', '#aluno_cliente', (evt) ->

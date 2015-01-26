@@ -84,10 +84,21 @@ class MatriculasController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @matricula.destroy
-    respond_to do |format|
-      format.html { redirect_to matriculas_path }
-      format.json { head :no_content }
+    @inativa = Matinativa.new
+    @inativa.aluno_id = @matricula.aluno_id
+    @inativa.curso_id = @matricula.curso_id
+    @inativa.data_matricula = @matricula.data_matricula
+    @inativa.termino_matricula = Date.today
+    @inativa.ano = @matricula.ano
+    @inativa.teoria_ano = @matricula.teoria_ano
+    @inativa.valor_mensal = @matricula.valor_mensal
+    @inativa.id_ativa = @matricula.id
+    if @inativa.save
+      @matricula.destroy
+      respond_to do |format|
+        format.html { redirect_to matriculas_path }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -132,11 +143,8 @@ class MatriculasController < ApplicationController
     end
   end
 
-  def encerrar
-  end
-
   def encerradas
-    @matriculas = Matricula.where("termino_matricula is not NULL")
+    @inativas = Matinativa.all
   end
 
   def refaz_contrato

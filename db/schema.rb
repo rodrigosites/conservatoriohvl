@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141226151118) do
+ActiveRecord::Schema.define(version: 20150126155055) do
 
   create_table "alunos", force: true do |t|
     t.integer  "cliente_id"
@@ -85,6 +85,19 @@ ActiveRecord::Schema.define(version: 20141226151118) do
   create_table "lecionam", force: true do |t|
     t.integer  "curso_id"
     t.integer  "professor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "matinativas", force: true do |t|
+    t.integer  "aluno_id"
+    t.integer  "curso_id"
+    t.datetime "data_matricula"
+    t.datetime "termino_matricula"
+    t.integer  "ano"
+    t.float    "valor_mensal"
+    t.integer  "teoria_ano"
+    t.integer  "id_ativa"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

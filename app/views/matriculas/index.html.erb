@@ -31,8 +31,7 @@
         <td><%= I18n.l(matricula.data_matricula.to_date) %></td>
         <td><%= button_to 'Abrir Ficha', matricula, :class => "btn btn-primary btn-xs", :method => :get %></td>
         <td><%= button_to 'Editar Dados', edit_matricula_path(matricula), :class => "btn btn-primary btn-xs", :method => :get %></td>
-        <td><%= button_to 'Encerrar', encerrar_path(matricula), :class => "btn btn-primary btn-xs", :method => :get %></td>
-        <td><%= button_to 'Excluir', matricula, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a matricula do aluno #{matricula.aluno.nome}?" } %></td>
+        <td><%= button_to 'Encerrar', matricula, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja encerrar a matricula do aluno #{matricula.aluno.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>

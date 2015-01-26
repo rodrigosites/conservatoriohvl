@@ -25,7 +25,16 @@ $colHighlight   : #08313F;
 		> .open {
 			> a, > a:hover, > a:focus {
 				color: $colHighlight;
-				background-color: $bgHighlight; }}}
+				background-color: $bgHighlight; }
+			> .dropdown-menu {
+    				background-color: $bgDefault;
+     				> li > a {
+    					color: $colDefault;
+    					&:hover, &:focus {
+							color: $colHighlight; }}
+			}
+		}
+	}
 	.navbar-toggle {
 		border-color: $bgHighlight;
 		&:hover, &:focus {
@@ -38,8 +47,10 @@ $colHighlight   : #08313F;
 	.navbar-link {
 		color: $colDefault;
 		&:hover {
-			color: $colHighlight; }}}
-@media (max-width: 767px) {
+			color: $colHighlight; }}
+}
+
+@media (max-width: 999px) {
 	.navbar-custom .navbar-nav .open .dropdown-menu {
 		> li > a {
 			color: $colDefault;
@@ -48,5 +59,7 @@ $colHighlight   : #08313F;
 		> .active {
 			> a, > a:hover, > a:focus, {
 				color: $colHighlight;
-				background-color: $bgHighlight; }}}
+				background-color: $bgHighlight; }}
+
+	}
 }

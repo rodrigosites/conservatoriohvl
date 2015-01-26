@@ -4,8 +4,8 @@
   <title>Conservatório Musical Heitor Villa Lobos - Santos/SP</title>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <%= stylesheet_link_tag("bootstrap") %>
+  <%= javascript_include_tag("bootstrap.min") %>
   <%= stylesheet_link_tag("main") %>
 </head>
 <body style="padding-top: 30px;">
@@ -13,18 +13,17 @@
   <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
+        <%= link_to "#Heitor Villa Lobos", inicial_path, class: "navbar-brand" %>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
-        <span class="sr-only">Altera Navegação</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <%= link_to "#Heitor Villa Lobos", inicial_path, class: "navbar-brand" %>
       </div>
       <% if current_user %>
         <%= render 'layouts/menu' %>
       <% end %>
-     </div>
+    </div>
   </nav>
 
   <div class="container">
