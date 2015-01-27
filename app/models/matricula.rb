@@ -7,4 +7,10 @@ class Matricula < ActiveRecord::Base
 
   #validações
   validates :aluno_id, :curso_id, :ano, :valor_mensal, presence: true
+
+  def self.search(search, page)
+    paginate :per_page => 10, :page => page,
+             :joins => :aluno,
+             :conditions => ['nome like ?', "%#{search}%"]
+  end
 end

@@ -2,7 +2,7 @@ class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clientes = Cliente.all.paginate(page: params[:page]).per_page(10)
+    @clientes = Cliente.search(params[:search], params[:page])
   end
 
   def show

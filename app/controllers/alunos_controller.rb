@@ -2,7 +2,7 @@ class AlunosController < ApplicationController
 before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
   def index
-    @alunos = Aluno.all.paginate(page: params[:page]).per_page(10)
+    @alunos = Aluno.search(params[:search], params[:page])
   end
 
   def show

@@ -11,4 +11,9 @@ class Curso < ActiveRecord::Base
   def nome=(s)
     super s.titleize
   end
+
+  def self.search(search, page)
+    paginate :per_page => 10, :page => page,
+             :conditions => ['nome like ?', "%#{search}%"]
+  end
 end
