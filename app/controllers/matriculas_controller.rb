@@ -183,7 +183,7 @@ class MatriculasController < ApplicationController
       if @matricula.horarios.size > 1
         doc.bookmarks['dia_teoria'].insert_text_after(@matricula.horarios.last.dia.slice(2,@matricula.horarios.last.dia.length-1).pluralize)
         doc.bookmarks['horario_teoria'].insert_text_after(@matricula.horarios.last.horario.to_s.slice(10..15))
-        doc.bookmarks['termino_teoria'].insert_text_after((@matricula.horarios.first.horario + 50*60).to_s.slice(10..15))
+        doc.bookmarks['termino_teoria'].insert_text_after((@matricula.horarios.last.horario + 50*60).to_s.slice(10..15))
         doc.bookmarks['professor_teoria'].insert_text_after(@matricula.horarios.last.professor.nome)
       end
       doc.bookmarks['cliente_email'].insert_text_after(@matricula.aluno.cliente.email)
@@ -199,7 +199,7 @@ class MatriculasController < ApplicationController
       doc.bookmarks['aluno_telefone'].insert_text_after(@matricula.aluno.telefone)
       doc.bookmarks['aluno_celular'].insert_text_after(@matricula.aluno.celular)
       doc.bookmarks['curso_nome2'].insert_text_after(@matricula.curso.nome.upcase)
-      doc.bookmarks['valor_total'].insert_text_after("R$ #{(@matricula.valor_mensal * 12).to_i},00")
+      doc.bookmarks['valor_total'].insert_text_after("R$ #{(@matricula.valor_mensal * 12 + 100).to_i},00")
       doc.bookmarks['valor_mensal'].insert_text_after("R$ #{@matricula.valor_mensal.to_i},00")
       doc.bookmarks['data_matricula'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))
       # página 2
@@ -217,7 +217,7 @@ class MatriculasController < ApplicationController
       doc.bookmarks['cliente_cidade'].insert_text_after(@matricula.aluno.cliente.cidade)
       doc.bookmarks['cliente_uf'].insert_text_after(@matricula.aluno.cliente.uf)
       # página 5
-      doc.bookmarks['valor_total2'].insert_text_after("R$ #{(@matricula.valor_mensal * 12).to_i},00")
+      doc.bookmarks['valor_total2'].insert_text_after("R$ #{(@matricula.valor_mensal * 12 + 100).to_i},00")
       doc.bookmarks['valor_mensal2'].insert_text_after("R$ #{@matricula.valor_mensal.to_i},00")
       # página 6
       doc.bookmarks['data_matricula2'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))

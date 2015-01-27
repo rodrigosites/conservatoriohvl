@@ -2,11 +2,11 @@
   <center><h4><b><br><br>Novas Notificações<br><br></b></h4></center>
 </div>
 <div class="col-md-4" align="center" style="background-color:#0070a0; color:#FFFFFF">
-  <h4><b><br><br>Agenda de Eventos<br><br></b></h4>
+  <h4><b><br><br>Próximas Aulas do Dia<br><br></b></h4>
 </div>
 <div class="col-md-8" style="background-color:#F9F9F9;">
   <center><br>
-  <% if @notificacoes.size > 0 %>
+  <% if @notificacoes.where("visualizado = false").size > 0 %>
     <% @notificacoes.each do |notificacao| %>
       <% unless notificacao.visualizado %>
         <p><%= link_to notificacao.conteudo, {:controller => "funcionalidades", :action => "notificacao_lida", :id => notificacao.id}, id: "notificacao#{notificacao.id}", :remote => true %></p>
@@ -18,10 +18,24 @@
       <% end %>
     <% end %>
   <% else %>
-    <p>Sem novas notificações.</p>
+    <p>Não há novas notificações desde a sua última visita.</p>
   <% end %>
   </center>
+  <br>
 </div>
-<div class="col-md-4" align="center" style="background-color:#0070a0; color:#FFFFFF">
-  <p>Sem eventos programados.</p><br>
+<div class="col-md-4" style="background-color:#007Fa0; color:#FFFFFF;">
+  <center><br>
+  <% controle = false %>
+  <% if @aulas.size > 0 %>
+    <% @aulas.each do |aula| %>
+      <% if aula.horario.horario.strftime('%H:%M') > Time.now.strftime('%H:%M') %>
+        <% controle = true %>
+        <p><%= aula.horario.horario.strftime('%H:%M') %> - <%= aula.matricula.curso.nome %> - Professor <%= aula.horario.professor.nome %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% unless controle %>
+    <br><p>Sem eventos programados.</p>
+  <% end %>
+  </center>
 </div>
