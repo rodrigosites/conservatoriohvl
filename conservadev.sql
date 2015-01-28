@@ -73,7 +73,7 @@ CREATE TABLE `aulas` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `aulas` (
 
 LOCK TABLES `aulas` WRITE;
 /*!40000 ALTER TABLE `aulas` DISABLE KEYS */;
-INSERT INTO `aulas` VALUES (3,2,4,0,NULL,'2014-12-27 00:38:00','2014-12-27 00:38:00'),(4,3,1,0,NULL,'2014-12-27 00:40:52','2014-12-27 00:40:52'),(5,3,5,1,NULL,'2014-12-27 00:40:52','2014-12-27 00:40:52'),(6,4,1,0,NULL,'2014-12-27 00:41:00','2014-12-27 00:41:00'),(7,4,5,1,NULL,'2014-12-27 00:41:00','2014-12-27 00:41:00'),(8,5,1,0,NULL,'2014-12-27 00:44:22','2014-12-27 00:44:22'),(9,5,5,1,NULL,'2014-12-27 00:44:22','2014-12-27 00:44:22'),(10,6,2,0,NULL,'2014-12-27 00:45:57','2014-12-27 00:45:57'),(11,7,4,0,NULL,'2014-12-27 00:46:06','2014-12-27 00:46:06'),(12,8,4,0,NULL,'2014-12-27 00:46:30','2014-12-27 00:46:30'),(13,9,4,0,NULL,'2014-12-27 00:46:40','2014-12-27 00:46:40');
+INSERT INTO `aulas` VALUES (3,2,4,0,NULL,'2014-12-27 00:38:00','2014-12-27 00:38:00'),(4,3,1,0,NULL,'2014-12-27 00:40:52','2014-12-27 00:40:52'),(5,3,5,1,NULL,'2014-12-27 00:40:52','2014-12-27 00:40:52'),(6,4,1,0,NULL,'2014-12-27 00:41:00','2014-12-27 00:41:00'),(7,4,5,1,NULL,'2014-12-27 00:41:00','2014-12-27 00:41:00'),(8,5,1,0,NULL,'2014-12-27 00:44:22','2014-12-27 00:44:22'),(9,5,5,1,NULL,'2014-12-27 00:44:22','2014-12-27 00:44:22'),(10,6,2,0,NULL,'2014-12-27 00:45:57','2014-12-27 00:45:57'),(11,7,4,0,NULL,'2014-12-27 00:46:06','2014-12-27 00:46:06'),(12,8,4,0,NULL,'2014-12-27 00:46:30','2014-12-27 00:46:30'),(13,9,4,0,NULL,'2014-12-27 00:46:40','2014-12-27 00:46:40'),(16,12,6,0,NULL,'2015-01-27 00:45:54','2015-01-27 00:45:54'),(17,13,7,0,NULL,'2015-01-27 00:55:30','2015-01-27 00:55:30'),(18,14,8,0,NULL,'2015-01-27 16:02:41','2015-01-27 16:02:41'),(19,15,9,0,NULL,'2015-01-27 16:03:00','2015-01-27 16:03:00');
 /*!40000 ALTER TABLE `aulas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ CREATE TABLE `horarios` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +180,7 @@ CREATE TABLE `horarios` (
 
 LOCK TABLES `horarios` WRITE;
 /*!40000 ALTER TABLE `horarios` DISABLE KEYS */;
-INSERT INTO `horarios` VALUES (1,1,NULL,'1-Segunda','10:00:00','2014-12-26 23:56:21','2015-01-26 15:03:04'),(2,1,NULL,'1-Segunda','10:50:00','2014-12-26 23:56:33','2014-12-26 23:56:33'),(4,1,NULL,'3-Quarta','10:00:00','2014-12-27 00:21:32','2014-12-27 00:21:32'),(5,2,NULL,'1-Segunda','15:00:00','2014-12-27 00:37:14','2014-12-27 00:37:14');
+INSERT INTO `horarios` VALUES (1,1,NULL,'1-Segunda','10:00:00','2014-12-26 23:56:21','2015-01-26 15:03:04'),(2,1,NULL,'1-Segunda','10:50:00','2014-12-26 23:56:33','2014-12-26 23:56:33'),(4,1,NULL,'3-Quarta','10:00:00','2014-12-27 00:21:32','2014-12-27 00:21:32'),(5,2,NULL,'1-Segunda','15:00:00','2014-12-27 00:37:14','2014-12-27 00:37:14'),(6,1,NULL,'1-Segunda','23:45:00','2015-01-27 00:45:37','2015-01-27 01:35:15'),(7,2,NULL,'1-Segunda','23:40:00','2015-01-27 00:55:18','2015-01-27 01:35:27'),(8,1,NULL,'2-Terça','10:00:00','2015-01-27 16:02:20','2015-01-27 16:02:20'),(9,1,NULL,'2-Terça','15:00:00','2015-01-27 16:02:30','2015-01-27 16:02:30');
 /*!40000 ALTER TABLE `horarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +263,7 @@ CREATE TABLE `matriculas` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +272,7 @@ CREATE TABLE `matriculas` (
 
 LOCK TABLES `matriculas` WRITE;
 /*!40000 ALTER TABLE `matriculas` DISABLE KEYS */;
-INSERT INTO `matriculas` VALUES (2,2,1,'2014-12-26 00:00:00',NULL,1,297,99,'2014-12-27 00:38:00','2014-12-27 00:38:00'),(3,2,3,'2014-12-26 00:00:00',NULL,1,297,1,'2014-12-27 00:40:52','2014-12-27 00:40:52'),(4,2,3,'2014-12-26 00:00:00',NULL,1,297,1,'2014-12-27 00:40:59','2014-12-27 00:40:59'),(5,2,3,'2014-12-26 00:00:00',NULL,1,297,1,'2014-12-27 00:44:21','2014-12-27 00:44:21'),(6,1,1,'2014-12-26 00:00:00',NULL,1,195,99,'2014-12-27 00:45:57','2014-12-27 00:45:57'),(7,2,1,'2014-12-26 00:00:00',NULL,1,195,99,'2014-12-27 00:46:06','2014-12-27 00:46:06'),(8,2,1,'2014-12-26 00:00:00',NULL,1,195,99,'2014-12-27 00:46:30','2014-12-27 00:46:30'),(9,1,1,'2014-12-26 00:00:00',NULL,2,195,99,'2014-12-27 00:46:39','2014-12-27 00:46:39');
+INSERT INTO `matriculas` VALUES (2,2,1,'2014-12-26 00:00:00',NULL,1,297,99,'2014-12-27 00:38:00','2014-12-27 00:38:00'),(3,2,3,'2014-12-26 00:00:00',NULL,1,297,1,'2014-12-27 00:40:52','2014-12-27 00:40:52'),(4,2,3,'2014-12-26 00:00:00',NULL,1,297,1,'2014-12-27 00:40:59','2014-12-27 00:40:59'),(5,2,3,'2014-12-26 00:00:00',NULL,1,297,1,'2014-12-27 00:44:21','2014-12-27 00:44:21'),(6,1,1,'2014-12-26 00:00:00',NULL,1,195,99,'2014-12-27 00:45:57','2014-12-27 00:45:57'),(7,2,1,'2014-12-26 00:00:00',NULL,1,195,99,'2014-12-27 00:46:06','2014-12-27 00:46:06'),(8,2,1,'2014-12-26 00:00:00',NULL,1,195,99,'2014-12-27 00:46:30','2014-12-27 00:46:30'),(9,1,1,'2014-12-26 00:00:00',NULL,2,195,99,'2014-12-27 00:46:39','2014-12-27 00:46:39'),(12,1,1,'2015-01-26 00:00:00',NULL,1,195,99,'2015-01-27 00:45:54','2015-01-27 00:45:54'),(13,2,1,'2015-01-26 00:00:00',NULL,1,195,99,'2015-01-27 00:55:30','2015-01-27 00:55:30'),(14,1,1,'2015-01-27 00:00:00',NULL,1,195,99,'2015-01-27 16:02:41','2015-01-27 16:02:41'),(15,1,1,'2015-01-27 00:00:00',NULL,1,195,99,'2015-01-27 16:03:00','2015-01-27 16:03:00');
 /*!40000 ALTER TABLE `matriculas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +292,7 @@ CREATE TABLE `notificacoes` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +301,7 @@ CREATE TABLE `notificacoes` (
 
 LOCK TABLES `notificacoes` WRITE;
 /*!40000 ALTER TABLE `notificacoes` DISABLE KEYS */;
-INSERT INTO `notificacoes` VALUES (1,'26/12/2014 - admin cadastrou Cliente Rodrigo De Souza Cruz.',0,'aviso',1,'2014-12-26 23:54:24','2014-12-26 23:54:24'),(2,'26/12/2014 - admin cadastrou Aluno Rodrigo De Souza Cruz.',0,'aviso',1,'2014-12-26 23:54:45','2014-12-26 23:54:45'),(3,'26/12/2014 - admin cadastrou Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-26 23:56:10','2014-12-26 23:56:10'),(4,'26/12/2014 - admin cadastrou o Horário às  10:00 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-26 23:56:21','2014-12-26 23:56:21'),(5,'26/12/2014 - admin cadastrou o Horário às  10:50 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-26 23:56:33','2014-12-26 23:56:33'),(6,'26/12/2014 - admin cadastrou o Horário às  10:50 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-26 23:56:34','2014-12-26 23:56:34'),(7,'26/12/2014 - admin cadastrou Curso Teoria.',0,'aviso',1,'2014-12-26 23:56:56','2014-12-26 23:56:56'),(8,'26/12/2014 - admin cadastrou Curso Musicalização Infantil.',0,'aviso',1,'2014-12-26 23:57:12','2014-12-26 23:57:12'),(9,'26/12/2014 - admin cadastrou Curso Piano.',0,'aviso',1,'2014-12-26 23:57:25','2014-12-26 23:57:25'),(10,'26/12/2014 - admin cadastrou a Matrícula nº 1 - Rodrigo De Souza Cruz.',0,'aviso',1,'2014-12-27 00:04:51','2014-12-27 00:04:51'),(11,'26/12/2014 - admin cadastrou o Horário às  10:00 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:21:32','2014-12-27 00:21:32'),(12,'26/12/2014 - admin cadastrou Cliente Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:35:49','2014-12-27 00:35:49'),(13,'26/12/2014 - admin cadastrou Aluno Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:36:01','2014-12-27 00:36:01'),(14,'26/12/2014 - admin cadastrou Professor Jurema.',0,'aviso',1,'2014-12-27 00:36:50','2014-12-27 00:36:50'),(15,'26/12/2014 - admin cadastrou o Horário às  15:00 - Professor Jurema.',0,'aviso',1,'2014-12-27 00:37:14','2014-12-27 00:37:14'),(16,'26/12/2014 - admin cadastrou a Matrícula nº 2 - Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:38:00','2014-12-27 00:38:00'),(17,'26/12/2014 - admin cadastrou a Matrícula nº 3 - Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:40:52','2014-12-27 00:40:52'),(18,'26/12/2014 - admin cadastrou a Matrícula nº 4 - Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:41:00','2014-12-27 00:41:00'),(19,'26/12/2014 - admin cadastrou a Matrícula nº 5 - Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:44:22','2014-12-27 00:44:22'),(20,'26/12/2014 - admin cadastrou a Matrícula nº 6 - Rodrigo De Souza Cruz.',0,'aviso',1,'2014-12-27 00:45:57','2014-12-27 00:45:57'),(21,'26/12/2014 - admin cadastrou a Matrícula nº 7 - Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:46:06','2014-12-27 00:46:06'),(22,'26/12/2014 - admin cadastrou a Matrícula nº 8 - Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:46:30','2014-12-27 00:46:30'),(23,'26/12/2014 - admin cadastrou a Matrícula nº 9 - Rodrigo De Souza Cruz.',0,'aviso',1,'2014-12-27 00:46:40','2014-12-27 00:46:40'),(24,'26/12/2014 - admin cadastrou a Matrícula nº 10 - Rodrigo De Souza Cruz.',0,'aviso',1,'2014-12-27 00:46:48','2014-12-27 00:46:48'),(25,'26/12/2014 - admin cadastrou a Matrícula nº 11 - Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2014-12-27 00:46:56','2014-12-27 00:46:56'),(26,'26/12/2014 - admin cadastrou Sala Sala 1   Piano.',0,'aviso',1,'2014-12-27 00:51:01','2014-12-27 00:51:01');
+INSERT INTO `notificacoes` VALUES (1,'26/12/2014 - admin cadastrou Cliente Rodrigo De Souza Cruz.',1,'aviso',1,'2014-12-26 23:54:24','2015-01-26 22:01:54'),(2,'26/12/2014 - admin cadastrou Aluno Rodrigo De Souza Cruz.',1,'aviso',1,'2014-12-26 23:54:45','2015-01-26 22:01:55'),(3,'26/12/2014 - admin cadastrou Professor Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-26 23:56:10','2015-01-26 22:01:55'),(4,'26/12/2014 - admin cadastrou o Horário às  10:00 - Professor Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-26 23:56:21','2015-01-26 22:01:55'),(5,'26/12/2014 - admin cadastrou o Horário às  10:50 - Professor Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-26 23:56:33','2015-01-26 22:01:56'),(6,'26/12/2014 - admin cadastrou o Horário às  10:50 - Professor Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-26 23:56:34','2015-01-26 22:01:56'),(7,'26/12/2014 - admin cadastrou Curso Teoria.',1,'aviso',1,'2014-12-26 23:56:56','2015-01-26 22:01:57'),(8,'26/12/2014 - admin cadastrou Curso Musicalização Infantil.',1,'aviso',1,'2014-12-26 23:57:12','2015-01-26 22:01:57'),(9,'26/12/2014 - admin cadastrou Curso Piano.',1,'aviso',1,'2014-12-26 23:57:25','2015-01-26 22:01:58'),(10,'26/12/2014 - admin cadastrou a Matrícula nº 1 - Rodrigo De Souza Cruz.',1,'aviso',1,'2014-12-27 00:04:51','2015-01-26 22:01:58'),(11,'26/12/2014 - admin cadastrou o Horário às  10:00 - Professor Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:21:32','2015-01-26 22:01:58'),(12,'26/12/2014 - admin cadastrou Cliente Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:35:49','2015-01-26 22:01:58'),(13,'26/12/2014 - admin cadastrou Aluno Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:36:01','2015-01-26 22:01:59'),(14,'26/12/2014 - admin cadastrou Professor Jurema.',1,'aviso',1,'2014-12-27 00:36:50','2015-01-26 22:01:59'),(15,'26/12/2014 - admin cadastrou o Horário às  15:00 - Professor Jurema.',1,'aviso',1,'2014-12-27 00:37:14','2015-01-26 22:02:00'),(16,'26/12/2014 - admin cadastrou a Matrícula nº 2 - Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:38:00','2015-01-26 22:02:00'),(17,'26/12/2014 - admin cadastrou a Matrícula nº 3 - Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:40:52','2015-01-26 22:02:01'),(18,'26/12/2014 - admin cadastrou a Matrícula nº 4 - Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:41:00','2015-01-26 22:02:01'),(19,'26/12/2014 - admin cadastrou a Matrícula nº 5 - Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:44:22','2015-01-26 22:02:02'),(20,'26/12/2014 - admin cadastrou a Matrícula nº 6 - Rodrigo De Souza Cruz.',1,'aviso',1,'2014-12-27 00:45:57','2015-01-26 22:02:02'),(21,'26/12/2014 - admin cadastrou a Matrícula nº 7 - Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:46:06','2015-01-26 22:02:02'),(22,'26/12/2014 - admin cadastrou a Matrícula nº 8 - Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:46:30','2015-01-26 22:02:54'),(23,'26/12/2014 - admin cadastrou a Matrícula nº 9 - Rodrigo De Souza Cruz.',1,'aviso',1,'2014-12-27 00:46:40','2015-01-26 22:02:55'),(24,'26/12/2014 - admin cadastrou a Matrícula nº 10 - Rodrigo De Souza Cruz.',1,'aviso',1,'2014-12-27 00:46:48','2015-01-26 22:02:56'),(25,'26/12/2014 - admin cadastrou a Matrícula nº 11 - Kelly Nunez Paulo Dos Santos.',1,'aviso',1,'2014-12-27 00:46:56','2015-01-26 22:02:56'),(26,'26/12/2014 - admin cadastrou Sala Sala 1   Piano.',1,'aviso',1,'2014-12-27 00:51:01','2015-01-26 22:02:57'),(27,'26/01/2015 - admin cadastrou o Usuário airton.',0,'aviso',1,'2015-01-26 23:36:18','2015-01-26 23:36:18'),(28,'26/01/2015 - admin cadastrou o Horário às  23:30 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2015-01-27 00:45:37','2015-01-27 00:45:37'),(29,'26/01/2015 - admin cadastrou o Horário às  23:30 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',2,'2015-01-27 00:45:37','2015-01-27 00:45:37'),(30,'26/01/2015 - admin cadastrou a Matrícula nº 12 - Rodrigo De Souza Cruz.',0,'aviso',1,'2015-01-27 00:45:54','2015-01-27 00:45:54'),(31,'26/01/2015 - admin cadastrou a Matrícula nº 12 - Rodrigo De Souza Cruz.',0,'aviso',2,'2015-01-27 00:45:54','2015-01-27 00:45:54'),(32,'26/01/2015 - admin cadastrou o Horário às  23:10 - Professor Jurema.',0,'aviso',1,'2015-01-27 00:55:18','2015-01-27 00:55:18'),(33,'26/01/2015 - admin cadastrou o Horário às  23:10 - Professor Jurema.',0,'aviso',2,'2015-01-27 00:55:18','2015-01-27 00:55:18'),(34,'26/01/2015 - admin cadastrou a Matrícula nº 13 - Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2015-01-27 00:55:30','2015-01-27 00:55:30'),(35,'26/01/2015 - admin cadastrou a Matrícula nº 13 - Kelly Nunez Paulo Dos Santos.',0,'aviso',2,'2015-01-27 00:55:30','2015-01-27 00:55:30'),(36,'27/01/2015 - admin cadastrou o Horário às  10:00 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2015-01-27 16:02:20','2015-01-27 16:02:20'),(37,'27/01/2015 - admin cadastrou o Horário às  10:00 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',2,'2015-01-27 16:02:20','2015-01-27 16:02:20'),(38,'27/01/2015 - admin cadastrou o Horário às  15:00 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',1,'2015-01-27 16:02:30','2015-01-27 16:02:30'),(39,'27/01/2015 - admin cadastrou o Horário às  15:00 - Professor Kelly Nunez Paulo Dos Santos.',0,'aviso',2,'2015-01-27 16:02:30','2015-01-27 16:02:30'),(40,'27/01/2015 - admin cadastrou a Matrícula nº 14 - Rodrigo De Souza Cruz.',0,'aviso',1,'2015-01-27 16:02:41','2015-01-27 16:02:41'),(41,'27/01/2015 - admin cadastrou a Matrícula nº 14 - Rodrigo De Souza Cruz.',0,'aviso',2,'2015-01-27 16:02:41','2015-01-27 16:02:41'),(42,'27/01/2015 - admin cadastrou a Matrícula nº 15 - Rodrigo De Souza Cruz.',0,'aviso',1,'2015-01-27 16:03:00','2015-01-27 16:03:00'),(43,'27/01/2015 - admin cadastrou a Matrícula nº 15 - Rodrigo De Souza Cruz.',0,'aviso',2,'2015-01-27 16:03:00','2015-01-27 16:03:00');
 /*!40000 ALTER TABLE `notificacoes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -413,7 +413,7 @@ CREATE TABLE `users` (
   `nivel` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,7 +422,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','$2a$10$kqIbixWlE1lDfTJVLQY9.OHYSzHNqSBU3Gnb72Ms5FqTIBN.rXnZO','nWkccbEjNABVSZ11LaWc','2014-12-26 23:29:19','2014-12-26 23:29:19','admin');
+INSERT INTO `users` VALUES (1,'admin','$2a$10$kqIbixWlE1lDfTJVLQY9.OHYSzHNqSBU3Gnb72Ms5FqTIBN.rXnZO','nWkccbEjNABVSZ11LaWc','2014-12-26 23:29:19','2014-12-26 23:29:19','admin'),(2,'airton','$2a$10$fBr1BzHUAL0JS0D3XHaZfuRGnNwVmcqyzsygAwNX6q6Rv6L92lMjO','QguqkRY7kzn5MmUUscMC','2015-01-26 23:36:18','2015-01-26 23:36:18','admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -435,4 +435,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-26 16:35:29
+-- Dump completed on 2015-01-27 19:19:12
