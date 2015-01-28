@@ -45,11 +45,36 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @aluno.destroy
-    respond_to do |format|
-      format.html { redirect_to alunos_path}
-      format.json { head :no_content }
+    @inativo = AlunosInativo.new
+    @inativo.cliente_id = @aluno.cliente_id
+    @inativo.nome = @aluno.nome
+    @inativo.endereco = @aluno.endereco
+    @inativo.rg = @aluno.rg
+    @inativo.cpf = @aluno.cpf
+    @inativo.telefone = @aluno.telefone
+    @inativo.celular = @aluno.celular
+    @inativo.email = @aluno.email
+    @inativo.nascimento = @aluno.nascimento
+    @inativo.bairro = @aluno.bairro
+    @inativo.cidade = @aluno.cidade
+    @inativo.uf = @aluno.uf
+    @inativo.cep = @aluno.cep
+    @inativo.pai = @aluno.pai
+    @inativo.mae = @aluno.mae
+    @inativo.nacionalidade = @aluno.nacionalidade
+    @inativo.profissao = @aluno.profissao
+    @inativo.id_ativo = @aluno.id
+    if @inativo.save
+      @aluno.destroy
+      respond_to do |format|
+        format.html { redirect_to alunos_path}
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def inativos
+    @inativos = AlunosInativo.search(params[:search], params[:page])
   end
 
   def busca_dados_cliente

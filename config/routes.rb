@@ -25,10 +25,14 @@ Conservatoriohvl::Application.routes.draw do
   get 'inicial', to: "funcionalidades#inicial"
   get 'notificacao_lida', to: "funcionalidades#notificacao_lida"
   get 'funcionalidades/index', to: "funcionalidades#index", as: :funcionalidades
+  get 'valor_boletos', to: "funcionalidades#valor_boletos"
   get 'aluno/busca_dados_cliente', to: "alunos#busca_dados_cliente"
+  get 'alunos_inativos', to: "alunos#inativos"
+  get 'clientes_inativos', to: "clientes#inativos"
+  get 'professores_inativos', to: "professores#inativos"
   get 'matricula_nova', to: "matriculas#new"
   get 'matricula_extra', to: "matriculas#new"
-  get 'encerradas', to: "matriculas#encerradas"
+  get 'matriculas_encerradas', to: "matriculas#encerradas"
   get 'matricula/:id/encerrar', to: 'matriculas#encerrar', as: :encerrar
   post 'refaz_contrato', to: "matriculas#refaz_contrato"
 

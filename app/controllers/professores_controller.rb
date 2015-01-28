@@ -45,11 +45,36 @@ class ProfessoresController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @professor.destroy
-    respond_to do |format|
-      format.html { redirect_to professores_path }
-      format.json { head :no_content }
+    @inativo = ProfessoresInativo.new
+    @inativo.nome = @professor.nome
+    @inativo.endereco = @professor.endereco
+    @inativo.rg = @professor.rg
+    @inativo.cpf = @professor.cpf
+    @inativo.telefone = @professor.telefone
+    @inativo.celular = @professor.celular
+    @inativo.email = @professor.email
+    @inativo.nascimento = @professor.nascimento
+    @inativo.bairro = @professor.bairro
+    @inativo.cidade = @professor.cidade
+    @inativo.uf = @professor.uf
+    @inativo.cep = @professor.cep
+    @inativo.pai = @professor.pai
+    @inativo.mae = @professor.mae
+    @inativo.nacionalidade = @professor.nacionalidade
+    @inativo.profissao = @professor.profissao
+    @inativo.escolaridade = @professor.escolaridade
+    @inativo.id_ativo = @professor.id
+    if @inativo.save
+      @professor.destroy
+      respond_to do |format|
+        format.html { redirect_to professores_path}
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def inativos
+    @inativos = ProfessoresInativo.search(params[:search], params[:page])
   end
 
   private

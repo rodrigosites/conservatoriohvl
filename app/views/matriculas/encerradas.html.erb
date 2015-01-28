@@ -1,6 +1,13 @@
 <div class="page-header">
-  <h2>Lista de Matrículas Inativas <small>// matrículas inativas: <%= @inativas.size %></small></h2>
+  <h2>Lista de Matrículas Encerradas <small>// matrículas encerradas: <%= @inativas.size %></small></h2>
 </div>
+
+<%= form_tag request.path, :method => 'get' do %>
+  <%= content_tag :label do %>
+    <%= text_field_tag :search, params[:search], :class => "form-control" %>
+  <% end %>
+  <%= submit_tag 'Buscar', :class => "btn btn-primary" %>
+<% end %>
 
 <table class="table table-striped">
   <thead>
@@ -29,3 +36,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @inativas, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>

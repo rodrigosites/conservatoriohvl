@@ -45,11 +45,35 @@ class ClientesController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @cliente.destroy
-    respond_to do |format|
-      format.html { redirect_to clientes_path}
-      format.json { head :no_content }
+    @inativo = ClientesInativo.new
+    @inativo.nome = @cliente.nome
+    @inativo.endereco = @cliente.endereco
+    @inativo.rg = @cliente.rg
+    @inativo.cpf = @cliente.cpf
+    @inativo.telefone = @cliente.telefone
+    @inativo.celular = @cliente.celular
+    @inativo.email = @cliente.email
+    @inativo.nascimento = @cliente.nascimento
+    @inativo.bairro = @cliente.bairro
+    @inativo.cidade = @cliente.cidade
+    @inativo.uf = @cliente.uf
+    @inativo.cep = @cliente.cep
+    @inativo.pai = @cliente.pai
+    @inativo.mae = @cliente.mae
+    @inativo.nacionalidade = @cliente.nacionalidade
+    @inativo.profissao = @cliente.profissao
+    @inativo.id_ativo = @cliente.id
+    if @inativo.save
+      @cliente.destroy
+      respond_to do |format|
+        format.html { redirect_to clientes_path}
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def inativos
+    @inativos = ClientesInativo.search(params[:search], params[:page])
   end
 
   private

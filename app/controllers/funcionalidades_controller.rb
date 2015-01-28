@@ -33,4 +33,8 @@ class FuncionalidadesController < ApplicationController
     end
   end
   
+  def valor_boletos
+    @clientes = Cliente.search(params[:search], params[:page])
+  end
+
 end

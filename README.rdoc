@@ -1,28 +1,32 @@
-== README
+== README ==
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicativo para gerenciamento do Conservatório HVL
 
-Things you may want to cover:
+* Ruby version 1.9.3
 
-* Ruby version
+* Rails version 4.0.0
 
-* System dependencies
+* Dependências do sistema
 
-* Configuration
+	- Utilizar o package de gems disponível na pasta vendor/cache através do comando bundle install --local 
 
-* Database creation
+* Database: Mysql2
 
-* Database initialization
+	- Gem: mysql2 version 0.3.16 
+	- Procedimentos: Instalar a gem através do comando "gem install mysql --platform=ruby -- --with-mysql-dir=C:/DIRETORIO MYSQL".
+					 Em seguida, colar o arquivo "libmysql.dll" situado na pasta \lib do Mysql dentro da pasta \bin do Ruby. 
+					 Por fim, comandar rake db:create db:migrate.
 
-* How to run the test suite
+* Inicialização da Database
 
-* Services (job queues, cache servers, search engines, etc.)
+	- Após migração da database, utilizar o comando rake db:seed para inclusão dos clientes pré-definidos pela direção.
 
 * Deployment instructions
 
-* ...
+	...
 
+* Rotinas do sistema
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+	- Abertura do sistema: comandar "rails s thin" ou abrir o arquivo "abre servidor.bat";
+	- Backup do banco de dados: comandar mysqldump -u root -p conservatoriohvl_development > conservadev.sql ou abrir o arquivo "backup db.bat";
+	- Importar banco de dados: comandar mysql -u root -p conservatoriohvl_development < conservadev.sql.

@@ -34,7 +34,6 @@ class MatriculasController < ApplicationController
         @aula = Aula.new
         @aula.horario_id = params[:pratica][:horario_id]
         @aula.matricula_id = @matricula.id
-        @aula.teoria = false
         @aula.save
         unless params[:teorica][:horario_id].blank?
           @aula = Aula.new
@@ -146,7 +145,7 @@ class MatriculasController < ApplicationController
   end
 
   def encerradas
-    @inativas = Matinativa.all
+    @inativas = Matinativa.search(params[:search], params[:page])
   end
 
   def refaz_contrato

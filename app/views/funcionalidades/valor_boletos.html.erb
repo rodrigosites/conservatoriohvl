@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h2>Valor de Boletos por Cliente</h2>
+</div>
+
+<%= form_tag request.path, :method => 'get' do %>
+  <%= content_tag :label do %>
+    <%= text_field_tag :search, params[:search], :class => "form-control" %>
+  <% end %>
+  <%= submit_tag 'Buscar', :class => "btn btn-primary" %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nº Cliente</th>
+      <th>Nome</th>
+      <th>Valor Mensal</th>
+      <th>Matrículas</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clientes.each do |cliente| %>
+      <tr>
+        <td><%= cliente.id %></td>
+        <td><%= cliente.nome %></td>
+        <% valor_cliente = 0 %>
+        <% n_matriculas = 0 %>
+        <% cliente.alunos.each do |aluno| %>
+          <% aluno.matriculas.each do |matricula| %>
+            <% valor_cliente += matricula.valor_mensal %>
+            <% n_matriculas += 1 %>
+          <% end %>
+        <% end %>
+        <td><%= number_to_currency(valor_cliente) %></td>
+        <td><%= n_matriculas %></td>
+        <td><center><%= button_to "Visualizar Matrículas", cliente, :class => "btn btn-primary btn-xs", :method => :get  %></center></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @clientes, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
