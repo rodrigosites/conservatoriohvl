@@ -20,7 +20,7 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
     respond_to do |format|
       if @aluno.save
-        gera_notificacao("admin",@aluno)
+        gera_notificacao("admin",@aluno, action_name)
         format.html { redirect_to @aluno, notice: "Aluno #{@aluno.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @aluno }
       else
@@ -33,6 +33,8 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
   def update
     respond_to do |format|
       if @aluno.update(aluno_params)
+        gera_notificacao("admin",@aluno, action_name)
+        logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!! #{action_name}"
         format.html { redirect_to @aluno, notice: "Dados do aluno #{@aluno.nome} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
@@ -66,6 +68,7 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
     @inativo.id_ativo = @aluno.id
     if @inativo.save
       @aluno.destroy
+      gera_notificacao("admin",@aluno, action_name)
       respond_to do |format|
         format.html { redirect_to alunos_path}
         format.json { head :no_content }

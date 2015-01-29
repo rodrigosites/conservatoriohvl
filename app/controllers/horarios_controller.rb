@@ -22,7 +22,7 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
 
     respond_to do |format|
       if @horario.save
-        gera_notificacao("admin",@horario)
+        gera_notificacao("admin",@horario, action_name)
         format.html { redirect_to @horario.professor, notice: "Horário #{@horario.dia.slice(2,@horario.dia.length-1)} - 
         #{@horario.horario.to_s.slice(10..15)} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @horario }
@@ -36,6 +36,7 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
   def update
     respond_to do |format|
       if @horario.update(horario_params)
+        gera_notificacao("admin",@horario, action_name)
         format.html { redirect_to @horario.professor, notice: "Horário #{@horario.dia.slice(2,@horario.dia.length-1)} - 
         #{@horario.horario.to_s.slice(10..15)} foram atualizados com sucesso." }
         format.json { head :no_content }
@@ -51,6 +52,7 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
   def destroy
     respond_to do |format|
       if @horario.destroy
+        gera_notificacao("admin",@horario, action_name)
         format.html { redirect_to @horario.professor}
         format.json { head :no_content }
       else

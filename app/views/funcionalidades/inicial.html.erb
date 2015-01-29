@@ -1,12 +1,12 @@
 <div class="col-md-8" style="background-color:#F0F0F0;">
-  <center><h4><b><br><br>Novas Notificações<br><br></b></h4></center>
+  <center><h4><b><br><br><%= link_to "Novas Notificações (#{@notificacoes.where(visualizado: false).size})", ler_notificacoes_path %><br><br></b></h4></center>
 </div>
 <div class="col-md-4" align="center" style="background-color:#0070a0; color:#FFFFFF">
   <h4><b><br><br>Próximas Aulas do Dia<br><br></b></h4>
 </div>
 <div class="col-md-8" style="background-color:#F9F9F9;">
   <center><br>
-  <% if @notificacoes.where("visualizado = false").size > 0 %>
+  <% if @notificacoes.where(visualizado: false).size > 0 %>
     <% @notificacoes.each do |notificacao| %>
       <% unless notificacao.visualizado %>
         <p><%= link_to notificacao.conteudo, {:controller => "funcionalidades", :action => "notificacao_lida", :id => notificacao.id}, id: "notificacao#{notificacao.id}", :remote => true %></p>

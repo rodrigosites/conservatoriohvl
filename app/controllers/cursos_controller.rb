@@ -20,7 +20,7 @@ class CursosController < ApplicationController
 
     respond_to do |format|
       if @curso.save
-        gera_notificacao("admin",@curso)
+        gera_notificacao("admin",@curso, action_name)
         format.html { redirect_to @curso, notice: "curso #{@curso.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @curso }
       else
@@ -33,6 +33,7 @@ class CursosController < ApplicationController
   def update
     respond_to do |format|
       if @curso.update(curso_params)
+        gera_notificacao("admin",@curso, action_name)
         format.html { redirect_to @curso, notice: "Dados do curso #{@curso.nome} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
@@ -46,6 +47,7 @@ class CursosController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @curso.destroy
+    gera_notificacao("admin",@curso, action_name)
     respond_to do |format|
       format.html { redirect_to cursos_path}
       format.json { head :no_content }

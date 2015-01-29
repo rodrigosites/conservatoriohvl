@@ -1,0 +1,49 @@
+<div class="page-header">
+  <h2>Lista de Circulares <small>// circulares cadastradas: <%= Circular.all.size %></small></h2>
+</div>
+
+<%= form_tag request.path, :method => 'get' do %>
+  <%= content_tag :label do %>
+    <%= text_field_tag :search, params[:search], :class => "form-control" %>
+  <% end %>
+  <%= submit_tag 'Buscar', :class => "btn btn-primary" %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Circular</th>
+      <th>Data</th>
+      <th>Vigente?</th>
+      <th>Curso Básico</th>
+      <th>Curso Extra</th>
+      <th>Taxa Matrícula</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @circulares.each do |circular| %>
+      <tr>
+        <td><%= circular.numero_circular %></td>
+        <td><%= I18n.l(circular.data_circular) %></td>
+        <td><%= circular.vigente ? "Sim" : "Não" %></td>
+        <td><%= number_to_currency(circular.valor_mensalidade) %></td>
+        <td><%= number_to_currency(circular.valor_extra) %></td>
+        <td><%= number_to_currency(circular.taxa_matricula) %></td>
+        <td><%= button_to 'Tornar Vigente', circular_vigente_path(id: circular.id), :class => "btn btn-primary btn-xs" %></td>
+        <td><%= button_to 'Visualizar Dados', circular, :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to 'Editar Dados', edit_circular_path(circular), :class => "btn btn-primary btn-xs", :method => :get %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @salas, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
+
+<br />
+
+<%= button_to 'Cadastrar Nova Circular', new_circular_path, :class => "btn btn-primary", :method => :get  %>

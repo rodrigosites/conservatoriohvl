@@ -1,5 +1,5 @@
 Conservatoriohvl::Application.routes.draw do
-  resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios, :lecionam
+  resources :user_sessions, :users, :clientes, :professores, :alunos, :cursos, :salas, :horarios, :lecionam, :circulares
 
   resources :matriculas do
     collection do
@@ -24,6 +24,7 @@ Conservatoriohvl::Application.routes.draw do
   get 'lecionam/:curso_id/lecionar' => 'lecionam#new', as: :lecionar
   get 'inicial', to: "funcionalidades#inicial"
   get 'notificacao_lida', to: "funcionalidades#notificacao_lida"
+  get 'ler_notificacoes', to: "funcionalidades#ler_notificacoes"
   get 'funcionalidades/index', to: "funcionalidades#index", as: :funcionalidades
   get 'valor_boletos', to: "funcionalidades#valor_boletos"
   get 'aluno/busca_dados_cliente', to: "alunos#busca_dados_cliente"
@@ -35,5 +36,6 @@ Conservatoriohvl::Application.routes.draw do
   get 'matriculas_encerradas', to: "matriculas#encerradas"
   get 'matricula/:id/encerrar', to: 'matriculas#encerrar', as: :encerrar
   post 'refaz_contrato', to: "matriculas#refaz_contrato"
+  post 'circular_vigente', to: "circulares#circular_vigente"
 
 end

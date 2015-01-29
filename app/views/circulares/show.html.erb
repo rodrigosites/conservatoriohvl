@@ -1,0 +1,26 @@
+<div class="page-header"></div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <b> Circular n° <%= @circular.numero_circular %></b>
+    </h3>
+  </div>
+  <ul class="list-group">
+      <li class="list-group-item"><b>Data da Circular:</b> <%= I18n.l(@circular.data_circular) %></li>
+      <li class="list-group-item"><b>Mensalidade do Curso Básico:</b> <%= number_to_currency(@circular.valor_mensalidade) %></li>
+      <li class="list-group-item"><b>Custo Anual do Curso Básico:</b> <%= number_to_currency(@circular.valor_mensalidade*12) %></li>
+      <li class="list-group-item"><b>Mensalidade do Instrumento Extra:</b> <%= number_to_currency(@circular.valor_extra) %></li>
+      <li class="list-group-item"><b>Custo Anual do Instrumento Extra:</b> <%= number_to_currency(@circular.valor_extra*12) %></li>
+      <li class="list-group-item"><b>Taxa de Matrícula:</b> <%= number_to_currency(@circular.taxa_matricula) %></li>
+      <li class="list-group-item"><b>Valor do Desconto:</b> <%= number_to_currency(@circular.desconto) %> (<%= (@circular.desconto / @circular.valor_mensalidade * 100).to_i %>%)</li>
+      <li class="list-group-item"><b>Vigente:</b> <%= @circular.vigente ? "Sim" : "Não" %></li>
+  </ul>
+</div>
+
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Editar', edit_circular_path(@circular), :class => "btn btn-primary", :method => :get %>
+</div>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Voltar', :back, :class => "btn btn-default", :method => :get %>
+</div>

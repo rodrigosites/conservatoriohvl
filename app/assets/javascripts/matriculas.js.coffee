@@ -106,7 +106,8 @@ $ ->
 	$(document).on 'change', '#desconto_check', (evt) ->
 		if $('#desconto_check').prop('checked')
 			valor_normal = $('#matricula_valor_mensal').val()
-			$('#matricula_valor_mensal').val(280.00)
+			valor_desconto = $('#matricula_valor_mensal').val() - $('#matricula_desconto').val()
+			$('#matricula_valor_mensal').val(valor_desconto)
 		else
 			$('#matricula_valor_mensal').val(valor_normal)
 

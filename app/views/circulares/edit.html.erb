@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h2><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados da Circular nº <%= @circular.numero_circular %></h2>
+</div>
+
+<%= render 'form' %>
+
+<%= button_to 'Voltar', :back, :class => "btn btn-default", :method => :get %>

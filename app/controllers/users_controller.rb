@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    gera_notificacao("admin",@user)
+    gera_notificacao("admin",@user, action_name)
     respond_to do |format|
       if @user.save
         format.html { redirect_to :users, notice: 'User was successfully created.' }
@@ -44,6 +44,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        gera_notificacao("admin",@user, action_name)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -57,6 +58,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
+    gera_notificacao("admin",@user, action_name)
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }

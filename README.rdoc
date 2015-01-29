@@ -21,12 +21,22 @@ Aplicativo para gerenciamento do Conservatório HVL
 
 	- Após migração da database, utilizar o comando rake db:seed para inclusão dos clientes pré-definidos pela direção.
 
-* Deployment instructions
-
-	...
+* Instruções de Uso
+	
+	- Preencher os dados da Circular vigente em Sistema>Listar Circulares>Cadastrar Nova Circular;
+	- Cadastrar os cursos ministrados em Cursos>Cadastrar Curso;
+	- Cadastrar os professores em Professores>Cadastrar Professor;
+	- Cadastrar os horários dos professores em Listar Professores>Abrir Ficha>Controlar Horários;
+	- Vincular os professores aos cursos em Listar Cursos>Abrir Ficha>Vincular Professores;
+	- Cadastrar as salas disponíveis em Salas>Cadastrar Sala;
+	- Cadastrar os clientes em Clientes>Cadastrar Cliente;
+	- Cadastrar alunos em Alunos>Cadastrar Aluno;
+	- Matricular os alunos nos cursos em Matriculas>Matricular no Curso Básico ou Matriculas>Matricular em Instrumento Extra;
+	- Atribuir sala às classes em Salas>Atribuir Sala.
 
 * Rotinas do sistema
 
 	- Abertura do sistema: comandar "rails s thin" ou abrir o arquivo "abre servidor.bat";
 	- Backup do banco de dados: comandar mysqldump -u root -p conservatoriohvl_development > conservadev.sql ou abrir o arquivo "backup db.bat";
-	- Importar banco de dados: comandar mysql -u root -p conservatoriohvl_development < conservadev.sql.
+	- Importar banco de dados: comandar mysql -u root -p conservatoriohvl_development < conservadev.sql;
+	- Contratos dos alunos são gerados na pasta /private/contratos/ano no formato "id-cliente - nome-cliente - id-matricula".

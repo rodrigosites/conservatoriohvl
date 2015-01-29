@@ -20,7 +20,7 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       if @cliente.save
-        gera_notificacao("admin",@cliente)
+        gera_notificacao("admin",@cliente, action_name)
         format.html { redirect_to @cliente, notice: "Cliente #{@cliente.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @cliente }
       else
@@ -33,6 +33,7 @@ class ClientesController < ApplicationController
   def update
     respond_to do |format|
       if @cliente.update(cliente_params)
+        gera_notificacao("admin",@cliente, action_name)
         format.html { redirect_to @cliente, notice: "Dados do cliente #{@cliente.nome} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
@@ -65,6 +66,7 @@ class ClientesController < ApplicationController
     @inativo.id_ativo = @cliente.id
     if @inativo.save
       @cliente.destroy
+      gera_notificacao("admin",@cliente, action_name)
       respond_to do |format|
         format.html { redirect_to clientes_path}
         format.json { head :no_content }

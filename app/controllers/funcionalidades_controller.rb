@@ -2,7 +2,7 @@
 
 class FuncionalidadesController < ApplicationController
   def inicial
-    @notificacoes = Notificacao.where("user_id = '#{current_user.id}'")
+    @notificacoes = Notificacao.where(user_id: current_user.id)
     case Time.now.wday
       when 1
         @aulas = Aula.joins(:horario).where(horarios: {dia: '1-Segunda'})
@@ -30,6 +30,16 @@ class FuncionalidadesController < ApplicationController
 
     respond_to do |format|
       format.js { head :ok }
+    end
+  end
+
+  def ler_notificacoes
+    @notificacoes = Notificacao.where(user_id: current_user.id)
+    @notificacoes.each do |notificacao|
+      notificacao.update_attribute(:visualizado,true)
+    end
+    respond_to do |format|
+      format.html { redirect_to inicial_path }
     end
   end
   

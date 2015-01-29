@@ -1,13 +1,9 @@
-<div class="page-header">
-  <h2>Módulo de Administração</h2>
-</div>
-
-<%= form_for(@administracao, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
-  <% if @administracao.errors.any? %>
+<%= form_for(@circular, html: { class: "form-horizontal container", "role" => "form" }) do |f| %>
+  <% if @circular.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@administracao.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(@circular.errors.count, "error") %> prohibited this user from being saved:</h2>
       <ul>
-      <% @administracao.errors.full_messages.each do |msg| %>
+      <% @circular.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -20,7 +16,7 @@
   </div>
   <div class="form-group">
     <%= f.label "Data da Circular:", class: "col-sm-0 control-label" %><br />
-    <%= f.text_field :data_circular, class: "form-control" %>
+    <%= f.text_field :data_circular, class: "form-control", value: (I18n.l Date.today) %>
   </div>
   <div class="form-group">
     <%= f.label "Valor Mensal do Curso Básico:", class: "col-sm-0 control-label" %><br />
@@ -29,6 +25,10 @@
   <div class="form-group">
     <%= f.label "Valor Mensal do Curso Extra:", class: "col-sm-0 control-label" %><br />
     <%= f.text_field :valor_extra, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label "Taxa de Matrícula:", class: "col-sm-0 control-label" %><br />
+    <%= f.text_field :taxa_matricula, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label "Valor de Desconto:", class: "col-sm-0 control-label" %><br />

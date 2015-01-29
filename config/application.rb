@@ -22,6 +22,5 @@ module Conservatoriohvl
 
     config.i18n.default_locale = :"pt-BR"
     I18n.enforce_available_locales = false
-
   end
 end

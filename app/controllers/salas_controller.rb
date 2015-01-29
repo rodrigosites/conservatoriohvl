@@ -20,7 +20,7 @@ class SalasController < ApplicationController
 
     respond_to do |format|
       if @sala.save
-        gera_notificacao("admin",@sala)
+        gera_notificacao("admin",@sala, action_name)
         format.html { redirect_to @sala, notice: "sala #{@sala.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @sala }
       else
@@ -33,6 +33,7 @@ class SalasController < ApplicationController
   def update
     respond_to do |format|
       if @sala.update(sala_params)
+        gera_notificacao("admin",@sala, action_name)
         format.html { redirect_to @sala, notice: "Dados da sala #{@sala.nome} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
@@ -46,6 +47,7 @@ class SalasController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @sala.destroy
+    gera_notificacao("admin",@sala, action_name)
     respond_to do |format|
       format.html { redirect_to salas_path}
       format.json { head :no_content }

@@ -19,4 +19,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'professor','professores'
   inflect.irregular 'leciona','lecionam'
   inflect.irregular 'notificacao','notificacoes'
+  inflect.irregular 'circular','circulares'
 end

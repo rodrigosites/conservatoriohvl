@@ -29,7 +29,7 @@ class MatriculasController < ApplicationController
     @matricula = Matricula.new(matricula_params)
     respond_to do |format|
       if @matricula.save
-        gera_notificacao("admin",@matricula)
+        gera_notificacao("admin",@matricula, action_name)
         # salva na tabela many_to_many
         @aula = Aula.new
         @aula.horario_id = params[:pratica][:horario_id]
@@ -50,7 +50,7 @@ class MatriculasController < ApplicationController
         gera_contrato(@matricula)
 
         format.html { redirect_to @matricula, notice: "Matricula criada com sucesso. O contrato pode ser acessado em 
-          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx" }
+          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
         format.json { render action: 'show', status: :created, location: @matricula }
       else
         format.html { render action: 'new' }
@@ -62,6 +62,7 @@ class MatriculasController < ApplicationController
   def update
     respond_to do |format|
       if @matricula.update(matricula_params)
+        gera_notificacao("admin",@matricula, action_name)
         @matricula.aulas.each do |aula|
           if aula.teoria
             aula.update_attribute(:horario_id,params[:teorica][:horario_id])
@@ -73,7 +74,7 @@ class MatriculasController < ApplicationController
         gera_contrato(@matricula)
 
         format.html { redirect_to @matricula, notice: "Dados do matricula foram atualizados com sucesso. O novo contrato foi 
-          gerado em \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome}.docx\"." }
+          gerado em \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -95,6 +96,7 @@ class MatriculasController < ApplicationController
     @inativa.valor_mensal = @matricula.valor_mensal
     @inativa.id_ativa = @matricula.id
     if @inativa.save
+      gera_notificacao("admin",@matricula, action_name)
       @matricula.destroy
       respond_to do |format|
         format.html { redirect_to matriculas_path }
@@ -152,7 +154,7 @@ class MatriculasController < ApplicationController
     respond_to do |format|
       if gera_contrato(@matricula)
         format.html { redirect_to @matricula, notice: "O contrato foi gerado com sucesso e pode ser acessado em 
-          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome}.docx\"." }
+          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
       else
         format.html { redirect_to @matricula, alert: "Erro ao tentar gerar o contrato." }
       end
@@ -219,6 +221,10 @@ class MatriculasController < ApplicationController
       doc.bookmarks['cliente_cep'].insert_text_after(@matricula.aluno.cliente.cep)
       doc.bookmarks['cliente_cidade'].insert_text_after(@matricula.aluno.cliente.cidade)
       doc.bookmarks['cliente_uf'].insert_text_after(@matricula.aluno.cliente.uf)
+      doc.bookmarks['circular_numero'].insert_text_after(Circular.where(vigente: true).first.numero_circular)
+      doc.bookmarks['circular_data'].insert_text_after(I18n.l(Circular.where(vigente: true).first.data_circular))
+      doc.bookmarks['circular_numero2'].insert_text_after(Circular.where(vigente: true).first.numero_circular)
+      doc.bookmarks['circular_data2'].insert_text_after(I18n.l(Circular.where(vigente: true).first.data_circular))
       # página 5
       doc.bookmarks['valor_total2'].insert_text_after(number_to_currency(@matricula.valor_mensal * (13 - Date.today.month) + 100))
       doc.bookmarks['valor_mensal2'].insert_text_after(number_to_currency(@matricula.valor_mensal))

@@ -20,7 +20,7 @@ class ProfessoresController < ApplicationController
 
     respond_to do |format|
       if @professor.save
-        gera_notificacao("admin",@professor)
+        gera_notificacao("admin",@professor, action_name)
         format.html { redirect_to @professor, notice: "professor #{@professor.nome} criado com sucesso." }
         format.json { render action: 'show', status: :created, location: @professor }
       else
@@ -33,6 +33,7 @@ class ProfessoresController < ApplicationController
   def update
     respond_to do |format|
       if @professor.update(professor_params)
+        gera_notificacao("admin",@professor, action_name)
         format.html { redirect_to @professor, notice: "Dados do professor #{@professor.nome} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
@@ -66,6 +67,7 @@ class ProfessoresController < ApplicationController
     @inativo.id_ativo = @professor.id
     if @inativo.save
       @professor.destroy
+      gera_notificacao("admin",@professor, action_name)
       respond_to do |format|
         format.html { redirect_to professores_path}
         format.json { head :no_content }
