@@ -41,3 +41,5 @@
 </table>
 
 <%= will_paginate @clientes, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
+
+<p><b>Total de Mensalidades: <%= number_to_currency(@mensalidade_total) %></b></p>

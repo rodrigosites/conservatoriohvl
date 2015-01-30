@@ -107,7 +107,7 @@ class MatriculasController < ApplicationController
 
   def busca_professores
     @curso = Curso.find params[:curso_id]
-    @professores = @curso.professores
+    @professores = @curso.professores.order("nome")
   end
 
   def busca_horarios
@@ -226,7 +226,7 @@ class MatriculasController < ApplicationController
       doc.bookmarks['circular_numero2'].insert_text_after(Circular.where(vigente: true).first.numero_circular)
       doc.bookmarks['circular_data2'].insert_text_after(I18n.l(Circular.where(vigente: true).first.data_circular))
       # página 5
-      doc.bookmarks['valor_total2'].insert_text_after(number_to_currency(@matricula.valor_mensal * (13 - Date.today.month) + 100))
+      doc.bookmarks['valor_total2'].insert_text_after(number_to_currency(@matricula.valor_mensal * (13 - Date.today.month) + Circular.where(vigente: true).first.taxa_matricula))
       doc.bookmarks['valor_mensal2'].insert_text_after(number_to_currency(@matricula.valor_mensal))
       doc.bookmarks['parcelas'].insert_text_after(12 - Date.today.month)
       doc.bookmarks['mes_inicio'].insert_text_after(I18n.l(Time.now, :format => "%B").upcase)

@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'ready page:load', (evt) ->
-  $('#professor_rg').mask('00.000.000-0', {reverse: true});
+  $('#professor_rg').mask('00.000.000-Z', {reverse: true, translation: {Z: {pattern: /[A-Za-z0-9]/}}});
   $('#professor_cpf').mask('000.000.000-00', {reverse: true});
   $('#professor_telefone').mask('(00) 0000-0000');
   $('#professor_celular').mask('(00) 00000-0000');

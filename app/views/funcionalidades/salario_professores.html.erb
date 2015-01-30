@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h2>Salário por Professor</h2>
+</div>
+
+<%= form_tag request.path, :method => 'get' do %>
+  <%= content_tag :label do %>
+    <%= text_field_tag :search, params[:search], :class => "form-control" %>
+  <% end %>
+  <%= submit_tag 'Buscar', :class => "btn btn-primary" %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Nº Aulas</th>
+      <th>Valor Mensal</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% total_salarios = 0 %>
+    <% @professores.each do |professor| %>
+      <tr>
+        <td><%= professor.nome %></td>
+        <% n_aulas = 0 %>
+        <% salario = 0 %>
+        <% professor.horarios.each do |horario| %>
+          <% if horario.matriculas.any? %>
+            <% n_aulas += 1 %>
+            <% salario += 60 %>
+          <% end %>
+        <% end %>
+        <td><%= n_aulas %></td>
+        <td><%= number_to_currency(salario) %></td>
+        <% total_salarios = salario %>
+        <td><center><%= button_to "Visualizar Aulas", professor, :class => "btn btn-primary btn-xs", :method => :get  %></center></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @professores, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
+
+<p><b>Total de Salários: <%= number_to_currency(total_salarios) %></b></p>

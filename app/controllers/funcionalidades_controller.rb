@@ -45,6 +45,14 @@ class FuncionalidadesController < ApplicationController
   
   def valor_boletos
     @clientes = Cliente.search(params[:search], params[:page])
+    @mensalidade_total = 0
+    Matricula.all.each do |matricula|
+      @mensalidade_total += matricula.valor_mensal
+    end
+  end
+
+  def salario_professores
+    @professores = Professor.search(params[:search], params[:page])
   end
 
 end
