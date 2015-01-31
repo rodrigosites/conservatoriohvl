@@ -11,28 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128232103) do
+ActiveRecord::Schema.define(version: 20150131002214) do
 
   create_table "alunos", force: true do |t|
     t.integer  "cliente_id"
     t.string   "nome"
-    t.string   "endereco"
     t.string   "rg"
     t.string   "cpf"
-    t.string   "telefone"
     t.string   "celular"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email"
     t.date     "nascimento"
-    t.string   "bairro"
-    t.string   "uf"
-    t.string   "cidade"
-    t.string   "cep"
     t.string   "pai"
     t.string   "mae"
     t.string   "nacionalidade"
-    t.string   "profissao"
   end
 
   create_table "alunos_inativos", force: true do |t|
@@ -51,7 +43,6 @@ ActiveRecord::Schema.define(version: 20150128232103) do
     t.string   "pai"
     t.string   "mae"
     t.string   "nacionalidade"
-    t.string   "profissao"
     t.integer  "id_ativo"
     t.integer  "cliente_id"
     t.datetime "created_at"

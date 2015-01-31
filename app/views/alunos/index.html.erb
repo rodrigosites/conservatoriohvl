@@ -26,7 +26,7 @@
     <% @alunos.each do |aluno| %>
       <tr>
         <td><%= aluno.nome %></td>
-        <td><%= aluno.telefone %></td>
+        <td><%= aluno.cliente.telefone %></td>
         <td><%= aluno.celular %></td>
         <td><%= aluno.matriculas.size %>
         <td><%= button_to "Abrir a Ficha", aluno, :class => "btn btn-primary btn-xs", :method => :get %></td>

@@ -4,9 +4,7 @@ class Aluno < ActiveRecord::Base
   has_many :matriculas, :dependent => :destroy
 
   #validações
-  validates :cpf,:rg, uniqueness: true
-  validates :cliente_id, :nome, :endereco, :rg, :cpf, :telefone, :celular, :email, :nascimento, :bairro, :cidade, :uf,
-  :cep, :pai, :mae, :nacionalidade, :profissao, presence: true
+  validates :cliente_id, :nome, :celular, :nascimento, :pai, :mae, :nacionalidade, presence: true
 
   def nome=(s)
     super s.titleize

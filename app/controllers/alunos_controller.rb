@@ -34,7 +34,6 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
     respond_to do |format|
       if @aluno.update(aluno_params)
         gera_notificacao("admin",@aluno, action_name)
-        logger.info "!!!!!!!!!!!!!!!!!!!!!!!!!!!! #{action_name}"
         format.html { redirect_to @aluno, notice: "Dados do aluno #{@aluno.nome} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
@@ -50,21 +49,20 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
     @inativo = AlunosInativo.new
     @inativo.cliente_id = @aluno.cliente_id
     @inativo.nome = @aluno.nome
-    @inativo.endereco = @aluno.endereco
+    @inativo.endereco = @aluno.cliente.endereco
     @inativo.rg = @aluno.rg
     @inativo.cpf = @aluno.cpf
-    @inativo.telefone = @aluno.telefone
+    @inativo.telefone = @aluno.cliente.telefone
     @inativo.celular = @aluno.celular
-    @inativo.email = @aluno.email
+    @inativo.email = @aluno.cliente.email
     @inativo.nascimento = @aluno.nascimento
-    @inativo.bairro = @aluno.bairro
-    @inativo.cidade = @aluno.cidade
-    @inativo.uf = @aluno.uf
-    @inativo.cep = @aluno.cep
+    @inativo.bairro = @aluno.cliente.bairro
+    @inativo.cidade = @aluno.cliente.cidade
+    @inativo.uf = @aluno.cliente.uf
+    @inativo.cep = @aluno.cliente.cep
     @inativo.pai = @aluno.pai
     @inativo.mae = @aluno.mae
     @inativo.nacionalidade = @aluno.nacionalidade
-    @inativo.profissao = @aluno.profissao
     @inativo.id_ativo = @aluno.id
     if @inativo.save
       @aluno.destroy
@@ -92,7 +90,6 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def aluno_params
-      params.require(:aluno).permit(:cliente_id, :nome, :endereco, :rg, :cpf, :telefone, :celular, :email, :nascimento, :bairro, :cidade,
-        :uf, :cep, :pai, :mae, :nacionalidade, :profissao)
+      params.require(:aluno).permit(:cliente_id, :nome, :rg, :cpf, :celular, :nascimento, :pai, :mae, :nacionalidade)
     end
 end

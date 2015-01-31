@@ -4,7 +4,7 @@
 
 # Máscaras dos campos, utilizando plugin JQuery Masks
 $(document).on 'ready page:load', (evt) ->
-  $('#aluno_rg').mask('00.000.000-Z', {reverse: true, translation: {Z: {pattern: /[A-Za-z0-9]/}}});
+  $('#aluno_rg').mask('ZZ.ZZZ.ZZZ.ZZZ.ZZZ-Z', {reverse: true, translation: {Z: {pattern: /[A-Za-z0-9]/}}});
   $('#aluno_cpf').mask('000.000.000-00', {reverse: true});
   $('#aluno_telefone').mask('(00) 0000-0000');
   $('#aluno_celular').mask('(00) 00000-0000');
