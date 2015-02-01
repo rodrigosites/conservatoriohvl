@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h2>Controlar Horários - Professor <%= @professor.nome %></h2>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Disponibilidade de Horários</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+    <th>Dia</th>
+      <th>Horário</th>
+      <th>Nº Alunos</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horarios.each do |horario| %>
+      <tr>
+        <td><%= dia(horario.dia) %>
+        <td><%= hora(horario.horario) %></td>
+        <td><a href="/professores" data-toggle="modal" data-target="#myModal" conteudo="teste"><%= horario.matriculas.size %></a></td>
+        <td><%= button_to 'Editar', edit_horario_path(horario), :class => "btn btn-primary btn-xs", :method => :get %></td>
+        <td><%= button_to 'Excluir', horario, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a horario #{horario.horario}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @horarios, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
+
+<br>
+<div style="float: left; margin-right: 10px;">
+  <%= button_to 'Cadastrar Horários', disponivel_path(professor_id: @professor.id), :class => "btn btn-primary", :method => :get %>
+</div>
+<br /><br />
+<%= button_to 'Voltar', @professor, :class => "btn btn-default", :method => :get  %>

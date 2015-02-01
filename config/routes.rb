@@ -38,5 +38,6 @@ Conservatoriohvl::Application.routes.draw do
   get 'matricula/:id/encerrar', to: 'matriculas#encerrar', as: :encerrar
   post 'refaz_contrato', to: "matriculas#refaz_contrato"
   post 'circular_vigente', to: "circulares#circular_vigente"
+  get 'professor/:id/controlar_horarios' => 'professores#controlar_horarios', as: :controlar_horarios
 
 end

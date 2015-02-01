@@ -1,5 +1,5 @@
 class ProfessoresController < ApplicationController
-  before_action :set_professor, only: [:show, :edit, :update, :destroy]
+  before_action :set_professor, only: [:show, :edit, :update, :destroy, :controlar_horarios]
 
   def index
     @professores = Professor.search(params[:search], params[:page])
@@ -77,6 +77,10 @@ class ProfessoresController < ApplicationController
 
   def inativos
     @inativos = ProfessoresInativo.search(params[:search], params[:page])
+  end
+
+  def controlar_horarios
+    @horarios = @professor.horarios.page(params[:page]).per_page(9)
   end
 
   private

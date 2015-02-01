@@ -18,16 +18,20 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
   end
 
   def create
-    @horario = Horario.new(horario_params)
-
+    horarios = params[:horario][:horario]
+    horarios.shift
+    erro = false
+    horarios.each do |horario|
+      @horario = Horario.new(horario_params)
+      @horario.horario = horario
+      @horario.save ? gera_notificacao("admin",@horario, action_name) : erro = true
+    end
     respond_to do |format|
-      if @horario.save
-        gera_notificacao("admin",@horario, action_name)
-        format.html { redirect_to @horario.professor, notice: "Horário #{@horario.dia.slice(2,@horario.dia.length-1)} - 
-        #{@horario.horario.to_s.slice(10..15)} criado com sucesso." }
+      unless erro
+        format.html { redirect_to professores_path, notice: "Horários cadastrados com sucesso." }
         format.json { render action: 'show', status: :created, location: @horario }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', alert: "Houve um erro ao tentar cadastrar os horários." }
         format.json { render json: @horario.errors, status: :unprocessable_entity }
       end
     end
@@ -37,8 +41,8 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
     respond_to do |format|
       if @horario.update(horario_params)
         gera_notificacao("admin",@horario, action_name)
-        format.html { redirect_to @horario.professor, notice: "Horário #{@horario.dia.slice(2,@horario.dia.length-1)} - 
-        #{@horario.horario.to_s.slice(10..15)} foram atualizados com sucesso." }
+        format.html { redirect_to @horario.professor, notice: "Horário #{dia(@horario.dia)} - 
+        #{hora(@horario.horario)} foram atualizados com sucesso." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -80,6 +84,6 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def horario_params
-      params.require(:horario).permit(:dia, :horario, :professor_id, :sala_id)
+      params.require(:horario).permit(:dia, :professor_id, :sala_id, :horario => [])
     end
 end
