@@ -10,17 +10,19 @@
       <li class="list-group-item"><b>Aluno:</b> <%= @matricula.aluno.nome %></li>
       <li class="list-group-item"><b>Curso Principal:</b> <%= @matricula.curso.nome  %></li>
       <li class="list-group-item"><b>Ano do Curso Principal:</b> <%= @matricula.ano %>º Ano</li>
-      <li class="list-group-item"><b>Professor do Curso Principal:</b> <%= @matricula.horarios.first.professor.nome %></li>
-      <li class="list-group-item"><b>Horário do Curso Principal:</b> <%= hora(@matricula.horarios.first.horario) %></li>
+      <li class="list-group-item"><b>Professor do Curso Principal:</b> <%= @matricula.aulas.first.horario.professor.nome %></li>
+      <li class="list-group-item"><b>Dia do Curso Principal:</b> <%= dia(@matricula.aulas.first.horario.dia) %></li>
+      <li class="list-group-item"><b>Horário do Curso Principal:</b> <%= hora(@matricula.aulas.first.horario.horario) %> até <%= hora(@matricula.aulas.first.horario.horario+50*60) %></li>
       <li class="list-group-item"><b>Ano de Teoria:</b> 
-      <% if @matricula.teoria_ano > 0 && @matricula.teoria_ano < 20 %>
+      <% if @matricula.teoria_ano > 0 && @matricula.teoria_ano <= 8 %>
         <%= "#{@matricula.teoria_ano}º Ano" %></li>
-        <li class="list-group-item"><b>Professor Teoria:</b> <%= @matricula.horarios.last.professor.nome %></li>
-        <li class="list-group-item"><b>Horário Teoria:</b> <%= hora(@matricula.horarios.last.horario) %></li>
+        <li class="list-group-item"><b>Professor Teoria:</b> <%= @matricula.aulas.last.horario.professor.nome %></li>
+        <li class="list-group-item"><b>Dia da Teoria:</b> <%= dia(@matricula.aulas.last.horario.dia) %></li>
+        <li class="list-group-item"><b>Horário Teoria:</b> <%= hora(@matricula.aulas.last.horario.horario) %> até <%= hora(@matricula.aulas.last.horario.horario+50*60) %></li>
       <% elsif @matricula.teoria_ano == 99 %>
         <%= "Instrumento Extra" %></li>
       <% else %>
-        <% "Formado em Teoria" %></li>
+        <%= "Formado em Teoria" %></li>
       <% end %>
       <li class="list-group-item"><b>Valor Mensal:</b> <%= number_to_currency(@matricula.valor_mensal) %></li>
       <li class="list-group-item"><b>Data da Matrícula:</b> <%= I18n.l(@matricula.data_matricula.to_date) %></li>

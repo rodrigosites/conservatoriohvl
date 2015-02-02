@@ -34,6 +34,11 @@ class MatriculasController < ApplicationController
         @aula = Aula.new
         @aula.horario_id = params[:pratica][:horario_id]
         @aula.matricula_id = @matricula.id
+        if @matricula.curso.nome == "Teoria"
+          @aula.teoria = true
+        elsif @matricula.curso.nome == "Musicalização Infantil"
+          @aula.musicalizacao = true
+        end
         @aula.save
         unless params[:teorica][:horario_id].blank?
           @aula = Aula.new
@@ -66,7 +71,9 @@ class MatriculasController < ApplicationController
         @matricula.aulas.each do |aula|
           if aula.teoria
             aula.update_attribute(:horario_id,params[:teorica][:horario_id])
-          else
+          elsif aula.musicalizacao
+            aula.update_attribute(:horario_id,params[:teorica][:horario_id])
+          else            
             aula.update_attribute(:horario_id,params[:pratica][:horario_id])
           end
         end

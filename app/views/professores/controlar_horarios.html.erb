@@ -24,7 +24,7 @@
     <% @horarios.each do |horario| %>
       <tr>
         <td><%= dia(horario.dia) %>
-        <td><%= hora(horario.horario) %></td>
+        <td><%= "#{hora(horario.horario)} até #{hora(horario.horario+50*60)}" %></td>
         <td><a href="/professores" data-toggle="modal" data-target="#myModal" conteudo="teste"><%= horario.matriculas.size %></a></td>
         <td><%= button_to 'Editar', edit_horario_path(horario), :class => "btn btn-primary btn-xs", :method => :get %></td>
         <td><%= button_to 'Excluir', horario, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir a horario #{horario.horario}?" } %></td>

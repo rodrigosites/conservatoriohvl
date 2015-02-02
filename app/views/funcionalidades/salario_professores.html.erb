@@ -19,7 +19,6 @@
     </tr>
   </thead>
   <tbody>
-    <% total_salarios = 0 %>
     <% @professores.each do |professor| %>
       <tr>
         <td><%= professor.nome %></td>
@@ -33,7 +32,6 @@
         <% end %>
         <td><%= n_aulas %></td>
         <td><%= number_to_currency(salario) %></td>
-        <% total_salarios = salario %>
         <td><center><%= button_to "Visualizar Aulas", professor, :class => "btn btn-primary btn-xs", :method => :get  %></center></td>
       </tr>
     <% end %>
@@ -42,4 +40,4 @@
 
 <%= will_paginate @professores, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
 
-<p><b>Total de Salários: <%= number_to_currency(total_salarios) %></b></p>
+<p><b>Total de Salários: <%= number_to_currency(@total_salarios) %></b></p>

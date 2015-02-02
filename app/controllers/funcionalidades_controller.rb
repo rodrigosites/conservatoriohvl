@@ -3,6 +3,7 @@
 class FuncionalidadesController < ApplicationController
   def inicial
     @notificacoes = Notificacao.where(user_id: current_user.id)
+
     case Time.now.wday
       when 1
         @aulas = Aula.joins(:horario).where(horarios: {dia: '1-Segunda'})
@@ -17,7 +18,9 @@ class FuncionalidadesController < ApplicationController
       when 6
         @aulas = Aula.joins(:horario).where(horarios: {dia: '6-Sábado'})
     end
-    @aulas.sort! { |a,b| a.horario.horario <=> b.horario.horario }
+    if @aulas
+      @aulas.sort! { |a,b| a.horario.horario <=> b.horario.horario }
+    end
   end
 
   def index
@@ -52,6 +55,17 @@ class FuncionalidadesController < ApplicationController
   end
 
   def salario_professores
+    @professores = Professor.all
+    @total_salarios = 0
+    @professores.each do |professor|
+      salario = 0
+      professor.horarios.each do |horario|
+        if horario.matriculas.any?
+          salario += 60
+        end
+      end
+      @total_salarios += salario
+    end
     @professores = Professor.search(params[:search], params[:page])
   end
 

@@ -26,7 +26,7 @@
 <div class="col-md-4" style="background-color:#007Fa0; color:#FFFFFF;">
   <center><br>
   <% controle = false %>
-  <% if @aulas.size > 0 %>
+  <% unless @aulas.nil? %>
     <% @aulas.each do |aula| %>
       <% if aula.horario.horario.strftime('%H:%M') > Time.now.strftime('%H:%M') %>
         <% controle = true %>

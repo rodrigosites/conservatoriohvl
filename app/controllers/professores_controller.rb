@@ -80,7 +80,7 @@ class ProfessoresController < ApplicationController
   end
 
   def controlar_horarios
-    @horarios = @professor.horarios.page(params[:page]).per_page(9)
+    @horarios = @professor.horarios.order('dia','horario').page(params[:page]).per_page(9)
   end
 
   private

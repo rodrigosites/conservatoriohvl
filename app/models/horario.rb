@@ -6,5 +6,5 @@ class Horario < ActiveRecord::Base
   has_many :matriculas, through: :aulas, :dependent => :destroy
 
   #validações de formulário
-  validates :horario, presence: true
+  validates :dia, :horario, presence: true
 end

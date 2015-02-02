@@ -28,7 +28,7 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
     end
     respond_to do |format|
       unless erro
-        format.html { redirect_to professores_path, notice: "Horários cadastrados com sucesso." }
+        format.html { redirect_to controlar_horarios_path(id: @horario.professor_id), notice: "Horários cadastrados com sucesso." }
         format.json { render action: 'show', status: :created, location: @horario }
       else
         format.html { render action: 'new', alert: "Houve um erro ao tentar cadastrar os horários." }
@@ -57,7 +57,7 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
     respond_to do |format|
       if @horario.destroy
         gera_notificacao("admin",@horario, action_name)
-        format.html { redirect_to @horario.professor}
+        format.html { redirect_to controlar_horarios_path(id: @horario.professor_id)}
         format.json { head :no_content }
       else
         format.html { redirect_to @horario.professor, alert: "Não foi possível excluir o horário pois existem matrículas atreladas a ele."}

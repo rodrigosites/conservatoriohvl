@@ -8,11 +8,11 @@
   <% end %>
   <div class="form-group">
     <%= f.label "Aluno:", class: "col-sm-0 control-label" %><br />
-    <%= f.collection_select :aluno_id, Aluno.all, :id, :nome, { prompt: 'Selecione o aluno' }, class: "form-control" %>
+    <%= f.collection_select :aluno_id, Aluno.order('nome'), :id, :nome, { prompt: 'Selecione o aluno' }, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label "Instrumento Extra:", class: "col-sm-0 control-label"  %><br />
-    <%= f.collection_select :curso_id, Curso.all, :id, :nome, { prompt: 'Selecione o curso' }, class: "form-control" %>
+    <%= f.collection_select :curso_id, Curso.order('nome'), :id, :nome, { prompt: 'Selecione o curso' }, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.label "Ano do Instrumento Extra:", class: "col-sm-0 control-label"  %><br />
