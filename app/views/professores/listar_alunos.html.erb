@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h2>Lista de Alunos - Professor <%= @professor.nome %></h2>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Dia</th>
+      <th>Horário</th>
+      <th>Curso</th>
+      <th>Aluno</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horarios.each do |horario| %>
+      <% horario.aulas.each do |aula| %>
+        <tr>
+          <td><%= dia(horario.dia) %>
+          <td><%= "#{hora(horario.horario)} até #{hora(horario.horario+50*60)}" %></td>
+          <% if aula.teoria %>
+            <td>Teoria</td>
+          <% elsif aula.musicalizacao %>
+            <td>Musicalização Infantil</td>
+          <% else %>
+            <td><%= aula.matricula.curso.nome %></td>
+          <% end %>
+          <td><%= aula.matricula.aluno.nome %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @horarios, class: "pagination", previous_label: "<<", next_label: ">>", renderer: BootstrapPagination::Rails %>
+
+<br>
+<%= button_to 'Voltar', @professor, :class => "btn btn-default", :method => :get  %>

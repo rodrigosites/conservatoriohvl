@@ -31,6 +31,10 @@
 </div>
 
 <div style="float: left; margin-right: 10px;">
+  <%= button_to 'Lista de Alunos', listar_alunos_path(id: @professor.id), :class => "btn btn-primary", :method => :get %>
+</div>
+
+<div style="float: left; margin-right: 10px;">
   <%= button_to 'Editar Dados', edit_professor_path(@professor), :class => "btn btn-primary", :method => :get %>
 </div>
 

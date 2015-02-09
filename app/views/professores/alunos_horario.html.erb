@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h2>Professor <%= @horario.professor.nome %> - <%= "#{dia(@horario.dia)} - #{hora(@horario.horario)}" %></h2>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Curso</th>
+      <th>Aluno</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @aulas.each do |aula| %>
+      <tr>
+        <% if aula.teoria %>
+          <td>Teoria</td>
+        <% elsif aula.musicalizacao %>
+          <td>Musicalização Infantil</td>
+        <% else %>
+          <td><%= aula.matricula.curso.nome %></td>
+        <% end %>
+        <td><%= aula.matricula.aluno.nome %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= button_to 'Voltar', controlar_horarios_path(id: @horario.professor.id), :class => "btn btn-default", :method => :get  %>
