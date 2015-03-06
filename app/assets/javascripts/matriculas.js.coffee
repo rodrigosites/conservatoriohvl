@@ -113,4 +113,8 @@ $ ->
 
 	# aplica as máscaras dos campos.
 	$(document).on 'ready page:load', (evt) ->
+		$('#matricula_curso_id').val('')
+
+	# aplica as máscaras dos campos.
+	$(document).on 'ready page:load', (evt) ->
   		$('#matricula_data_matricula').mask('00/00/0000');
