@@ -18,6 +18,11 @@
     <h2>Matricular Aluno - Instrumento Extra</h2>
   </div>
   <%= render 'form_extra' %>
+<% else %>
+  <div class="page-header">
+    <h2>Matricular Aluno - Curso Principal e Teoria</h2>
+  </div>
+  <%= render 'form' %>
 <% end %>
 
 <%= button_to 'Voltar', matriculas_path, :class => "btn btn-default", :method => :get  %>

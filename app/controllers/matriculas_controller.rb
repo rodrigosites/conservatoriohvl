@@ -77,6 +77,26 @@ class MatriculasController < ApplicationController
             aula.update_attribute(:horario_id,params[:pratica][:horario_id])
           end
         end
+        # verifica se já havia um horário de teoria cadastrado para o curso na tabela many_to_many e se não tinha, cria o horário
+        if params[:teorica][:horario_id] && @matricula.aulas.size == 1
+          @aula = Aula.new
+          @aula.horario_id = params[:teorica][:horario_id]
+          @aula.matricula_id = @matricula.id
+          if params[:teorica][:teoria] == "Teoria"
+            @aula.teoria = true
+          elsif params[:teorica][:teoria] == "Musicalização Infantil"
+            @aula.musicalizacao = true
+          end
+          @aula.save
+        end
+        # verifica a mudança de tipo de teoria na alteração
+        if params[:teorica][:teoria] == "Teoria" && @matricula.aulas.last.musicalizacao
+            @matricula.aulas.last.update_attribute(:teoria,true)
+            @matricula.aulas.last.update_attribute(:musicalizacao,false)
+        elsif params[:teorica][:teoria] == "Musicalização Infantil" && @matricula.aulas.last.teoria
+            @matricula.aulas.last.update_attribute(:musicalizacao,true)
+            @matricula.aulas.last.update_attribute(:teoria,false)
+        end
 
         gera_contrato(@matricula)
 

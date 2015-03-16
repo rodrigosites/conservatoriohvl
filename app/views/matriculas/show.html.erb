@@ -13,12 +13,39 @@
       <li class="list-group-item"><b>Professor do Curso Principal:</b> <%= @matricula.aulas.first.horario.professor.nome %></li>
       <li class="list-group-item"><b>Dia do Curso Principal:</b> <%= dia(@matricula.aulas.first.horario.dia) %></li>
       <li class="list-group-item"><b>Horário do Curso Principal:</b> <%= hora(@matricula.aulas.first.horario.horario) %> até <%= hora(@matricula.aulas.first.horario.horario+50*60) %></li>
-      <li class="list-group-item"><b>Ano de Teoria:</b> 
+      <% tipo_teoria = "" %>
+      <% if @matricula.aulas.last.teoria %>
+        <% tipo_teoria = "Teoria" %>
+      <% elsif @matricula.aulas.last.musicalizacao %>
+        <% tipo_teoria = "Musicalização Infantil" %>
+      <% end %>
+      <li class="list-group-item"><b>Ano de <%= tipo_teoria %>:</b> 
       <% if @matricula.teoria_ano > 0 && @matricula.teoria_ano <= 8 %>
-        <%= "#{@matricula.teoria_ano}º Ano" %></li>
-        <li class="list-group-item"><b>Professor Teoria:</b> <%= @matricula.aulas.last.horario.professor.nome %></li>
-        <li class="list-group-item"><b>Dia da Teoria:</b> <%= dia(@matricula.aulas.last.horario.dia) %></li>
-        <li class="list-group-item"><b>Horário Teoria:</b> <%= hora(@matricula.aulas.last.horario.horario) %> até <%= hora(@matricula.aulas.last.horario.horario+50*60) %></li>
+        <% if tipo_teoria == "Teoria" %>
+          <%= "#{@matricula.teoria_ano}º Ano" %></li>
+        <% else %>
+          <% case @matricula.teoria_ano %>
+          <% when 1 %>
+            Baby
+          <% when 2 %>
+            First 1
+          <% when 3 %>
+            First 2
+          <% when 4 %>
+            Módulo 1
+          <% when 5 %>
+            Módulo 2
+          <% when 6 %>
+            Módulo 3
+          <% when 7 %>
+            Módulo 4
+          <% when 8 %>
+            Módulo 5
+          <% end %>
+        <% end %>
+        <li class="list-group-item"><b>Professor <%= tipo_teoria %>:</b> <%= @matricula.aulas.last.horario.professor.nome %></li>
+        <li class="list-group-item"><b>Dia da <%= tipo_teoria %>:</b> <%= dia(@matricula.aulas.last.horario.dia) %></li>
+        <li class="list-group-item"><b>Horário <%= tipo_teoria %>:</b> <%= hora(@matricula.aulas.last.horario.horario) %> até <%= hora(@matricula.aulas.last.horario.horario+50*60) %></li>
       <% elsif @matricula.teoria_ano == 99 %>
         <%= "Instrumento Extra" %></li>
       <% else %>
