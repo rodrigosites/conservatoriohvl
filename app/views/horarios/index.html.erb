@@ -24,7 +24,15 @@
           <td><%= hora(horario.horario) %></td>
           <td><%= horario.professor.nome %></td>
           <td><%= aluno.aluno.nome %></td>
-          <td><%= horario.aulas.first.teoria ? "Teoria" : aluno.curso.nome %></td>
+          <td>
+          <% if horario.aulas.first.teoria %>
+            Teoria 
+          <% elsif horario.aulas.first.musicalizacao %>
+            Musicalização Infantil
+          <% else %>
+            <%= aluno.curso.nome %>
+          <% end %>
+          </td>
           <td><%= horario.sala.nome unless horario.sala.nil? %></td>
           <td><%= button_to 'Atribuir uma sala', edit_horario_path(horario), :class => "btn btn-primary btn-xs", :method => :get  %></td>
           <td><%= button_to 'Desvincular Sala', remove_sala_path(id: horario.id), :class => "btn btn-primary btn-xs" %></td>

@@ -68,6 +68,11 @@ class MatriculasController < ApplicationController
     respond_to do |format|
       if @matricula.update(matricula_params)
         gera_notificacao("admin",@matricula, action_name)
+        # verifica se o curso antes era apenas teoria e se tornou agora na edição pratica/teoria, sendo o caso corrige a primeira aula da matricula para pratica
+        unless @matricula.curso == "Teoria" || @matricula.curso == "Musicalização Infantil"
+          @matricula.aulas.first.update_attribute(:teoria,false)
+          @matricula.aulas.first.update_attribute(:musicalizacao,false)
+        end
         @matricula.aulas.each do |aula|
           if aula.teoria
             aula.update_attribute(:horario_id,params[:teorica][:horario_id])
@@ -179,12 +184,14 @@ class MatriculasController < ApplicationController
 
   def refaz_contrato
     respond_to do |format|
-      if gera_contrato(@matricula)
-        format.html { redirect_to @matricula, notice: "O contrato foi gerado com sucesso e pode ser acessado em 
-          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
-      else
-        format.html { redirect_to @matricula, alert: "Erro ao tentar gerar o contrato." }
+      begin
+        gera_contrato(@matricula)
+      rescue Errno::EACCES  
+        redirect_to @matricula, alert: "Não foi possível gerar o contrato. O arquivo está aberto no Microsoft Word."
+        return
       end
+      format.html { redirect_to @matricula, notice: "O contrato foi gerado com sucesso e pode ser acessado em 
+          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
     end
   end
   
@@ -204,70 +211,71 @@ class MatriculasController < ApplicationController
       doc = Docx::Document.open("#{Rails.root}/private/contratos/template.docx")
       
       # página 1
-      doc.bookmarks['cliente_id1'].insert_text_after(@matricula.aluno.cliente.id)
-      doc.bookmarks['matricula_id1'].insert_text_after(@matricula.id)
-      doc.bookmarks['curso_nome1'].insert_text_after(@matricula.curso.nome)
-      doc.bookmarks['dia_pratica'].insert_text_after(dia(@matricula.horarios.first.dia).pluralize)
-      doc.bookmarks['horario_pratica'].insert_text_after(hora(@matricula.horarios.first.horario))
-      doc.bookmarks['termino_pratica'].insert_text_after(hora(@matricula.horarios.first.horario + 50*60))
-      doc.bookmarks['professor_pratica'].insert_text_after(@matricula.horarios.first.professor.nome)
-      if @matricula.horarios.size > 1
-        doc.bookmarks['dia_teoria'].insert_text_after(dia(@matricula.horarios.last.dia).pluralize)
-        doc.bookmarks['horario_teoria'].insert_text_after(hora(@matricula.horarios.last.horario))
-        doc.bookmarks['termino_teoria'].insert_text_after(hora(@matricula.horarios.last.horario + 50*60))
-        doc.bookmarks['professor_teoria'].insert_text_after(@matricula.horarios.last.professor.nome)
+      doc.bookmarks['cliente_id1'].insert_text_after(matricula.aluno.cliente.id)
+      doc.bookmarks['matricula_id1'].insert_text_after(matricula.id)
+      doc.bookmarks['curso_nome1'].insert_text_after(matricula.curso.nome)
+      doc.bookmarks['dia_pratica'].insert_text_after(dia(matricula.aulas.first.horario.dia).pluralize)
+      doc.bookmarks['horario_pratica'].insert_text_after(hora(matricula.aulas.first.horario.horario))
+      doc.bookmarks['termino_pratica'].insert_text_after(hora(matricula.aulas.first.horario.horario + 50*60))
+      doc.bookmarks['professor_pratica'].insert_text_after(matricula.aulas.first.horario.professor.nome)
+      if matricula.horarios.size > 1
+        doc.bookmarks['dia_teoria'].insert_text_after(dia(matricula.aulas.last.horario.dia).pluralize)
+        doc.bookmarks['horario_teoria'].insert_text_after(hora(matricula.aulas.last.horario.horario))
+        doc.bookmarks['termino_teoria'].insert_text_after(hora(matricula.aulas.last.horario.horario + 50*60))
+        doc.bookmarks['professor_teoria'].insert_text_after(matricula.aulas.last.horario.professor.nome)
       end
-      doc.bookmarks['cliente_email'].insert_text_after(@matricula.aluno.cliente.email)
-      doc.bookmarks['aluno_nome'].insert_text_after(@matricula.aluno.nome)
-      doc.bookmarks['aluno_nascimento'].insert_text_after(I18n.l(@matricula.aluno.nascimento))
-      doc.bookmarks['aluno_pai'].insert_text_after(@matricula.aluno.pai)
-      doc.bookmarks['aluno_mae'].insert_text_after(@matricula.aluno.mae)
-      doc.bookmarks['aluno_endereco'].insert_text_after(@matricula.aluno.cliente.endereco)
-      doc.bookmarks['aluno_bairro'].insert_text_after(@matricula.aluno.cliente.bairro)
-      doc.bookmarks['aluno_cep'].insert_text_after(@matricula.aluno.cliente.cep)
-      doc.bookmarks['aluno_cidade'].insert_text_after(@matricula.aluno.cliente.cidade)
-      doc.bookmarks['aluno_uf'].insert_text_after(@matricula.aluno.cliente.uf)
-      doc.bookmarks['aluno_telefone'].insert_text_after(@matricula.aluno.cliente.telefone)
-      doc.bookmarks['aluno_celular'].insert_text_after(@matricula.aluno.celular)
-      doc.bookmarks['curso_nome2'].insert_text_after(@matricula.curso.nome.upcase)
-      doc.bookmarks['valor_total'].insert_text_after(number_to_currency(@matricula.valor_mensal * (13 - Date.today.month) + 100))
-      doc.bookmarks['valor_mensal'].insert_text_after(number_to_currency(@matricula.valor_mensal))
+      doc.bookmarks['cliente_email'].insert_text_after(matricula.aluno.cliente.email)
+      doc.bookmarks['aluno_nome'].insert_text_after(matricula.aluno.nome)
+      doc.bookmarks['aluno_nascimento'].insert_text_after(I18n.l(matricula.aluno.nascimento))
+      doc.bookmarks['aluno_pai'].insert_text_after(matricula.aluno.pai)
+      doc.bookmarks['aluno_mae'].insert_text_after(matricula.aluno.mae)
+      doc.bookmarks['aluno_endereco'].insert_text_after(matricula.aluno.cliente.endereco)
+      doc.bookmarks['aluno_bairro'].insert_text_after(matricula.aluno.cliente.bairro)
+      doc.bookmarks['aluno_cep'].insert_text_after(matricula.aluno.cliente.cep)
+      doc.bookmarks['aluno_cidade'].insert_text_after(matricula.aluno.cliente.cidade)
+      doc.bookmarks['aluno_uf'].insert_text_after(matricula.aluno.cliente.uf)
+      doc.bookmarks['aluno_telefone'].insert_text_after(matricula.aluno.cliente.telefone)
+      doc.bookmarks['aluno_celular'].insert_text_after(matricula.aluno.celular)
+      doc.bookmarks['curso_nome2'].insert_text_after(matricula.curso.nome.upcase)
+      doc.bookmarks['valor_total'].insert_text_after(number_to_currency(matricula.valor_mensal * (13 - Date.today.month) + 100))
+      doc.bookmarks['valor_mensal'].insert_text_after(number_to_currency(matricula.valor_mensal))
       doc.bookmarks['data_matricula'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))
       # página 2
-      doc.bookmarks['cliente_id2'].insert_text_after(@matricula.aluno.cliente.id)
-      doc.bookmarks['matricula_id2'].insert_text_after(@matricula.id)
-      doc.bookmarks['aluno_nome2'].insert_text_after(@matricula.aluno.nome)
-      doc.bookmarks['curso_nome3'].insert_text_after(@matricula.curso.nome)
-      doc.bookmarks['cliente_nome1'].insert_text_after(@matricula.aluno.cliente.nome)
-      doc.bookmarks['cliente_nacionalidade'].insert_text_after(@matricula.aluno.cliente.nacionalidade)
-      doc.bookmarks['cliente_profissao'].insert_text_after(@matricula.aluno.cliente.profissao)
-      doc.bookmarks['cliente_rg'].insert_text_after(@matricula.aluno.cliente.rg)
-      doc.bookmarks['cliente_cpf'].insert_text_after(@matricula.aluno.cliente.cpf)
-      doc.bookmarks['cliente_endereco'].insert_text_after(@matricula.aluno.cliente.endereco)
-      doc.bookmarks['cliente_bairro'].insert_text_after(@matricula.aluno.cliente.bairro)
-      doc.bookmarks['cliente_cep'].insert_text_after(@matricula.aluno.cliente.cep)
-      doc.bookmarks['cliente_cidade'].insert_text_after(@matricula.aluno.cliente.cidade)
-      doc.bookmarks['cliente_uf'].insert_text_after(@matricula.aluno.cliente.uf)
+      doc.bookmarks['cliente_id2'].insert_text_after(matricula.aluno.cliente.id)
+      doc.bookmarks['matricula_id2'].insert_text_after(matricula.id)
+      doc.bookmarks['aluno_nome2'].insert_text_after(matricula.aluno.nome)
+      doc.bookmarks['curso_nome3'].insert_text_after(matricula.curso.nome)
+      doc.bookmarks['cliente_nome1'].insert_text_after(matricula.aluno.cliente.nome)
+      doc.bookmarks['cliente_nacionalidade'].insert_text_after(matricula.aluno.cliente.nacionalidade)
+      doc.bookmarks['cliente_profissao'].insert_text_after(matricula.aluno.cliente.profissao)
+      doc.bookmarks['cliente_rg'].insert_text_after(matricula.aluno.cliente.rg)
+      doc.bookmarks['cliente_cpf'].insert_text_after(matricula.aluno.cliente.cpf)
+      doc.bookmarks['cliente_endereco'].insert_text_after(matricula.aluno.cliente.endereco)
+      doc.bookmarks['cliente_bairro'].insert_text_after(matricula.aluno.cliente.bairro)
+      doc.bookmarks['cliente_cep'].insert_text_after(matricula.aluno.cliente.cep)
+      doc.bookmarks['cliente_cidade'].insert_text_after(matricula.aluno.cliente.cidade)
+      doc.bookmarks['cliente_uf'].insert_text_after(matricula.aluno.cliente.uf)
       doc.bookmarks['circular_numero'].insert_text_after(Circular.where(vigente: true).first.numero_circular)
       doc.bookmarks['circular_data'].insert_text_after(I18n.l(Circular.where(vigente: true).first.data_circular))
       doc.bookmarks['circular_numero2'].insert_text_after(Circular.where(vigente: true).first.numero_circular)
       doc.bookmarks['circular_data2'].insert_text_after(I18n.l(Circular.where(vigente: true).first.data_circular))
       # página 5
       taxa_matricula = Circular.where(vigente: true).first.taxa_matricula
-      doc.bookmarks['valor_total2'].insert_text_after(number_to_currency(@matricula.valor_mensal * (13 - @matricula.data_matricula.month) + taxa_matricula))
-      doc.bookmarks['valor_mensal2'].insert_text_after(number_to_currency(@matricula.valor_mensal + taxa_matricula))
-      doc.bookmarks['valor_mensal3'].insert_text_after(number_to_currency(@matricula.valor_mensal))
-      doc.bookmarks['parcelas'].insert_text_after(12 - @matricula.data_matricula.month)
-      doc.bookmarks['mes_inicio'].insert_text_after(I18n.l(@matricula.data_matricula, :format => "%B").upcase)
-      doc.bookmarks['ano_vigente'].insert_text_after(@matricula.data_matricula.year)
-      doc.bookmarks['ano_vigente3'].insert_text_after(@matricula.data_matricula.year)
+      doc.bookmarks['valor_total2'].insert_text_after(number_to_currency(matricula.valor_mensal * (13 - matricula.data_matricula.month) + taxa_matricula))
+      doc.bookmarks['valor_mensal2'].insert_text_after(number_to_currency(matricula.valor_mensal + taxa_matricula))
+      doc.bookmarks['valor_mensal3'].insert_text_after(number_to_currency(matricula.valor_mensal))
+      doc.bookmarks['parcelas'].insert_text_after(12 - matricula.data_matricula.month)
+      doc.bookmarks['mes_inicio'].insert_text_after(I18n.l(matricula.data_matricula, :format => "%B").upcase)
+      doc.bookmarks['ano_vigente'].insert_text_after(matricula.data_matricula.year)
+      doc.bookmarks['ano_vigente3'].insert_text_after(matricula.data_matricula.year)
       # página 6
       doc.bookmarks['data_matricula2'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))
 
       dir = "#{Rails.root}/private/contratos/#{Time.now.year}"
       Dir.mkdir(dir) unless File.exists?(dir)
 
-      doc.save("#{Rails.root}/private/contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx")
+      doc.save("#{Rails.root}/private/contratos/#{Time.now.year}/#{matricula.aluno.cliente.id} - #{matricula.aluno.cliente.nome} - Matrícula #{matricula.id}.docx")
+      
       true
     end
 end
