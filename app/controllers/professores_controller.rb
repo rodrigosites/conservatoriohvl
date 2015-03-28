@@ -84,7 +84,7 @@ class ProfessoresController < ApplicationController
   end
 
   def listar_alunos
-    @horarios = @professor.horarios.order('dia','horario').joins(:matriculas).page(params[:page]).per_page(9)
+    @horarios = @professor.horarios.order('dia','horario').joins(:matriculas).group('horarios.id').page(params[:page]).per_page(9)
   end
 
   def alunos_horario

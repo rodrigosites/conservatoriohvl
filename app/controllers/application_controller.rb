@@ -36,11 +36,11 @@ class ApplicationController < ActionController::Base
         end
       when "horarios"
         if action_name == "create"
-          @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} cadastrou o Horário às #{hora(modelo.horario)} - Professor #{modelo.professor.nome}."
+          @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} cadastrou o Horário #{dia(modelo.dia)} às #{hora(modelo.horario)} - Professor #{modelo.professor.nome}."
         elsif action_name == "update"
-          @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} editou dados do Horário às #{hora(modelo.horario)} - Professor #{modelo.professor.nome}."
+          @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} editou dados do Horário #{dia(modelo.dia)} às #{hora(modelo.horario)} - Professor #{modelo.professor.nome}."
         else
-          @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} excluiu o Horário às #{hora(modelo.horario)} - Professor #{modelo.professor.nome}."
+          @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} excluiu o Horário #{dia(modelo.dia)} às #{hora(modelo.horario)} - Professor #{modelo.professor.nome}."
         end
       when "users"
         if action_name == "create"
