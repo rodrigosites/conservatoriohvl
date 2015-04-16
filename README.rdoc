@@ -6,16 +6,16 @@ Aplicativo para gerenciamento do Conservatório HVL
 
 * Rails version 4.0.0
 
-* Dependências do sistema
-
-	- Utilizar o package de gems disponível na pasta vendor/cache através do comando bundle install --local 
-
 * Database: Mysql2
 
 	- Gem: mysql2 version 0.3.16 
-	- Procedimentos: Instalar a gem através do comando "gem install mysql --platform=ruby -- --with-mysql-dir=C:/DIRETORIO MYSQL".
+	- Procedimentos: Instalar a gem através do comando "gem install mysql2 --version 0.3.16 --platform=ruby -- --with-mysql-dir=C:/DIRETORIO MYSQL".
 					 Em seguida, colar o arquivo "libmysql.dll" situado na pasta \lib do Mysql dentro da pasta \bin do Ruby. 
 					 Por fim, comandar rake db:create db:migrate.
+
+* Dependências do sistema
+
+	- Utilizar o package de gems disponível na pasta vendor/cache através do comando bundle install --local 
 
 * Inicialização da Database
 

@@ -60,7 +60,11 @@
   <% end %>
   <div class="form-group">
     <%= f.label "Data da Matrícula:", class: "col-sm-0 control-label" %><br />
-    <%= f.text_field :data_matricula, class: "form-control", value: (I18n.l Date.today) %>
+    <% if action_name != "edit" %>
+      <%= f.text_field :data_matricula, class: "form-control", value: (I18n.l Date.today) %>
+    <% else %>
+      <%= f.text_field :data_matricula, class: "form-control", value: (data(@matricula.data_matricula)) %>
+    <% end %>
   </div>
   <div class="form-group">
     <br /><%= f.submit "Cadastrar", class: "btn btn-primary" %>

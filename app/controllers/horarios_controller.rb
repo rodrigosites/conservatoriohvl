@@ -4,7 +4,7 @@ class HorariosController < ApplicationController
 before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala]
 
   def index
-    @horarios = Horario.joins(:matriculas).page(params[:page]).per_page(10)
+    @horarios = Horario.joins(:matriculas).group('horarios.id').page(params[:page]).per_page(10)
   end
 
   def show
