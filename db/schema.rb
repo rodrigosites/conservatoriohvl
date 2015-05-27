@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150131002214) do
+ActiveRecord::Schema.define(version: 20150525230933) do
 
   create_table "alunos", force: true do |t|
     t.integer  "cliente_id"
@@ -117,6 +117,18 @@ ActiveRecord::Schema.define(version: 20150131002214) do
     t.string   "nome"
     t.float    "valor"
     t.integer  "anos"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "folha_pagamentos", force: true do |t|
+    t.integer  "professor_id"
+    t.integer  "user_id"
+    t.integer  "mes"
+    t.integer  "ano"
+    t.float    "salario"
+    t.integer  "n_aulas"
+    t.date     "data_aprovacao"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

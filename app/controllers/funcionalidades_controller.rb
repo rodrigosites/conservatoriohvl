@@ -61,12 +61,27 @@ class FuncionalidadesController < ApplicationController
       salario = 0
       professor.horarios.each do |horario|
         if horario.matriculas.any?
-          salario += 60
+          #salario += 60
+          if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month
+            salario += 60
+          else
+            dia = horario.dia[0].to_i
+            inicio = horario.matriculas.first.data_matricula.to_date
+            fim = Date.civil(2015,Date.today.month,-1)
+            inicio.upto(fim) do |x|
+              if x.wday == dia
+                salario += 15
+              end
+            end
+          end
         end
       end
       @total_salarios += salario
     end
     @professores = Professor.search(params[:search], params[:page])
+  end
+
+  def salvar_folha
   end
 
 end
