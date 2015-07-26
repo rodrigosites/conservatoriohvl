@@ -78,6 +78,10 @@
       <%= f.label "Escolaridade:", class: "col-sm-0 control-label" %><br />
       <%= f.text_field :escolaridade, class: "form-control" %>
   </div>
+  <div class="form-group">
+      <%= f.label "Salário por Aula:", class: "col-sm-0 control-label" %><br />
+      <%= f.text_field :valor_aula, class: "form-control", value: Circular.where(vigente: true).first.salario_aula %>
+  </div>
   <div class="form-group" style="float: left; margin-right: 10px;">
     <br /><%= f.submit "Cadastrar", class: "btn btn-primary" %>
   </div>

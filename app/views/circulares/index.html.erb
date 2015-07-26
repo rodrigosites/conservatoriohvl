@@ -18,7 +18,7 @@
       <th>Curso Básico</th>
       <th>Curso Extra</th>
       <th>Taxa Matrícula</th>
-      <th></th>
+      <th>Salário por Aula</th>
       <th></th>
       <th></th>
       <th></th>
@@ -34,6 +34,7 @@
         <td><%= number_to_currency(circular.valor_mensalidade) %></td>
         <td><%= number_to_currency(circular.valor_extra) %></td>
         <td><%= number_to_currency(circular.taxa_matricula) %></td>
+        <td><%= number_to_currency(circular.salario_aula) %></td>
         <td><%= button_to 'Tornar Vigente', circular_vigente_path(id: circular.id), :class => "btn btn-primary btn-xs" %></td>
         <td><%= button_to 'Visualizar Dados', circular, :class => "btn btn-primary btn-xs", :method => :get %></td>
         <td><%= button_to 'Editar Dados', edit_circular_path(circular), :class => "btn btn-primary btn-xs", :method => :get %></td>

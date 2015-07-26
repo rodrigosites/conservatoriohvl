@@ -14,6 +14,7 @@
       <li class="list-group-item"><b>Custo Anual do Instrumento Extra:</b> <%= number_to_currency(@circular.valor_extra*12) %></li>
       <li class="list-group-item"><b>Taxa de Matrícula:</b> <%= number_to_currency(@circular.taxa_matricula) %></li>
       <li class="list-group-item"><b>Valor do Desconto:</b> <%= number_to_currency(@circular.desconto) %> (<%= (@circular.desconto / @circular.valor_mensalidade * 100).to_i %>%)</li>
+      <li class="list-group-item"><b>Salário Padrão por Aula:</b> <%= number_to_currency(@circular.salario_aula) %></li>
       <li class="list-group-item"><b>Vigente:</b> <%= @circular.vigente ? "Sim" : "Não" %></li>
   </ul>
 </div>

@@ -35,6 +35,10 @@
     <%= f.text_field :desconto, class: "form-control" %>
   </div>
   <div class="form-group">
+    <%= f.label "Salário Padrão por Aula:", class: "col-sm-0 control-label" %><br />
+    <%= f.text_field :salario_aula, class: "form-control" %>
+  </div>
+  <div class="form-group">
     <br /><%= f.submit "Cadastrar", class: "btn btn-primary" %>
   </div>
 <% end %>

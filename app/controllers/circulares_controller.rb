@@ -53,12 +53,19 @@ class CircularesController < ApplicationController
   end
 
   def circular_vigente
-    if Circular.where(vigente: true).any?
-      @circular_antiga = Circular.where(vigente: true).first
+    @circular_antiga = Circular.where(vigente: true).first
+    if @circular_antiga && @circular_antiga.id != @circular.id
       @circular_antiga.update_attribute(:vigente, false)
     end
     respond_to do |format|
       if @circular.update_attribute(:vigente, true)
+
+        @professores = Professor.all
+
+        @professores.each do |professor|
+          professor.update_attribute(:valor_aula, @circular.salario_aula)
+         end
+
         format.html { redirect_to circulares_path, notice: "Circular nº #{@circular.numero_circular} foi definida como vigente." }
       else
         format.html { redirect_to circulares_path, alert: "Erro ao tentar definir a Circular nº #{@circular.numero_circular} como vigente." }
@@ -75,6 +82,6 @@ class CircularesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def circular_params
       params.require(:circular).permit(:numero_circular,:data_circular,:valor_mensalidade,:valor_extra,
-      :desconto,:vigente,:taxa_matricula)
+      :desconto,:vigente,:taxa_matricula,:salario_aula)
     end
 end

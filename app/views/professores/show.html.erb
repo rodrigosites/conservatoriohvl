@@ -23,6 +23,7 @@
       <li class="list-group-item"><b>Nacionalidade:</b> <%= @professor.nacionalidade %></li>
       <li class="list-group-item"><b>Profissão:</b> <%= @professor.profissao %></li>
       <li class="list-group-item"><b>Escolaridade:</b> <%= @professor.escolaridade %></li>
+      <li class="list-group-item"><b>Valor da Aula:</b> <%= number_to_currency(@professor.valor_aula) %></li>
     </ul>
 </div>
 
