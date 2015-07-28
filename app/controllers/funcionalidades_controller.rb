@@ -56,28 +56,35 @@ class FuncionalidadesController < ApplicationController
 
   def salario_professores
     @professores = Professor.all
+    @folha_pagamento = []
     @total_salarios = 0
     @professores.each do |professor|
       salario = 0
+      n_aulas = 0
       professor.horarios.each do |horario|
         if horario.matriculas.any?
+          n_aulas += 1
           if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month
               salario += professor.valor_aula
           else
             dia = horario.dia[0].to_i
             inicio = horario.matriculas.first.data_matricula.to_date
-            fim = Date.civil(2015,Date.today.month,-1)
+            fim = Date.civil(Date.today.year,Date.today.month,-1)
+            salario_parcial = 0
             inicio.upto(fim) do |x|
-                if x.wday == dia && salario < professor.valor_aula
-                  salario += professor.valor_aula/4
+                if x.wday == dia && salario_parcial < professor.valor_aula
+                  salario_parcial += professor.valor_aula/4
                 end
             end
+            salario += salario_parcial
           end
         end
       end
+      p = FolhaPagamento.new(professor_id: professor.id, user_id: current_user.id, mes: Date.today.month, ano: Date.today.year, salario: salario, n_aulas: n_aulas)
+      @folha_pagamento << p
+      @folha_pagamento.sort! { |a,b| Professor.find(a.professor_id).nome <=> Professor.find(b.professor_id).nome }
       @total_salarios += salario
     end
-    @professores = Professor.search(params[:search], params[:page])
   end
 
   def salvar_folha
