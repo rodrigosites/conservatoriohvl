@@ -1,7 +1,3 @@
-<div class="page-header">
-  <h2>Lista de Salários do Mês - <%= Date.today.month %>/<%= Date.today.year %></h2>
-</div>
-
 <table class="table table-striped">
   <thead>
     <tr>
@@ -30,5 +26,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= button_to "Gerar Folha de Pagamento", salvar_folha_path, :class => "btn btn-primary", :method => :get  %>

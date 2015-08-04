@@ -56,8 +56,8 @@ class FuncionalidadesController < ApplicationController
 
   def salario_professores
     @professores = Professor.all
-    @folha_pagamento = []
     @total_salarios = 0
+    @folha_pagamento = []
     @professores.each do |professor|
       salario = 0
       n_aulas = 0
@@ -88,6 +88,48 @@ class FuncionalidadesController < ApplicationController
   end
 
   def salvar_folha
+    if Date.today.day <= 25
+      redirect_to salario_professores_path, alert: "A folha de pagamento só pode ser salva a partir do dia 25 de cada mês."
+      return
+    elsif FolhaPagamento.where(mes: Date.today.month, ano: Date.today.year)
+      redirect_to salario_professores_path, alert: "A folha de pagamento do mês #{Date.today.month}/#{Date.today.year} já existe."
+      return
+    else
+      @professores = Professor.all
+      @folha_pagamento = []
+      @professores.each do |professor|
+        salario = 0
+        n_aulas = 0
+        professor.horarios.each do |horario|
+          if horario.matriculas.any?
+            n_aulas += 1
+            if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month
+                salario += professor.valor_aula
+            else
+              dia = horario.dia[0].to_i
+              inicio = horario.matriculas.first.data_matricula.to_date
+              fim = Date.civil(Date.today.year,Date.today.month,-1)
+              salario_parcial = 0
+              inicio.upto(fim) do |x|
+                  if x.wday == dia && salario_parcial < professor.valor_aula
+                    salario_parcial += professor.valor_aula/4
+                  end
+              end
+              salario += salario_parcial
+            end
+          end
+        end
+        p = FolhaPagamento.new(professor_id: professor.id, user_id: current_user.id, mes: Date.today.month, ano: Date.today.year, salario: salario, n_aulas: n_aulas)
+        @folha_pagamento << p
+        @folha_pagamento.sort! { |a,b| Professor.find(a.professor_id).nome <=> Professor.find(b.professor_id).nome }
+      end
+      @folha_pagamento.each do |professor|
+        @pagamento = FolhaPagamento.new
+        @pagamento = professor
+        @pagamento.save
+      end
+      redirect_to salario_professores_path, notice: "Folha de Pagamento referente ao mês #{Date.today.month}/#{Date.today.year} criada com sucesso."
+    end
   end
 
 end

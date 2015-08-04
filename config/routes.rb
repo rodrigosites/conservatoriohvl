@@ -28,6 +28,7 @@ Conservatoriohvl::Application.routes.draw do
   get 'funcionalidades/index', to: "funcionalidades#index", as: :funcionalidades
   get 'valor_boletos', to: "funcionalidades#valor_boletos"
   get 'salario_professores', to: "funcionalidades#salario_professores"
+  get 'salvar_folha', to: "funcionalidades#salvar_folha"
   get 'aluno/busca_dados_cliente', to: "alunos#busca_dados_cliente"
   get 'alunos_inativos', to: "alunos#inativos"
   get 'clientes_inativos', to: "clientes#inativos"

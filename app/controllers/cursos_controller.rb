@@ -1,3 +1,4 @@
+# coding: utf-8
 class CursosController < ApplicationController
   before_action :set_curso, only: [:show, :edit, :update, :destroy]
 
@@ -46,11 +47,15 @@ class CursosController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @curso.destroy
-    gera_notificacao("admin",@curso, action_name)
-    respond_to do |format|
-      format.html { redirect_to cursos_path}
-      format.json { head :no_content }
+    if @curso.matriculas.any?
+      redirect_to cursos_path, alert: "Não foi possível excluir o curso #{@curso.nome} pois existem matrículas atreladas."
+    else
+      @curso.destroy
+      gera_notificacao("admin",@curso, action_name)
+      respond_to do |format|
+        format.html { redirect_to cursos_path}
+        format.json { head :no_content }
+      end
     end
   end
 

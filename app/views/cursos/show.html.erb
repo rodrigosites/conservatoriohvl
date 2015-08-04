@@ -33,6 +33,30 @@
     <% end %>
   </tbody>
 </table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Alunos Matriculados:</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% if @curso.matriculas.any? %>
+      <% @curso.matriculas.each do |matricula| %>
+        <tr>
+          <td><%= matricula.aluno.nome %>
+          <td><%= dia(matricula.horarios.first.dia) %></td>
+          <td><%= hora(matricula.horarios.first.horario) %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr><td>Ainda não há professores vinculados neste curso...</td></tr>
+    <% end %>
+  </tbody>
+</table>
   
 <div style="float: left; margin-right: 10px;">   
   <%= button_to 'Vincular Professores', lecionar_path(curso_id: @curso.id), :class => "btn btn-primary", :method => :get %>

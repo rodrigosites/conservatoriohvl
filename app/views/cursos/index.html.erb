@@ -14,8 +14,9 @@
     <tr>
       <th>Curso</th>
       <th>Valor Mensal</th>
-      <th>Nº de Anos</th>
-      <th>Professores Vinculados</th>
+      <th>Duração</th>
+      <th>Professores</th>
+      <th>Nº de Alunos</th>
       <th></th>
       <th></th>
       <th></th>
@@ -27,8 +28,9 @@
       <tr>
         <td><%= curso.nome %></td>
         <td><%= number_to_currency(curso.valor) %></td>
-        <td><%= curso.anos %></td>
+        <td><%= curso.anos %> anos</td>
         <td><%= curso.professores.size %>
+        <td><%= curso.matriculas.size %>
         <td><%= button_to "Abrir a Ficha", curso, :class => "btn btn-primary btn-xs", :method => :get %></td>
         <td><%= button_to "Editar Dados", edit_curso_path(curso), :class => "btn btn-primary btn-xs", :method => :get %></td>
         <td><%= button_to "Excluir Curso", curso, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o curso #{curso.nome}?" } %></td>
