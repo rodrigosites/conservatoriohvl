@@ -64,12 +64,12 @@ class FuncionalidadesController < ApplicationController
       professor.horarios.each do |horario|
         if horario.matriculas.any?
           n_aulas += 1
-          if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month
+          if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month-1
               salario += professor.valor_aula
           else
             dia = horario.dia[0].to_i
             inicio = horario.matriculas.first.data_matricula.to_date
-            fim = Date.civil(Date.today.year,Date.today.month,-1)
+            fim = Date.civil(Date.today.year,Date.today.month-1,-1)
             salario_parcial = 0
             inicio.upto(fim) do |x|
                 if x.wday == dia && salario_parcial < professor.valor_aula
@@ -88,10 +88,7 @@ class FuncionalidadesController < ApplicationController
   end
 
   def salvar_folha
-    if Date.today.day <= 25
-      redirect_to salario_professores_path, alert: "A folha de pagamento só pode ser salva a partir do dia 25 de cada mês."
-      return
-    elsif FolhaPagamento.where(mes: Date.today.month, ano: Date.today.year)
+    if FolhaPagamento.where(mes: Date.today.month, ano: Date.today.year)
       redirect_to salario_professores_path, alert: "A folha de pagamento do mês #{Date.today.month}/#{Date.today.year} já existe."
       return
     else
@@ -103,12 +100,12 @@ class FuncionalidadesController < ApplicationController
         professor.horarios.each do |horario|
           if horario.matriculas.any?
             n_aulas += 1
-            if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month
+            if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month-1
                 salario += professor.valor_aula
             else
               dia = horario.dia[0].to_i
               inicio = horario.matriculas.first.data_matricula.to_date
-              fim = Date.civil(Date.today.year,Date.today.month,-1)
+              fim = Date.civil(Date.today.year,Date.today.month-1,-1)
               salario_parcial = 0
               inicio.upto(fim) do |x|
                   if x.wday == dia && salario_parcial < professor.valor_aula
