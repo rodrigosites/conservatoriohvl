@@ -42,4 +42,5 @@ Conservatoriohvl::Application.routes.draw do
   get 'professor/:id/controlar_horarios' => 'professores#controlar_horarios', as: :controlar_horarios
   get 'professor/:id/listar_alunos' => 'professores#listar_alunos', as: :listar_alunos
   get 'professor/:horario_id/alunos_horario' => 'professores#alunos_horario', as: :alunos_horario
+  get 'visualiza_folha', to: "funcionalidades#visualiza_folha"
 end

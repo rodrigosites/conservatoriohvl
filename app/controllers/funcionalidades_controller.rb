@@ -62,7 +62,7 @@ class FuncionalidadesController < ApplicationController
       salario = 0
       n_aulas = 0
       professor.horarios.each do |horario|
-        if horario.matriculas.any?
+        if horario.matriculas.any? && horario.matriculas.where("extract(month from data_matricula) = ?", Date.today.month).count == 0
           n_aulas += 1
           if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month-1
               salario += professor.valor_aula
@@ -88,7 +88,7 @@ class FuncionalidadesController < ApplicationController
   end
 
   def salvar_folha
-    if FolhaPagamento.where(mes: Date.today.month, ano: Date.today.year)
+    if FolhaPagamento.where(mes: Date.today.month, ano: Date.today.year).any?
       redirect_to salario_professores_path, alert: "A folha de pagamento do mês #{Date.today.month}/#{Date.today.year} já existe."
       return
     else
@@ -98,7 +98,7 @@ class FuncionalidadesController < ApplicationController
         salario = 0
         n_aulas = 0
         professor.horarios.each do |horario|
-          if horario.matriculas.any?
+          if horario.matriculas.any? && horario.matriculas.where("extract(month from data_matricula) = ?", Date.today.month).count == 0
             n_aulas += 1
             if horario.matriculas.size > 1 || horario.matriculas.size == 1 && horario.matriculas.first.data_matricula.month < Date.today.month-1
                 salario += professor.valor_aula
@@ -127,6 +127,13 @@ class FuncionalidadesController < ApplicationController
       end
       redirect_to salario_professores_path, notice: "Folha de Pagamento referente ao mês #{Date.today.month}/#{Date.today.year} criada com sucesso."
     end
+  end
+
+  def visualiza_folha
+    respond_to do |format|
+      format.html           
+      format.js { @folha_pagamento = FolhaPagamento.where(mes: params[:mes], ano: params[:ano])}
+    end    
   end
 
 end
