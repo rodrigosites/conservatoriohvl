@@ -191,8 +191,11 @@ class MatriculasController < ApplicationController
         return
       end
       format.html { redirect_to @matricula, notice: "O contrato foi gerado com sucesso e pode ser acessado em 
-          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
+          \"/Contratos/#{@matricula.data_matricula.to_date.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
     end
+  end
+
+  def rematricular
   end
   
   private
@@ -271,10 +274,10 @@ class MatriculasController < ApplicationController
       # página 6
       doc.bookmarks['data_matricula2'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))
 
-      dir = "#{Rails.root}/private/contratos/#{Time.now.year}"
+      dir = "#{Rails.root}/private/contratos/#{matricula.data_matricula.to_date.year}"
       Dir.mkdir(dir) unless File.exists?(dir)
 
-      doc.save("#{Rails.root}/private/contratos/#{Time.now.year}/#{matricula.aluno.cliente.id} - #{matricula.aluno.cliente.nome} - Matrícula #{matricula.id}.docx")
+      doc.save("#{Rails.root}/private/contratos/#{matricula.data_matricula.to_date.year}/#{matricula.aluno.cliente.id} - #{matricula.aluno.cliente.nome} - Matrícula #{matricula.id}.docx")
       
       true
     end

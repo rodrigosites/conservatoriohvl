@@ -20,8 +20,10 @@
         <span class="icon-bar"></span>
         </button>
       </div>
-      <% if current_user %>
-        <%= render 'layouts/menu' %>
+      <% if current_user && current_user.nivel == "admin" %>
+        <%= render 'layouts/menu_admin' %>
+      <% elsif current_user && current_user.nivel == "professor" %>
+        <%= render 'layouts/menu_professor' %>
       <% end %>
     </div>
   </nav>

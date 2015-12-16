@@ -1,0 +1,14 @@
+<div class="page-header"><h2><b>Rematricular Base de Alunos</b></h2></div>
+<div style="float: left; margin-right: 10px;">
+  <%= form_tag rematricular_base_path, :method => 'get' do %>
+    <%= label_tag(:data, "Digite a data para rematricular a base de alunos:") %>
+    <%= text_field_tag :data, params[:data], :class => "form-control" %>
+    <br>
+    <div style="float: left; margin-right: 10px;">
+      <%= button_tag 'Enviar', :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+  <div style="float: left; margin-right: 10px;">
+    <%= button_to 'Voltar', matriculas_path, :class => "btn btn-default", :method => :get %>
+   </div>
+</div>

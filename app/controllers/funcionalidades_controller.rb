@@ -136,4 +136,24 @@ class FuncionalidadesController < ApplicationController
     end    
   end
 
+  def rematricular_base
+    @matriculas = Matricula.all
+    @matriculas.each do |matricula|
+      # registra a matricula com a data atual nas inativas
+      @inativa = Matinativa.new
+      @inativa.aluno_id = matricula.aluno_id
+      @inativa.curso_id = matricula.curso_id
+      @inativa.data_matricula = matricula.data_matricula
+      @inativa.termino_matricula = Date.today
+      @inativa.ano = matricula.ano
+      @inativa.teoria_ano = matricula.teoria_ano
+      @inativa.valor_mensal = matricula.valor_mensal
+      @inativa.id_ativa = matricula.id
+      @inativa.save
+      #atualiza a data de matricula para a data desejada
+      matricula.update_attribute(:data_matricula, params[:data])
+    end
+    redirect_to matriculas_path, notice: "Base de alunos rematriculada com sucesso para o dia #{params[:data]}."
+  end
+
 end

@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+	$(document).on 'ready page:load', (evt) ->
+  		$('#data').mask('00/00/0000');
+
 	$(document).on 'change', '#folhapagamento_mes', (evt) ->
 		if $('#folhapagamento_mes option:selected').val().length
 			if $('#folhapagamento_ano option:selected').val().length
