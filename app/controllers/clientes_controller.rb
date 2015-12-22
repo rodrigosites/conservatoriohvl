@@ -1,3 +1,4 @@
+# coding: utf-8
 class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
 
@@ -46,30 +47,34 @@ class ClientesController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @inativo = ClientesInativo.new
-    @inativo.nome = @cliente.nome
-    @inativo.endereco = @cliente.endereco
-    @inativo.rg = @cliente.rg
-    @inativo.cpf = @cliente.cpf
-    @inativo.telefone = @cliente.telefone
-    @inativo.celular = @cliente.celular
-    @inativo.email = @cliente.email
-    @inativo.nascimento = @cliente.nascimento
-    @inativo.bairro = @cliente.bairro
-    @inativo.cidade = @cliente.cidade
-    @inativo.uf = @cliente.uf
-    @inativo.cep = @cliente.cep
-    @inativo.pai = @cliente.pai
-    @inativo.mae = @cliente.mae
-    @inativo.nacionalidade = @cliente.nacionalidade
-    @inativo.profissao = @cliente.profissao
-    @inativo.id_ativo = @cliente.id
-    if @inativo.save
-      @cliente.destroy
-      gera_notificacao("admin",@cliente, action_name)
-      respond_to do |format|
-        format.html { redirect_to clientes_path}
-        format.json { head :no_content }
+    if @cliente.alunos.any?
+      redirect_to clientes_path, alert: "Não foi possível excluir o(a) cliente #{@cliente.nome}. Primeiro você precisa excluir os alunos vinculadas."
+      else
+      @inativo = ClientesInativo.new
+      @inativo.nome = @cliente.nome
+      @inativo.endereco = @cliente.endereco
+      @inativo.rg = @cliente.rg
+      @inativo.cpf = @cliente.cpf
+      @inativo.telefone = @cliente.telefone
+      @inativo.celular = @cliente.celular
+      @inativo.email = @cliente.email
+      @inativo.nascimento = @cliente.nascimento
+      @inativo.bairro = @cliente.bairro
+      @inativo.cidade = @cliente.cidade
+      @inativo.uf = @cliente.uf
+      @inativo.cep = @cliente.cep
+      @inativo.pai = @cliente.pai
+      @inativo.mae = @cliente.mae
+      @inativo.nacionalidade = @cliente.nacionalidade
+      @inativo.profissao = @cliente.profissao
+      @inativo.id_ativo = @cliente.id
+      if @inativo.save
+        @cliente.destroy
+        gera_notificacao("admin",@cliente, action_name)
+        respond_to do |format|
+          format.html { redirect_to clientes_path}
+          format.json { head :no_content }
+        end
       end
     end
   end

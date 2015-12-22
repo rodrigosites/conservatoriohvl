@@ -39,3 +39,10 @@
   <% end %>
   <br></center>
 </div>
+
+<% if @folha %>
+  <% content_for :js do %> 
+    alert("Você ainda não gerou a folha de pagamento do mês <%= Date.today.month %>/<%= Date.today.year %>. Para continuidade do sistema, favor gerar a folha de pagamento na página a ser carregada em seguida.");
+    window.location="<%=salario_professores_path%>"; 
+  <% end %>
+<% end %>

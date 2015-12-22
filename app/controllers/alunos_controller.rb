@@ -1,3 +1,4 @@
+# coding: utf-8
 class AlunosController < ApplicationController
 before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
@@ -46,30 +47,34 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @inativo = AlunosInativo.new
-    @inativo.cliente_id = @aluno.cliente_id
-    @inativo.nome = @aluno.nome
-    @inativo.endereco = @aluno.cliente.endereco
-    @inativo.rg = @aluno.rg
-    @inativo.cpf = @aluno.cpf
-    @inativo.telefone = @aluno.cliente.telefone
-    @inativo.celular = @aluno.celular
-    @inativo.email = @aluno.cliente.email
-    @inativo.nascimento = @aluno.nascimento
-    @inativo.bairro = @aluno.cliente.bairro
-    @inativo.cidade = @aluno.cliente.cidade
-    @inativo.uf = @aluno.cliente.uf
-    @inativo.cep = @aluno.cliente.cep
-    @inativo.pai = @aluno.pai
-    @inativo.mae = @aluno.mae
-    @inativo.nacionalidade = @aluno.nacionalidade
-    @inativo.id_ativo = @aluno.id
-    if @inativo.save
-      @aluno.destroy
-      gera_notificacao("admin",@aluno, action_name)
-      respond_to do |format|
-        format.html { redirect_to alunos_path}
-        format.json { head :no_content }
+    if @aluno.matriculas.any?
+      redirect_to alunos_path, alert: "Não foi possível excluir o(a) aluno(a) #{@aluno.nome}. Primeiro você precisa encerrar as matrículas vinculadas."
+    else
+      @inativo = AlunosInativo.new
+      @inativo.cliente_id = @aluno.cliente_id
+      @inativo.nome = @aluno.nome
+      @inativo.endereco = @aluno.cliente.endereco
+      @inativo.rg = @aluno.rg
+      @inativo.cpf = @aluno.cpf
+      @inativo.telefone = @aluno.cliente.telefone
+      @inativo.celular = @aluno.celular
+      @inativo.email = @aluno.cliente.email
+      @inativo.nascimento = @aluno.nascimento
+      @inativo.bairro = @aluno.cliente.bairro
+      @inativo.cidade = @aluno.cliente.cidade
+      @inativo.uf = @aluno.cliente.uf
+      @inativo.cep = @aluno.cliente.cep
+      @inativo.pai = @aluno.pai
+      @inativo.mae = @aluno.mae
+      @inativo.nacionalidade = @aluno.nacionalidade
+      @inativo.id_ativo = @aluno.id
+      if @inativo.save
+        @aluno.destroy
+        gera_notificacao("admin",@aluno, action_name)
+        respond_to do |format|
+          format.html { redirect_to alunos_path}
+          format.json { head :no_content }
+        end
       end
     end
   end
