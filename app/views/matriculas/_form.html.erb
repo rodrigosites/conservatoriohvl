@@ -12,11 +12,21 @@
   </div>
   <div class="form-group">
     <%= f.label "Curso Principal:", class: "col-sm-0 control-label"  %><br />
-    <%= f.collection_select :curso_id, Curso.order('nome'), :id, :nome, { prompt: 'Selecione o curso' }, class: "form-control" %>
+    <div style="float: left; margin-right: 10px;">
+      <%= f.collection_select :curso_id, Curso.order('nome'), :id, :nome, { prompt: 'Selecione o curso' }, class: "form-control" %>
+    </div>
+    <div style="float: left; margin-right: 10px;">
+      <b style="color: red">(<%= @matricula.curso.nome %>)</b>
+    </div>
   </div>
   <div class="form-group">
     <%= f.label "Ano do Curso Principal:", class: "col-sm-0 control-label"  %><br />
-    <%= f.collection_select :ano, [], nil, nil, { prompt: 'Primeiro selecione o curso...' }, class: "form-control" %>
+    <div style="float: left; margin-right: 10px;">
+      <%= f.collection_select :ano, [], nil, nil, { prompt: 'Primeiro selecione o curso...' }, class: "form-control" %>
+    </div>
+    <div style="float: left; margin-right: 10px;">
+      <b style="color: red">(<%= @matricula.ano %>)</b>
+    </div>
   </div>
   <div class="form-group">
     <%= f.label "Valor Mensal", class: "col-sm-0 control-label"  %><br />
@@ -29,33 +39,68 @@
   </div>
   <div class="form-group">
     <label>Professor do curso Principal:</label><br />
-    <%= collection_select(:professor, :id, [], :id, :nome, { prompt: 'Primeiro selecione o curso...' }, class: "form-control")%>
+    <div style="float: left; margin-right: 10px;">
+      <%= collection_select(:professor, :id, [], :id, :nome, { prompt: 'Primeiro selecione o curso...' }, class: "form-control")%>
+    </div>
+    <div style="float: left; margin-right: 10px;">
+      <b style="color: red">(<%= @matricula.aulas.first.horario.professor.nome %>)</b>
+    </div>
   </div>
   <%= fields_for(:pratica, @matricula.aulas.build) do |u| %>
     <div class="form-group">
       <%= u.label "Horário do Curso Principal:", class: "col-sm-0 control-label" %><br />
       <%= u.hidden_field :matricula_id, value: Matricula.maximum(:id).to_i + 1 %>
-      <%= u.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor...' }, {class: "form-control"} %>
+      <div style="float: left; margin-right: 10px;">
+        <%= u.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor...' }, {class: "form-control"} %>
+      </div>
+      <div style="float: left; margin-right: 10px;">
+        <b style="color: red">(<%= dia(@matricula.aulas.first.horario.dia) %> às <%= hora(@matricula.aulas.first.horario.horario) %>)</b>
+      </div>
     </div>
   <% end %>
   <div class="form-group" id="tipo_teoria_div">
     <%= f.label "Tipo de Teoria", class: "col-sm-0 control-label"  %><br />
-    <%= select(:tipo,:teoria, options_for_select([["Teoria"],["Musicalização Infantil"]]), { prompt: "Selecione o tipo de teoria..." }, class: "form-control") %>
+    <div style="float: left; margin-right: 10px;">
+      <%= select(:tipo,:teoria, options_for_select([["Teoria"],["Musicalização Infantil"]]), { prompt: "Selecione o tipo de teoria..." }, class: "form-control") %>
+    </div>
+    <% logger.info ("!!!!!!!!!!!!!!!!!!!! #{@matricula.aulas.size}") %>
+    <div style="float: left; margin-right: 10px;">
+      <% if @matricula.aulas.second.teoria %>
+        <b style="color: red">(Teoria)</b>
+      <% elsif @matricula.aulas.second.musicalizacao %>
+        <b style="color: red">(Musicalização Infantil)</b>
+      <% end %>
+    </div>
   </div>
   <div class="form-group" id="matricula_teoria_div">
-    <%= f.label "Ano de Teoria", class: "col-sm-0 control-label"  %><br />
-    <%= f.select :teoria_ano, [], { prompt: "Selecione o tipo de teoria..." }, class: "form-control" %>
+    <%= f.label "Ano de Teoria", class: "col-sm-0 control-label" %><br />
+    <div style="float: left; margin-right: 10px;">
+      <%= f.select :teoria_ano, [], { prompt: "Selecione o tipo de teoria..." }, class: "form-control" %>
+    </div>
+    <div style="float: left; margin-right: 10px;">
+       <b style="color: red">(<%= @matricula.teoria_ano %>)</b>
+    </div>
   </div>
   <div class="form-group" id="professor_teoria_div">
     <label>Professor de teoria</label><br />
-    <%= collection_select(:professor_teoria, :id, [], :id, :nome, { prompt: 'Selecione o professor de teoria...'}, class: "form-control")%>
+    <div style="float: left; margin-right: 10px;">
+      <%= collection_select(:professor_teoria, :id, [], :id, :nome, { prompt: 'Selecione o professor de teoria...'}, class: "form-control")%>
+    </div>
+    <div style="float: left; margin-right: 10px;">
+       <b style="color: red">(<%= @matricula.aulas.second.horario.professor.nome %>)</b>
+    </div>
   </div>
   <%= fields_for(:teorica, @matricula.aulas.build) do |v| %>
     <div class="form-group" id="horario_teoria_div">
       <%= v.label "Horário de Teoria:", class: "col-sm-0 control-label" %><br />
       <%= v.hidden_field :teoria %>
       <%= v.hidden_field :matricula_id, value: Matricula.maximum(:id).to_i + 1 %>
-      <%= v.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor de teoria...' }, {class: "form-control"} %>
+      <div style="float: left; margin-right: 10px;">
+        <%= v.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor de teoria...' }, {class: "form-control"} %>
+      </div>
+      <div style="float: left; margin-right: 10px;">
+        <b style="color: red">(<%= dia(@matricula.aulas.second.horario.dia) %> às <%= hora(@matricula.aulas.second.horario.horario) %>)</b>
+      </div>
     </div>
   <% end %>
   <div class="form-group">

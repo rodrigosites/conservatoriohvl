@@ -156,6 +156,11 @@ class FuncionalidadesController < ApplicationController
       @inativa.save
       #atualiza a data de matricula para a data desejada
       matricula.update_attribute(:data_matricula, params[:data])
+      if matricula.teoria_ano != 99
+        matricula.update_attribute(:valor_mensal, Circular.where(vigente: true).first.valor_mensalidade)
+      else
+        matricula.update_attribute(:valor_mensal, Circular.where(vigente: true).first.valor_extra)
+      end
     end
     redirect_to matriculas_path, notice: "Base de alunos rematriculada com sucesso para o dia #{params[:data]}."
   end
