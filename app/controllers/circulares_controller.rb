@@ -81,7 +81,7 @@ class CircularesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def circular_params
-      params.require(:circular).permit(:numero_circular,:data_circular,:valor_mensalidade,:valor_extra,
+      params.require(:circular).permit(:numero_circular,:data_circular,:valor_mensalidade,:valor_extra,:valor_profissionalizante,
       :desconto,:vigente,:taxa_matricula,:salario_aula)
     end
 end

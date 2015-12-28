@@ -4,9 +4,11 @@ class CursosController < ApplicationController
 
   def index
     @cursos = Curso.search(params[:search], params[:page])
+    @circular = Circular.where(vigente: true).first
   end
 
   def show
+    @circular = Circular.where(vigente: true).first
   end
 
   def new
@@ -67,6 +69,6 @@ class CursosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def curso_params
-      params.require(:curso).permit(:nome, :valor, :anos)
+      params.require(:curso).permit(:nome, :basico, :anos)
     end
 end

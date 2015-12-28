@@ -27,7 +27,7 @@
     <% @cursos.each do |curso| %>
       <tr>
         <td><%= curso.nome %></td>
-        <td><%= number_to_currency(curso.valor) %></td>
+        <td><%= curso.basico? ? number_to_currency(@circular.valor_mensalidade) : number_to_currency(@circular.valor_profissionalizante) %></td>
         <td><%= curso.anos %> anos</td>
         <td><%= curso.professores.size %>
         <td><%= curso.matriculas.size %>

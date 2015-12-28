@@ -56,6 +56,7 @@ class FuncionalidadesController < ApplicationController
     Matricula.all.each do |matricula|
       @mensalidade_total += matricula.valor_mensal
     end
+    @total_matriculas = Matricula.all.size
   end
 
   def salario_professores
@@ -157,7 +158,12 @@ class FuncionalidadesController < ApplicationController
       #atualiza a data de matricula para a data desejada
       matricula.update_attribute(:data_matricula, params[:data])
       if matricula.teoria_ano != 99
-        matricula.update_attribute(:valor_mensal, Circular.where(vigente: true).first.valor_mensalidade)
+        if matricula.curso.basico?
+          mensalidade = Circular.where(vigente: true).first.valor_mensalidade
+        else
+          mensalidade = Circular.where(vigente: true).first.valor_profissionalizante
+        end
+        matricula.update_attribute(:valor_mensal, mensalidade)
       else
         matricula.update_attribute(:valor_mensal, Circular.where(vigente: true).first.valor_extra)
       end

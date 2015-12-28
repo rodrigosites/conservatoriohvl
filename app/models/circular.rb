@@ -1,7 +1,7 @@
 class Circular < ActiveRecord::Base
   #validações
   validates :numero_circular, uniqueness: true
-  validates :numero_circular, :data_circular, :desconto, :valor_mensalidade, :valor_extra, 
+  validates :numero_circular, :data_circular, :desconto, :valor_mensalidade, :valor_extra, :valor_profissionalizante,
   :taxa_matricula, presence: true
 
   def self.search(search, page)

@@ -196,6 +196,7 @@ class MatriculasController < ApplicationController
   end
 
   def rematricular
+    @circular = Circular.where(vigente: true).first
   end
   
   private

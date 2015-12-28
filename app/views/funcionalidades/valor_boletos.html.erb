@@ -24,26 +24,21 @@
       <td></td>
       <td><b>Total:</b></td>
       <td><b><%= number_to_currency(@mensalidade_total) %></b></td>
-      <td></td>
+      <td><b><%= @total_matriculas %></td>
     </tr>
   </tfoot>
   <tbody>
     <% @clientes.each do |cliente| %>
-      <tr>
-        <td><%= cliente.id %></td>
-        <td><%= cliente.nome %></td>
-        <% valor_cliente = 0 %>
-        <% n_matriculas = 0 %>
-        <% cliente.alunos.each do |aluno| %>
-          <% aluno.matriculas.each do |matricula| %>
-            <% valor_cliente += matricula.valor_mensal %>
-            <% n_matriculas += 1 %>
-          <% end %>
-        <% end %>
-        <td><%= number_to_currency(valor_cliente) %></td>
-        <td><%= n_matriculas %></td>
-        <td><center><%= button_to "Visualizar Matrículas", cliente, :class => "btn btn-primary btn-xs", :method => :get  %></center></td>
-      </tr>
+      <% dados_cliente = valor_matriculas_cliente (cliente) %>
+      <% if dados_cliente[0] > 0 %>
+        <tr>
+          <td><%= cliente.id %></td>
+          <td><%= cliente.nome %></td>
+          <td><%= number_to_currency(dados_cliente[0]) %></td>
+          <td><%= dados_cliente[1] %></td>
+          <td><center><%= button_to "Visualizar Matrículas", cliente, :class => "btn btn-primary btn-xs", :method => :get  %></center></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
