@@ -4,4 +4,4 @@ $('#matricula_ano').append( $('<option value>Selecione o ano</option>'));
 	$('#matricula_ano').append($('<option value="<%= i %>"><%= i %>º Ano</option>'));
 <% end %>
 if ($('#tipo_teoria').length) 
-	$('#matricula_valor_mensal').val("<%= @curso.valor %>")
+	$('#matricula_valor_mensal').val("<%= @curso.basico? ? Circular.where(vigente: true).first.valor_mensalidade : Circular.where(vigente: true).first.valor_profissionalizante %>")

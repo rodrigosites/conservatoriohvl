@@ -15,18 +15,22 @@
     <div style="float: left; margin-right: 10px;">
       <%= f.collection_select :curso_id, Curso.order('nome'), :id, :nome, { prompt: 'Selecione o curso' }, class: "form-control" %>
     </div>
+    <% if action_name == "edit" %>
     <div style="float: left; margin-right: 10px;">
       <b style="color: red">(<%= @matricula.curso.nome %>)</b>
     </div>
+    <% end %>
   </div>
   <div class="form-group">
     <%= f.label "Ano do Instrumento Extra:", class: "col-sm-0 control-label"  %><br />
     <div style="float: left; margin-right: 10px;">
       <%= f.collection_select :ano, [], nil, nil, { prompt: 'Primeiro selecione o curso...' }, class: "form-control" %>
     </div>
+    <% if action_name == "edit" %>
     <div style="float: left; margin-right: 10px;">
       <b style="color: red">(<%= @matricula.ano %>)</b>
     </div>
+    <% end %>
   </div>
   <div class="form-group">
     <%= f.label "Valor Mensal", class: "col-sm-0 control-label"  %><br />
@@ -37,9 +41,11 @@
     <div style="float: left; margin-right: 10px;">
       <%= collection_select(:professor, :id, [], :id, :nome, { prompt: 'Primeiro selecione o curso...' }, class: "form-control")%>
     </div>
+    <% if action_name == "edit" %>
     <div style="float: left; margin-right: 10px;">
       <b style="color: red">(<%= @matricula.aulas.first.horario.professor.nome %>)</b>
     </div>
+    <% end %>
   </div>
   <%= fields_for(:pratica, @matricula.aulas.build) do |u| %>
     <div class="form-group">
@@ -48,9 +54,11 @@
       <div style="float: left; margin-right: 10px;">
         <%= u.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor...' }, {class: "form-control"} %>
       </div>
+      <% if action_name == "edit" %>
       <div style="float: left; margin-right: 10px;">
         <b style="color: red">(<%= dia(@matricula.aulas.first.horario.dia) %> às <%= hora(@matricula.aulas.first.horario.horario) %>)</b>
       </div>
+      <% end %>
     </div>
   <% end %>
   <%= hidden_field :teorica, :horario_id %>

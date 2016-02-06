@@ -55,7 +55,7 @@ class MatriculasController < ApplicationController
         gera_contrato(@matricula)
 
         format.html { redirect_to @matricula, notice: "Matricula criada com sucesso. O contrato pode ser acessado em 
-          \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
+          \"/Contratos/#{@matricula.data_matricula.to_date.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
         format.json { render action: 'show', status: :created, location: @matricula }
       else
         format.html { render action: 'new' }
@@ -105,8 +105,8 @@ class MatriculasController < ApplicationController
 
         gera_contrato(@matricula)
 
-        format.html { redirect_to @matricula, notice: "Dados do matricula foram atualizados com sucesso. O novo contrato foi 
-          gerado em \"/Contratos/#{Time.now.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
+        format.html { redirect_to @matricula, notice: "O contrato foi gerado com sucesso e pode ser acessado em 
+          \"/Contratos/#{@matricula.data_matricula.to_date.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -241,8 +241,8 @@ class MatriculasController < ApplicationController
       doc.bookmarks['aluno_telefone'].insert_text_after(matricula.aluno.cliente.telefone)
       doc.bookmarks['aluno_celular'].insert_text_after(matricula.aluno.celular)
       doc.bookmarks['curso_nome2'].insert_text_after(matricula.curso.nome.upcase)
-      doc.bookmarks['valor_total'].insert_text_after(number_to_currency(matricula.valor_mensal * (13 - Date.today.month) + 100))
-      doc.bookmarks['valor_mensal'].insert_text_after(number_to_currency(matricula.valor_mensal))
+      doc.bookmarks['valor_total'].insert_text_after(number_to_currency(matricula.valor_mensal * (13 - matricula.data_matricula.month) + 100))
+      doc.bookmarks['parcelas2'].insert_text_after(13 - matricula.data_matricula.month)
       doc.bookmarks['data_matricula'].insert_text_after(I18n.l(matricula.data_matricula.to_date, :format => :long))
       # página 2
       doc.bookmarks['cliente_id2'].insert_text_after(matricula.aluno.cliente.id)
