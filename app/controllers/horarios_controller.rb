@@ -21,18 +21,22 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
     horarios = params[:horario][:horario]
     horarios.shift
     erro = false
-    horarios.each do |horario|
+    unless horarios[0].nil?
+      horarios.each do |horario|
+        @horario = Horario.new(horario_params)
+        @horario.horario = horario
+        @horario.save ? gera_notificacao("admin",@horario, action_name) : erro = true
+      end
+    else
       @horario = Horario.new(horario_params)
-      @horario.horario = horario
+      @horario.horario = params[:diferenciado][:horario]
       @horario.save ? gera_notificacao("admin",@horario, action_name) : erro = true
     end
     respond_to do |format|
       unless erro
         format.html { redirect_to controlar_horarios_path(id: @horario.professor_id), notice: "Horários cadastrados com sucesso." }
-        format.json { render action: 'show', status: :created, location: @horario }
       else
-        format.html { render action: 'new', alert: "Houve um erro ao tentar cadastrar os horários." }
-        format.json { render json: @horario.errors, status: :unprocessable_entity }
+        format.html { redirect_to disponivel_path(professor_id: params[:horario][:professor_id]), alert: "Houve um erro ao tentar cadastrar os horários." }
       end
     end
   end
@@ -43,10 +47,8 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
         gera_notificacao("admin",@horario, action_name)
         format.html { redirect_to @horario.professor, notice: "Horário #{dia(@horario.dia)} - 
         #{hora(@horario.horario)} foram atualizados com sucesso." }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @horario.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,7 +60,6 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
       if @horario.destroy
         gera_notificacao("admin",@horario, action_name)
         format.html { redirect_to controlar_horarios_path(id: @horario.professor_id)}
-        format.json { head :no_content }
       else
         format.html { redirect_to @horario.professor, alert: "Não foi possível excluir o horário pois existem matrículas atreladas a ele."}
       end
@@ -71,7 +72,6 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
         format.html { redirect_to horarios_path, notice: "Sala desvinculada com sucesso." }
       else
         format.html { redirect_to horarios_path, alert: "Erro ao tentar desvincular a sala." }
-        format.json { render json: @horario.errors, status: :unprocessable_entity }
       end
     end
   end

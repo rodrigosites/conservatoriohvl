@@ -46,7 +46,7 @@
     <div style="float: left; margin-right: 10px;">
       <%= collection_select(:professor, :id, [], :id, :nome, { prompt: 'Primeiro selecione o curso...' }, class: "form-control")%>
     </div>
-    <% if action_name == "edit" %>
+    <% if action_name == "edit" && @matricula.aulas.size > 0 %>
     <div style="float: left; margin-right: 10px;">
       <b style="color: red">(<%= @matricula.aulas.first.horario.professor.nome %>)</b>
     </div>
@@ -59,10 +59,10 @@
       <div style="float: left; margin-right: 10px;">
         <%= u.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor...' }, {class: "form-control"} %>
       </div>
-      <% if action_name == "edit" %>
-      <div style="float: left; margin-right: 10px;">
-        <b style="color: red">(<%= dia(@matricula.aulas.first.horario.dia) %> às <%= hora(@matricula.aulas.first.horario.horario) %>)</b>
-      </div>
+      <% if action_name == "edit" && @matricula.aulas.first.try(:horario) %>
+        <div style="float: left; margin-right: 10px;">
+          <b style="color: red">(<%= dia(@matricula.aulas.first.horario.dia) %> às <%= hora(@matricula.aulas.first.horario.horario) %>)</b>
+        </div>
       <% end %>
     </div>
   <% end %>
@@ -71,7 +71,7 @@
     <div style="float: left; margin-right: 10px;">
       <%= select(:tipo,:teoria, options_for_select([["Teoria"],["Musicalização Infantil"]]), { prompt: "Selecione o tipo de teoria..." }, class: "form-control") %>
     </div>
-    <% if action_name == "edit" %>
+    <% if action_name == "edit" && @matricula.aulas.first.try(:horario)  %>
     <div style="float: left; margin-right: 10px;">
       <% if @matricula.aulas.second.teoria %>
         <b style="color: red">(Teoria)</b>
@@ -86,9 +86,9 @@
     <div style="float: left; margin-right: 10px;">
       <%= f.select :teoria_ano, [], { prompt: "Selecione o tipo de teoria..." }, class: "form-control" %>
     </div>
-    <% if action_name == "edit" %>
+    <% if action_name == "edit" && @matricula.aulas.first.try(:horario) && (@matricula.aulas.second.teoria || @matricula.aulas.second.musicalizacao) %>
     <div style="float: left; margin-right: 10px;">
-       <b style="color: red">(<%= @matricula.teoria_ano %>)</b>
+      <b style="color: red">(<%= @matricula.teoria_ano %>)</b>
     </div>
     <% end %>
   </div>
@@ -97,11 +97,9 @@
     <div style="float: left; margin-right: 10px;">
       <%= collection_select(:professor_teoria, :id, [], :id, :nome, { prompt: 'Selecione o professor de teoria...'}, class: "form-control")%>
     </div>
-    <% if action_name == "edit" %>
+    <% if action_name == "edit" && @matricula.aulas.first.try(:horario) && (@matricula.aulas.second.teoria || @matricula.aulas.second.musicalizacao) %>
     <div style="float: left; margin-right: 10px;">
-      <% if @matricula.aulas.second.teoria || @matricula.aulas.second.musicalizacao %>
-        <b style="color: red">(<%= @matricula.aulas.second.horario.professor.nome %>)</b>
-      <% end %>
+      <b style="color: red">(<%= @matricula.aulas.second.horario.professor.nome %>)</b>
     </div>
     <% end %>
   </div>
@@ -113,9 +111,9 @@
       <div style="float: left; margin-right: 10px;">
         <%= v.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor de teoria...' }, {class: "form-control"} %>
       </div>
-      <% if action_name == "edit" %>
+      <% if action_name == "edit" && (@matricula.aulas.second.teoria || @matricula.aulas.second.musicalizacao) %>
       <div style="float: left; margin-right: 10px;">
-        <b style="color: red">(<%= dia(@matricula.aulas.second.horario.dia) %> às <%= hora(@matricula.aulas.second.horario.horario) %>)</b>
+          <b style="color: red">(<%= dia(@matricula.aulas.second.horario.dia) %> às <%= hora(@matricula.aulas.second.horario.horario) %>)</b>
       </div>
       <% end %>
     </div>

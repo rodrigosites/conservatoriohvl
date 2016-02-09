@@ -8,6 +8,7 @@
   </div>
     <ul class="list-group">
       <li class="list-group-item"><b>Aluno:</b> <%= @matricula.aluno.nome %></li>
+      <li class="list-group-item"><b>Vinculado ao Cliente:</b> <%= @matricula.aluno.cliente.id %> - <%= @matricula.aluno.cliente.nome %></li>
       <li class="list-group-item"><b>Curso Principal:</b> <%= @matricula.curso.nome  %></li>
       <li class="list-group-item"><b>Ano do Curso Principal:</b> <%= @matricula.ano %>º Ano</li>
       <li class="list-group-item"><b>Professor do Curso Principal:</b> <%= @matricula.aulas.first.horario.professor.nome %></li>

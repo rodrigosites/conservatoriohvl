@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Matrículas Encerradas <small>// matrículas encerradas: <%= @inativas.size %></small></h2>
+  <h2>Lista de Matrículas Encerradas <small>// matrículas encerradas: <%= Matinativa.all.size %></small></h2>
 </div>
 
 <%= form_tag request.path, :method => 'get' do %>
@@ -19,6 +19,7 @@
       <th>Valor Mensal</th>
       <th>Data da Matrícula</th>
       <th>Encerramento da Matrícula</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -31,7 +32,8 @@
         <td><%= matricula.teoria_ano == 0 || matricula.teoria_ano == 99 ? "-" : "#{matricula.teoria_ano}º Ano" %></td>
         <td><%= number_to_currency(matricula.valor_mensal) %></td>
         <td><%= I18n.l(matricula.data_matricula.to_date) %></td>
-        <td><%= I18n.l(matricula.termino_matricula.to_date) %></td>      
+        <td><%= I18n.l(matricula.termino_matricula.to_date) %></td>
+        <td><%= button_to 'Reativar Matrícula', reativar_matricula_path(matricula), :class => "btn btn-primary btn-xs", :method => :get, data: { confirm: "Tem certeza que deseja reativar a matrícula nº #{matricula.id} - #{matricula.aluno.nome}?" } %></td>    
       </tr>
     <% end %>
   </tbody>

@@ -59,60 +59,76 @@ class MatriculasController < ApplicationController
         format.json { render action: 'show', status: :created, location: @matricula }
       else
         format.html { render action: 'new' }
-        format.json { render json: @matricula.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
-    respond_to do |format|
-      if @matricula.update(matricula_params)
-        gera_notificacao("admin",@matricula, action_name)
-        # verifica se o curso antes era apenas teoria e se tornou agora na edição pratica/teoria, sendo o caso corrige a primeira aula da matricula para pratica
-        unless @matricula.curso == "Teoria" || @matricula.curso == "Musicalização Infantil"
-          @matricula.aulas.first.update_attribute(:teoria,false)
-          @matricula.aulas.first.update_attribute(:musicalizacao,false)
+    if @matricula.update(matricula_params)
+      gera_notificacao("admin",@matricula, action_name)
+      # no caso de reativação de matrícula, a aula precisa ser criada novamente.
+      if @matricula.aulas.size < 1
+        @aula = Aula.new
+        @aula.horario_id = params[:pratica][:horario_id]
+        @aula.matricula_id = @matricula.id
+        if @matricula.curso.nome == "Teoria"
+          @aula.teoria = true
+        elsif @matricula.curso.nome == "Musicalização Infantil"
+          @aula.musicalizacao = true
         end
-        @matricula.aulas.each do |aula|
-          if aula.teoria
-            aula.update_attribute(:horario_id,params[:teorica][:horario_id])
-          elsif aula.musicalizacao
-            aula.update_attribute(:horario_id,params[:teorica][:horario_id])
-          else            
-            aula.update_attribute(:horario_id,params[:pratica][:horario_id])
-          end
+        @aula.save
+      end
+      # atualiza a associação passando (true) como argumento
+      @matricula.aulas(true) 
+      # verifica se o curso antes era apenas teoria e se tornou agora na edição pratica/teoria, sendo o caso corrige a primeira aula da matricula para pratica
+      unless @matricula.curso.nome == "Teoria" || @matricula.curso.nome == "Musicalização Infantil"
+        @matricula.aulas.first.update_attribute(:teoria,false)
+        @matricula.aulas.first.update_attribute(:musicalizacao,false)
+      else
+        # ao contrário, se o curso virou apenas teoria, remove a segunda aula
+        if @matricula.aulas.size > 1
+          @matricula.aulas.last.destroy
         end
-        # verifica se já havia um horário de teoria cadastrado para o curso na tabela many_to_many e se não tinha, cria o horário
-        if params[:teorica][:horario_id] && @matricula.aulas.size == 1
-          @aula = Aula.new
-          @aula.horario_id = params[:teorica][:horario_id]
-          @aula.matricula_id = @matricula.id
-          if params[:teorica][:teoria] == "Teoria"
-            @aula.teoria = true
-          elsif params[:teorica][:teoria] == "Musicalização Infantil"
-            @aula.musicalizacao = true
-          end
-          @aula.save
+      end
+      @matricula.aulas.each do |aula|
+        if (aula.teoria || aula.musicalizacao) && @matricula.aulas.size > 1 #@matricula.valor_mensal > Circular.where(vigente: true).first.valor_extra
+          aula.update_attribute(:horario_id,params[:teorica][:horario_id])
+        else            
+          aula.update_attribute(:horario_id,params[:pratica][:horario_id])
         end
-        # verifica a mudança de tipo de teoria na alteração
-        if params[:teorica][:teoria] == "Teoria" && @matricula.aulas.last.musicalizacao
-            @matricula.aulas.last.update_attribute(:teoria,true)
-            @matricula.aulas.last.update_attribute(:musicalizacao,false)
-        elsif params[:teorica][:teoria] == "Musicalização Infantil" && @matricula.aulas.last.teoria
-            @matricula.aulas.last.update_attribute(:musicalizacao,true)
-            @matricula.aulas.last.update_attribute(:teoria,false)
+      end
+      # verifica se já havia um horário de teoria cadastrado para o curso na tabela many_to_many e se não tinha, cria o horário
+      if params[:teorica][:horario_id] && @matricula.aulas.size == 1
+        @aula = Aula.new
+        @aula.horario_id = params[:teorica][:horario_id]
+        @aula.matricula_id = @matricula.id
+        if params[:teorica][:teoria] == "Teoria"
+          @aula.teoria = true
+        elsif params[:teorica][:teoria] == "Musicalização Infantil"
+          @aula.musicalizacao = true
         end
-
-        gera_contrato(@matricula)
-
+        @aula.save
+        # atualiza a associação passando (true) como argumento
+        @matricula.aulas(true) 
+      end
+      # verifica a mudança de tipo de teoria na alteração
+      if params[:teorica][:teoria] == "Teoria" && @matricula.aulas.last.musicalizacao
+        @matricula.aulas.last.update_attribute(:teoria,true)
+        @matricula.aulas.last.update_attribute(:musicalizacao,false)
+      elsif params[:teorica][:teoria] == "Musicalização Infantil" && @matricula.aulas.last.teoria
+        @matricula.aulas.last.update_attribute(:musicalizacao,true)
+        @matricula.aulas.last.update_attribute(:teoria,false)
+      end
+      gera_contrato(@matricula)
+      respond_to do |format|
         format.html { redirect_to @matricula, notice: "O contrato foi gerado com sucesso e pode ser acessado em 
           \"/Contratos/#{@matricula.data_matricula.to_date.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @matricula.errors, status: :unprocessable_entity }
       end
-    end
+      else
+        respond_to do |format|
+          format.html { render action: 'edit' }
+        end
+      end
   end
 
   # DELETE /users/1
@@ -132,7 +148,6 @@ class MatriculasController < ApplicationController
       @matricula.destroy
       respond_to do |format|
         format.html { redirect_to matriculas_path }
-        format.json { head :no_content }
       end
     end
   end
@@ -197,6 +212,24 @@ class MatriculasController < ApplicationController
 
   def rematricular
     @circular = Circular.where(vigente: true).first
+  end
+
+  def reativar_matricula
+    @inativa = Matinativa.find(params[:id])
+    @matricula = Matricula.new
+    @matricula.id =  @inativa.id_ativa
+    @matricula.aluno_id = @inativa.aluno_id
+    @matricula.curso_id = @inativa.curso_id
+    @matricula.data_matricula = @inativa.data_matricula
+    @matricula.ano = @inativa.ano
+    @matricula.teoria_ano = @inativa.teoria_ano
+    @matricula.valor_mensal = @inativa.valor_mensal
+    if @matricula.save
+      @inativa.destroy
+      respond_to do |format|
+        format.html { redirect_to edit_matricula_path(@matricula), notice: "Matrícula nº #{@matricula.id} - #{@matricula.aluno.nome} reativada com sucesso." }
+      end
+    end
   end
   
   private
