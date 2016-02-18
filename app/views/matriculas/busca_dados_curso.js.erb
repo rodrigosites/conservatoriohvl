@@ -1,7 +1,18 @@
 $('#matricula_ano').empty();
 $('#matricula_ano').append( $('<option value>Selecione o ano</option>'));
-<% for i in 1..@curso.anos %>
-	$('#matricula_ano').append($('<option value="<%= i %>"><%= i %>º Ano</option>'));
+<% unless @curso.nome == "Musicalização Infantil" %>
+	<% for i in 1..@curso.anos %>
+		$('#matricula_ano').append($('<option value="<%= i %>"><%= i %>º Ano</option>'));
+	<% end %>
+<% else %>
+	$('#matricula_ano').append($('<option value="1">Baby</option>'));
+	$('#matricula_ano').append($('<option value="2">First 1</option>'));
+	$('#matricula_ano').append($('<option value="3">First 2</option>'));
+	$('#matricula_ano').append($('<option value="4">Módulo 1</option>'));
+	$('#matricula_ano').append($('<option value="5">Módulo 2</option>'));
+	$('#matricula_ano').append($('<option value="6">Módulo 3</option>'));
+	$('#matricula_ano').append($('<option value="7">Módulo 4</option>'));
+	$('#matricula_ano').append($('<option value="8">Módulo 5</option>'));
 <% end %>
 if ($('#tipo_teoria').length) 
 	$('#matricula_valor_mensal').val("<%= @curso.basico? ? Circular.where(vigente: true).first.valor_mensalidade : Circular.where(vigente: true).first.valor_profissionalizante %>")

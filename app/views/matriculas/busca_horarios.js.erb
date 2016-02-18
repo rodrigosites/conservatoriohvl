@@ -7,11 +7,9 @@ $('#pratica_horario_id').append( $('<option value>Selecione um horário</option>
 	  <% if !horario.matriculas.any? %>
 	  	<% tem_horario = true %>
 	  	$('#pratica_horario_id').append($('<option value="<%= horario.id %>"><%= dia(horario.dia) %> - <%= hora(horario.horario) %> até <%= hora(horario.horario+50*60) %></option>'));
-	  <% elsif horario.matriculas.where(curso_id: @curso.id).any? %>
-	  	<% unless horario.aulas.first.teoria || horario.aulas.first.musicalizacao %>
+	  <% elsif horario.matriculas.where(curso_id: @curso.id).any? && !(horario.aulas.first.teoria || horario.aulas.first.musicalizacao) %>
 	  		<% tem_horario = true %>
 	  		$('#pratica_horario_id').append($('<option value="<%= horario.id %>"><%= dia(horario.dia) %> - <%= hora(horario.horario) %> até <%= hora(horario.horario+50*60) %> - Classe</option>'));
-	  	<% end %>
 	  <% elsif @curso.nome == "Teoria" && horario.aulas.where(teoria: true).any? %>
 	  		<% tem_horario = true %>
 	  		$('#pratica_horario_id').append($('<option value="<%= horario.id %>"><%= dia(horario.dia) %> - <%= hora(horario.horario) %> até <%= hora(horario.horario+50*60) %> - Classe</option>'));

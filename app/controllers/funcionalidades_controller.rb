@@ -22,7 +22,7 @@ class FuncionalidadesController < ApplicationController
       @aulas.sort! { |a,b| a.horario.horario <=> b.horario.horario }
     end
 
-    if Date.today.day > 28 && !FolhaPagamento.where(mes: Date.today.month, ano: Date.today.year).any?
+    if Date.today.day >= 28 && !FolhaPagamento.where(mes: Date.today.month, ano: Date.today.year).any?
       @folha = true
     end
   end

@@ -12,20 +12,24 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Nº</th>
       <th>Nome</th>
       <th>CPF</th>
       <th>Telefone</th>
       <th>Celular</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @inativos.each do |cliente| %>
       <tr>
+        <td><%= cliente.id_ativo %></td>
         <td><%= cliente.nome %></td>
         <td><%= cliente.cpf %></td>
         <td><%= cliente.telefone %></td>
         <td><%= cliente.celular %></td>
+        <td><%= button_to 'Reativar Cliente', reativar_cliente_path(cliente), :class => "btn btn-primary btn-xs", :method => :get, data: { confirm: "Tem certeza que deseja reativar o cliente nº #{cliente.id_ativo} - #{cliente.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>

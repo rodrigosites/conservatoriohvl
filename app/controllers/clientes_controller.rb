@@ -83,6 +83,34 @@ class ClientesController < ApplicationController
     @inativos = ClientesInativo.search(params[:search], params[:page])
   end
 
+  def reativar_cliente
+    @inativo = ClientesInativo.find(params[:id])
+    @cliente = Cliente.new
+    @cliente.id = @inativo.id_ativo
+    @cliente.nome = @inativo.nome
+    @cliente.endereco = @inativo.endereco
+    @cliente.rg = @inativo.rg
+    @cliente.cpf = @inativo.cpf
+    @cliente.telefone = @inativo.telefone
+    @cliente.celular = @inativo.celular
+    @cliente.email = @inativo.email
+    @cliente.nascimento = @inativo.nascimento
+    @cliente.bairro = @inativo.bairro
+    @cliente.cidade = @inativo.cidade
+    @cliente.uf = @inativo.uf
+    @cliente.cep = @inativo.cep
+    @cliente.pai = @inativo.pai
+    @cliente.mae = @inativo.mae
+    @cliente.nacionalidade = @inativo.nacionalidade
+    @cliente.profissao = @inativo.profissao
+    if @cliente.save
+      @inativo.destroy
+      respond_to do |format|
+        format.html { redirect_to @cliente, notice: "Cliente nº #{@cliente.id} - #{@cliente.nome} reativado com sucesso." }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cliente
