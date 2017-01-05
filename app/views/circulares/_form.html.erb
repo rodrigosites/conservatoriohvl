@@ -16,7 +16,7 @@
   </div>
   <div class="form-group">
     <%= f.label "Data da Circular:", class: "col-sm-0 control-label" %><br />
-    <%= f.text_field :data_circular, class: "form-control", value: (data(@circular.data_circular)) %>
+    <%= f.text_field :data_circular, class: "form-control", value: (@circular.data_circular ? data(@circular.data_circular) : '' ) %>
   </div>
   <div class="form-group">
     <%= f.label "Valor Mensal do Curso Básico:", class: "col-sm-0 control-label" %><br />

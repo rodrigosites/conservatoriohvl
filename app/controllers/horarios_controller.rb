@@ -59,7 +59,7 @@ before_action :set_horario, only: [:show, :edit, :update, :destroy, :remove_sala
     respond_to do |format|
       if @horario.destroy
         gera_notificacao("admin",@horario, action_name)
-        format.html { redirect_to controlar_horarios_path(id: @horario.professor_id)}
+        format.html { redirect_to controlar_horarios_path(id: @horario.professor_id) }
       else
         format.html { redirect_to @horario.professor, alert: "Não foi possível excluir o horário pois existem matrículas atreladas a ele."}
       end

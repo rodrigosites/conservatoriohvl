@@ -43,6 +43,7 @@ Conservatoriohvl::Application.routes.draw do
   get 'professor/:horario_id/alunos_horario' => 'professores#alunos_horario', as: :alunos_horario
   get 'visualiza_folha', to: "funcionalidades#visualiza_folha"
   get 'rematricular', to: "matriculas#rematricular"
+  get 'rematricular_base', to: "matriculas#rematricular_base"
   get 'reativar_matricula/:id', to: "matriculas#reativar_matricula", as: :reativar_matricula
   get 'reativar_cliente/:id', to: "clientes#reativar_cliente", as: :reativar_cliente
 

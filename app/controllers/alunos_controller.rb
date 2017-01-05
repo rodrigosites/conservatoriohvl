@@ -67,6 +67,7 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
       @inativo.pai = @aluno.pai
       @inativo.mae = @aluno.mae
       @inativo.nacionalidade = @aluno.nacionalidade
+      @inativo.desde = @aluno.desde
       @inativo.id_ativo = @aluno.id
       if @inativo.save
         @aluno.destroy
@@ -95,6 +96,6 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def aluno_params
-      params.require(:aluno).permit(:cliente_id, :nome, :rg, :cpf, :celular, :nascimento, :pai, :mae, :nacionalidade)
+      params.require(:aluno).permit(:cliente_id, :nome, :rg, :cpf, :celular, :nascimento, :pai, :mae, :nacionalidade, :desde)
     end
 end

@@ -11,6 +11,7 @@ $(document).on 'ready page:load', (evt) ->
   $('#aluno_cep').mask('00000-000');
   $('#aluno_uf').mask('AA');
   $('#aluno_nascimento').mask('00/00/0000');
+  $('#aluno_desde').mask('00/00/0000');
 
 # Monitora o checkbox e requisita via Ajax os dados do cliente selecionado no select
 $(document).on 'change', '#aluno_cliente', (evt) ->
@@ -38,3 +39,4 @@ $(document).on 'change', '#aluno_cliente', (evt) ->
 		$('#aluno_pai').val('')
 		$('#aluno_mae').val('')
 		$('#aluno_profissao').val('')
+		$('#aluno_desde').val('')

@@ -42,6 +42,10 @@ class Aluno < ActiveRecord::Base
     super s.titleize
   end
 
+  def desde=(s)
+    super s.titleize
+  end
+
   def self.search(search, page)
     paginate :per_page => 10, :page => page, :order => 'nome',
              :conditions => ['nome like ?', "%#{search}%"]
