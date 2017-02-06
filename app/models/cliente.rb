@@ -1,6 +1,6 @@
 class Cliente < ActiveRecord::Base
   #associações no banco de dados
-  has_many :alunos, :dependent => :destroy
+  has_many :alunos
 
   #validações
   validates :cpf,:rg, uniqueness: true

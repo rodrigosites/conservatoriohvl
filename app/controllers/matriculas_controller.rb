@@ -230,7 +230,7 @@ class MatriculasController < ApplicationController
       @inativa.save
       #atualiza a data de matricula para a data desejada
       matricula.update_attribute(:data_matricula, params[:data])
-      if matricula.teoria_ano != 99
+      if matricula.teoria_ano != 99 || matricula.curso.nome == "Musicalização Infantil" || matricula.curso.nome == "Teoria"
         if matricula.curso.basico?
           mensalidade = Circular.where(vigente: true).first.valor_mensalidade
         else

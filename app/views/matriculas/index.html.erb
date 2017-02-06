@@ -32,8 +32,54 @@
         <td><%= matricula.id %></td>
         <td><%= matricula.aluno.nome %></td>
         <td><%= matricula.curso.nome %></td>
-        <td><%= matricula.ano %>º Ano</td>
-        <td><%= matricula.teoria_ano == 0 || matricula.teoria_ano == 99 ? "-" : "#{matricula.teoria_ano}º Ano" %></td>
+        <td>
+        <% if matricula.curso.nome == "Musicalização Infantil" %>
+          <% case matricula.ano %>
+              <% when 1 %>
+                Baby
+              <% when 2 %>
+                First 1
+              <% when 2 %>
+                First 2
+              <% when 3 %>
+                Módulo 1
+              <% when 4 %>
+                Módulo 2
+              <% when 5 %>
+                Módulo 3
+              <% when 6 %>
+                Módulo 4
+              <% when 7 %>
+                Módulo 5
+            <% end %>
+        <% else %>
+          <%= matricula.ano %>º Ano
+        <% end %>
+        </td>
+        <td>
+        <% if matricula.aulas.size == 1 && matricula.curso.nome == "Musicalização Infantil" || matricula.aulas.size > 1 && matricula.aulas.last.musicalizacao %>
+          <% case matricula.teoria_ano %>
+            <% when 1 %>
+              Baby
+            <% when 2 %>
+              First 1
+            <% when 2 %>
+              First 2
+            <% when 3 %>
+              Módulo 1
+            <% when 4 %>
+              Módulo 2
+            <% when 5 %>
+              Módulo 3
+            <% when 6 %>
+              Módulo 4
+            <% when 7 %>
+              Módulo 5
+          <% end %>
+        <% else %>
+          <%= matricula.teoria_ano == 0 || matricula.teoria_ano == 99 ? "-" : "#{matricula.teoria_ano}º Ano" %>
+        <% end %>
+        </td>
         <td><%= number_to_currency(matricula.valor_mensal) %></td>
         <td><%= I18n.l(matricula.data_matricula.to_date) %></td>
         <td><%= button_to 'Abrir Ficha', matricula, :class => "btn btn-primary btn-xs", :method => :get %></td>

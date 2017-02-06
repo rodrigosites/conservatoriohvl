@@ -64,7 +64,7 @@
     <div style="float: left; margin-right: 10px;">
       <%= collection_select(:professor, :id, [], :id, :nome, { prompt: 'Primeiro selecione o curso...' }, class: "form-control")%>
     </div>
-    <% if action_name == "edit" %>
+    <% if action_name == "edit" && @matricula.aulas.size > 0 %>
     <div style="float: left; margin-right: 10px;">
       <b style="color: red">(<%= @matricula.aulas.first.horario.professor.nome %>)</b>
     </div>
@@ -77,7 +77,7 @@
       <div style="float: left; margin-right: 10px;">
         <%= u.collection_select :horario_id, [], :id, :horario, { prompt: 'Primeiro selecione o professor...' }, {class: "form-control"} %>
       </div>
-      <% if action_name == "edit" %>
+      <% if action_name == "edit" && @matricula.aulas.first.try(:horario) %>
       <div style="float: left; margin-right: 10px;">
         <b style="color: red">(<%= dia(@matricula.aulas.first.horario.dia) %> às <%= hora(@matricula.aulas.first.horario.horario) %>)</b>
       </div>
