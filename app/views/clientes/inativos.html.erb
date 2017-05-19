@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Clientes Inativos <small>// clientes inativos: <%= ClientesInativo.all.size %></small></h2>
+  <h2>Lista de Clientes Inativos <small>// clientes inativos: <%= Cliente.where(ativo: false).size %></small></h2>
 </div>
 
 <%= form_tag request.path, :method => 'get' do %>
@@ -24,12 +24,12 @@
   <tbody>
     <% @inativos.each do |cliente| %>
       <tr>
-        <td><%= cliente.id_ativo %></td>
+        <td><%= cliente.id %></td>
         <td><%= cliente.nome %></td>
         <td><%= cliente.cpf %></td>
         <td><%= cliente.telefone %></td>
         <td><%= cliente.celular %></td>
-        <td><%= button_to 'Reativar Cliente', reativar_cliente_path(cliente), :class => "btn btn-primary btn-xs", :method => :get, data: { confirm: "Tem certeza que deseja reativar o cliente nº #{cliente.id_ativo} - #{cliente.nome}?" } %></td>
+        <td><%= button_to 'Reativar Cliente', alterna_cliente_path(cliente), :class => "btn btn-primary btn-xs", :method => :get, data: { confirm: "Tem certeza que deseja reativar o cliente nº #{cliente.id} - #{cliente.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>

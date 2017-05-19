@@ -54,9 +54,6 @@
       <% end %>
       <li class="list-group-item"><b>Valor Mensal:</b> <%= number_to_currency(@matricula.valor_mensal) %></li>
       <li class="list-group-item"><b>Data da Matrícula:</b> <%= I18n.l(@matricula.data_matricula.to_date) %></li>
-      <% if @matricula.termino_matricula %>
-        <li class="list-group-item"><b>Data de Encerramento da Matrícula:</b> <%= I18n.l(@matricula.termino_matricula.to_date) %></li>
-      <% end %>
     </ul>
 </div>
 

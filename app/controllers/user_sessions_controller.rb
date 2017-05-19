@@ -15,7 +15,9 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    logout
+    #if logged_in? 
+      logout
+    #end
     redirect_to(root_path, notice: 'Desconectado!')
   end
 end

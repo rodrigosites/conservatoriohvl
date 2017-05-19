@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105225355) do
+ActiveRecord::Schema.define(version: 20170518020942) do
 
   create_table "alunos", force: true do |t|
     t.integer  "cliente_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170105225355) do
     t.string   "mae"
     t.string   "nacionalidade"
     t.date     "desde"
+    t.boolean  "ativo"
   end
 
   create_table "alunos_inativos", force: true do |t|
@@ -93,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170105225355) do
     t.string   "mae"
     t.string   "nacionalidade"
     t.string   "profissao"
+    t.boolean  "ativo"
   end
 
   create_table "clientes_inativos", force: true do |t|
@@ -164,13 +166,16 @@ ActiveRecord::Schema.define(version: 20170105225355) do
     t.integer  "id_ativa"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "professor_id"
+    t.integer  "professor_teoria_id"
+    t.integer  "dia_pratica"
+    t.integer  "dia_teoria"
   end
 
   create_table "matriculas", force: true do |t|
     t.integer  "aluno_id"
     t.integer  "curso_id"
     t.datetime "data_matricula"
-    t.datetime "termino_matricula"
     t.integer  "ano"
     t.float    "valor_mensal"
     t.integer  "teoria_ano"
@@ -208,6 +213,7 @@ ActiveRecord::Schema.define(version: 20170105225355) do
     t.string   "profissao"
     t.string   "escolaridade"
     t.float    "valor_aula"
+    t.boolean  "ativo"
   end
 
   create_table "professores_inativos", force: true do |t|

@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Clientes <small>// clientes cadastrados: <%= Cliente.all.size %></small></h2>
+  <h2>Lista de Clientes <small>// clientes cadastrados: <%= Cliente.where(ativo: true).size %></small></h2>
 </div>
 
 <%= form_tag request.path, :method => 'get' do %>
@@ -31,7 +31,7 @@
         <td><%= cliente.celular %></td>
         <td><%= button_to "Abrir a Ficha", cliente, :class => "btn btn-primary btn-xs", :method => :get  %></td>
         <td><%= button_to "Editar Dados", edit_cliente_path(cliente), :class => "btn btn-primary btn-xs", :method => :get %></td>
-        <td><%= button_to "Excluir Cliente", cliente, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o cliente #{cliente.nome}? Fazer isso excluirá todos os alunos vinculados." } %></td>
+        <td><%= button_to "Excluir Cliente", alterna_cliente_path(cliente), :class => "btn btn-primary btn-xs", :method => :get, data: { confirm: "Tem certeza que deseja excluir o cliente #{cliente.nome}? Fazer isso excluirá todos os alunos vinculados." } %></td>
       </tr>
     <% end %>
   </tbody>

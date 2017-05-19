@@ -1,9 +1,15 @@
 # coding: utf-8
 class AlunosController < ApplicationController
-before_action :set_aluno, only: [:show, :edit, :update, :destroy]
+before_action :set_aluno, only: [:show, :edit, :update, :destroy, :alterna_aluno]
 
   def index
-    @alunos = Aluno.search(params[:search], params[:page])
+    @alunos = Aluno.search(params[:search], params[:page], true)
+=begin
+    #remover após alterar sistema com o atributo "ativo"
+    @alunos.each do |aluno|
+      aluno.update_attribute(:ativo, true) unless aluno.ativo?
+    end
+=end
   end
 
   def show
@@ -50,27 +56,7 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
     if @aluno.matriculas.any?
       redirect_to alunos_path, alert: "Não foi possível excluir o(a) aluno(a) #{@aluno.nome}. Primeiro você precisa encerrar as matrículas vinculadas."
     else
-      @inativo = AlunosInativo.new
-      @inativo.cliente_id = @aluno.cliente_id
-      @inativo.nome = @aluno.nome
-      @inativo.endereco = @aluno.cliente.endereco
-      @inativo.rg = @aluno.rg
-      @inativo.cpf = @aluno.cpf
-      @inativo.telefone = @aluno.cliente.telefone
-      @inativo.celular = @aluno.celular
-      @inativo.email = @aluno.cliente.email
-      @inativo.nascimento = @aluno.nascimento
-      @inativo.bairro = @aluno.cliente.bairro
-      @inativo.cidade = @aluno.cliente.cidade
-      @inativo.uf = @aluno.cliente.uf
-      @inativo.cep = @aluno.cliente.cep
-      @inativo.pai = @aluno.pai
-      @inativo.mae = @aluno.mae
-      @inativo.nacionalidade = @aluno.nacionalidade
-      @inativo.desde = @aluno.desde
-      @inativo.id_ativo = @aluno.id
-      if @inativo.save
-        @aluno.destroy
+      if @aluno.destroy
         gera_notificacao("admin",@aluno, action_name)
         respond_to do |format|
           format.html { redirect_to alunos_path}
@@ -80,8 +66,41 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy]
     end
   end
 
+  def alterna_aluno
+    if @aluno.ativo?
+      if @aluno.matriculas.any?
+        redirect_to alunos_path, alert: "Exclusão cancelada. O aluno #{@aluno.nome} tem matriculas vinculadas. Favor encerrar as matriculas."
+        return
+      else  
+        @aluno.update_attribute(:ativo, false)
+      end
+    else
+      @aluno.update_attribute(:ativo, true)
+    end
+    redirect_to alunos_path, notice: "Status do aluno #{@aluno.nome} alterado com sucesso."
+  end
+
   def inativos
-    @inativos = AlunosInativo.search(params[:search], params[:page])
+    @inativos = Aluno.search(params[:search], params[:page], false)
+=begin
+    #remover após alterar sistema com o atributo "ativo"
+    @inativos.each do |inativo|
+      @aluno = Aluno.new
+      @aluno.id = inativo.id_ativo
+      @aluno.cliente_id = inativo.cliente_id
+      @aluno.nome = inativo.nome
+      @aluno.rg = inativo.rg
+      @aluno.cpf = inativo.cpf
+      @aluno.celular = inativo.celular
+      @aluno.nascimento = inativo.nascimento
+      @aluno.pai = inativo.pai
+      @aluno.mae = inativo.mae
+      @aluno.nacionalidade = inativo.nacionalidade
+      @aluno.desde = inativo.desde
+      @aluno.ativo = false
+      @aluno.save
+    end
+=end
   end
 
   def busca_dados_cliente

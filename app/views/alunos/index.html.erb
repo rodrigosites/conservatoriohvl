@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Alunos <small>// alunos cadastrados: <%= Aluno.all.size %></small></h2>
+  <h2>Lista de Alunos <small>// alunos cadastrados: <%= Aluno.where(ativo: true).size %></small></h2>
 </div>
 
 <%= form_tag request.path, :method => 'get' do %>
@@ -31,7 +31,7 @@
         <td><%= aluno.matriculas.size %>
         <td><%= button_to "Abrir a Ficha", aluno, :class => "btn btn-primary btn-xs", :method => :get %></td>
         <td><%= button_to "Editar Dados", edit_aluno_path(aluno), :class => "btn btn-primary btn-xs", :method => :get %></td>
-        <td><%= button_to "Excluir Aluno", aluno, :class => "btn btn-primary btn-xs", :method => :delete, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
+        <td><%= button_to 'Excluir', alterna_aluno_path(aluno), :class => "btn btn-primary btn-xs", :method => :get, data: { confirm: "Tem certeza que deseja excluir o aluno #{aluno.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>

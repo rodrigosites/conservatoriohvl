@@ -5,11 +5,11 @@
 <div class="form-inline">
   <div class="form-group">
     <label for="folhapagamento_mes">Mês:</label>
-    <%= collection_select(:folhapagamento, :mes, FolhaPagamento.select('mes').uniq, :mes, :mes, { prompt: 'Selecione o mês...' }, class: "form-control")%>
+    <%= collection_select(:folhapagamento, :mes, @meses, :to_s, :to_s, { prompt: 'Selecione o mês...' }, class: "form-control")%>
   </div>
   <div class="form-group">
     <label for="folhapagamento_ano">Ano:</label>
-    <%= collection_select(:folhapagamento, :ano, FolhaPagamento.select('ano').uniq, :ano, :ano, { prompt: 'Selecione o mês...' }, class: "form-control")%>
+    <%= collection_select(:folhapagamento, :ano, @anos.uniq, :to_s, :to_s, { prompt: 'Selecione o mês...' }, class: "form-control")%>
   </div>
   <div class="form-group">
     <button id="button" class="btn btn-primary btn-sm" disabled="true">Visualizar</button>

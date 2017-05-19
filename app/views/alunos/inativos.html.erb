@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Lista de Alunos Inativos <small>// alunos inativos: <%= AlunosInativo.all.size %></small></h2>
+  <h2>Lista de Alunos Inativos <small>// alunos inativos: <%= Aluno.where(ativo: false).size %></small></h2>
 </div>
 
 <%= form_tag request.path, :method => 'get' do %>
@@ -16,6 +16,7 @@
       <th>CPF</th>
       <th>Telefone</th>
       <th>Celular</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -24,8 +25,9 @@
       <tr>
         <td><%= aluno.nome %></td>
         <td><%= aluno.cpf %></td>
-        <td><%= aluno.telefone %></td>
+        <td><%= aluno.cliente.telefone %></td>
         <td><%= aluno.celular %></td>
+        <td><%= button_to 'Reativar', alterna_aluno_path(aluno), :class => "btn btn-primary btn-xs", :method => :get, data: { confirm: "Tem certeza que deseja reativar o aluno #{aluno.nome}?" } %></td>
       </tr>
     <% end %>
   </tbody>

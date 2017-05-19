@@ -1,9 +1,15 @@
 # coding: utf-8
 class ClientesController < ApplicationController
-  before_action :set_cliente, only: [:show, :edit, :update, :destroy]
+  before_action :set_cliente, only: [:show, :edit, :update, :destroy, :alterna_cliente]
 
   def index
-    @clientes = Cliente.search(params[:search], params[:page])
+    @clientes = Cliente.search(params[:search], params[:page], true)
+=begin
+    #remover após alterar sistema com o atributo "ativo"
+    @clientes.each do |cliente|
+      cliente.update_attribute(:ativo, true) unless cliente.ativo?
+    end
+=end
   end
 
   def show
@@ -49,27 +55,8 @@ class ClientesController < ApplicationController
   def destroy
     if @cliente.alunos.any?
       redirect_to clientes_path, alert: "Não foi possível excluir o(a) cliente #{@cliente.nome}. Primeiro você precisa excluir os alunos vinculadas."
-      else
-      @inativo = ClientesInativo.new
-      @inativo.nome = @cliente.nome
-      @inativo.endereco = @cliente.endereco
-      @inativo.rg = @cliente.rg
-      @inativo.cpf = @cliente.cpf
-      @inativo.telefone = @cliente.telefone
-      @inativo.celular = @cliente.celular
-      @inativo.email = @cliente.email
-      @inativo.nascimento = @cliente.nascimento
-      @inativo.bairro = @cliente.bairro
-      @inativo.cidade = @cliente.cidade
-      @inativo.uf = @cliente.uf
-      @inativo.cep = @cliente.cep
-      @inativo.pai = @cliente.pai
-      @inativo.mae = @cliente.mae
-      @inativo.nacionalidade = @cliente.nacionalidade
-      @inativo.profissao = @cliente.profissao
-      @inativo.id_ativo = @cliente.id
-      if @inativo.save
-        @cliente.destroy
+    else
+      if @cliente.destroy
         gera_notificacao("admin",@cliente, action_name)
         respond_to do |format|
           format.html { redirect_to clientes_path}
@@ -80,35 +67,46 @@ class ClientesController < ApplicationController
   end
 
   def inativos
-    @inativos = ClientesInativo.search(params[:search], params[:page])
+    @inativos = Cliente.search(params[:search], params[:page], false)
+=begin
+    #remover após alterar sistema com o atributo "ativo"
+    @inativos.each do |inativo|
+      @cliente = Cliente.new
+      @cliente.id = inativo.id_ativo
+      @cliente.nome = inativo.nome
+      @cliente.endereco = inativo.endereco
+      @cliente.rg = inativo.rg
+      @cliente.cpf = inativo.cpf
+      @cliente.telefone = inativo.telefone
+      @cliente.celular = inativo.celular
+      @cliente.email = inativo.email
+      @cliente.nascimento = inativo.nascimento
+      @cliente.bairro = inativo.bairro
+      @cliente.cidade = inativo.cidade
+      @cliente.uf = inativo.uf
+      @cliente.cep = inativo.cep
+      @cliente.pai = inativo.pai
+      @cliente.mae = inativo.mae
+      @cliente.nacionalidade = inativo.nacionalidade
+      @cliente.profissao = inativo.profissao
+      @cliente.ativo = false
+      @cliente.save
+    end
+=end
   end
 
-  def reativar_cliente
-    @inativo = ClientesInativo.find(params[:id])
-    @cliente = Cliente.new
-    @cliente.id = @inativo.id_ativo
-    @cliente.nome = @inativo.nome
-    @cliente.endereco = @inativo.endereco
-    @cliente.rg = @inativo.rg
-    @cliente.cpf = @inativo.cpf
-    @cliente.telefone = @inativo.telefone
-    @cliente.celular = @inativo.celular
-    @cliente.email = @inativo.email
-    @cliente.nascimento = @inativo.nascimento
-    @cliente.bairro = @inativo.bairro
-    @cliente.cidade = @inativo.cidade
-    @cliente.uf = @inativo.uf
-    @cliente.cep = @inativo.cep
-    @cliente.pai = @inativo.pai
-    @cliente.mae = @inativo.mae
-    @cliente.nacionalidade = @inativo.nacionalidade
-    @cliente.profissao = @inativo.profissao
-    if @cliente.save
-      @inativo.destroy
-      respond_to do |format|
-        format.html { redirect_to @cliente, notice: "Cliente nº #{@cliente.id} - #{@cliente.nome} reativado com sucesso." }
+  def alterna_cliente
+    if @cliente.ativo?
+      if @cliente.alunos.any?
+        redirect_to clientes_path, alert: "Exclusão cancelada. O cliente #{@cliente.nome} tem alunos vinculados. Favor excluir os alunos."
+        return
+      else  
+        @cliente.update_attribute(:ativo, false)
       end
+    else
+      @cliente.update_attribute(:ativo, true)
     end
+    redirect_to clientes_path, notice: "Status do cliente #{@cliente.nome} alterado com sucesso."
   end
 
   private

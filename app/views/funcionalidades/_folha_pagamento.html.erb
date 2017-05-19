@@ -1,29 +1,30 @@
-<% total_salarios = 0 %>
-
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Nome do Professor</th>
+      <th>Nome</th>
       <th>Nº Aulas</th>
-      <th>Salário</th>
+      <th>Valor</th>
       <th></th>
     </tr>
   </thead>
-  <tbody>
-    <% @folha_pagamento.each do |professor| %>
-      <tr>
-        <td><%= Professor.find(professor.professor_id).nome %></td>
-        <td><%= professor.n_aulas %></td>
-        <td><%= number_to_currency(professor.salario) %></td>
-      </tr>
-      <% total_salarios += professor.salario %>
-    <% end %>
-  </tbody>
   <tfoot>
     <tr>
+      <td><b>Totais:</b></td>
+      <td><b><%= @total_aulas %></b></td>
+      <td><b><%= number_to_currency(@total_salarios) %></b></td>
       <td></td>
-      <td><b>Total:</b></td>
-      <td><b><%= number_to_currency(total_salarios) %></b></td>
     </tr>
   </tfoot>
+  <tbody>
+    <% @folha_pagamento.each do |professor| %>
+      <% if professor.salario > 0 %>
+        <tr>
+          <td><%= Professor.find(professor.professor_id).nome %></td>
+          <td><%= professor.n_aulas %></td>
+          <td><%= number_to_currency(professor.salario) %></td>
+          <td><center><%= button_to "Visualizar Aulas", Professor.find(professor.professor_id), :class => "btn btn-primary btn-xs", :method => :get  %></center></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
 </table>

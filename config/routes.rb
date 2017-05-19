@@ -27,8 +27,6 @@ Conservatoriohvl::Application.routes.draw do
   get 'ler_notificacoes', to: "funcionalidades#ler_notificacoes"
   get 'funcionalidades/index', to: "funcionalidades#index", as: :funcionalidades
   get 'valor_boletos', to: "funcionalidades#valor_boletos"
-  get 'salario_professores', to: "funcionalidades#salario_professores"
-  get 'salvar_folha', to: "funcionalidades#salvar_folha"
   get 'aluno/busca_dados_cliente', to: "alunos#busca_dados_cliente"
   get 'alunos_inativos', to: "alunos#inativos"
   get 'clientes_inativos', to: "clientes#inativos"
@@ -45,6 +43,7 @@ Conservatoriohvl::Application.routes.draw do
   get 'rematricular', to: "matriculas#rematricular"
   get 'rematricular_base', to: "matriculas#rematricular_base"
   get 'reativar_matricula/:id', to: "matriculas#reativar_matricula", as: :reativar_matricula
-  get 'reativar_cliente/:id', to: "clientes#reativar_cliente", as: :reativar_cliente
-
+  get 'alterna_cliente/:id', to: "clientes#alterna_cliente", as: :alterna_cliente
+  get 'alterna_professor/:id', to: "professores#alterna_professor", as: :alterna_professor
+  get 'alterna_aluno/:id', to: "alunos#alterna_aluno", as: :alterna_aluno
 end

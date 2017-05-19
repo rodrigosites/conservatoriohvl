@@ -43,8 +43,8 @@ class Cliente < ActiveRecord::Base
     super s.titleize
   end
 
-  def self.search(search, page)
+  def self.search(search, page, ativo)
     paginate :per_page => 10, :page => page,
-             :conditions => ['nome like ?', "%#{search}%"]
+             :conditions => ['nome like ? and ativo = ?', "%#{search}%", ativo]
   end
 end
