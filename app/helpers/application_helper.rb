@@ -10,4 +10,8 @@ module ApplicationHelper
   def data(data)
     data.strftime('%d/%m/%Y')
   end
+
+  def por_pagina
+    return 12
+  end
 end

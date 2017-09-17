@@ -12,7 +12,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Nº</th>
       <th>Aluno</th>
       <th>Curso</th>
       <th>Ano</th>
@@ -29,7 +28,6 @@
   <tbody>
     <% @matriculas.each do |matricula| %>
       <tr>
-        <td><%= matricula.id %></td>
         <td><%= matricula.aluno.nome %></td>
         <td><%= matricula.curso.nome %></td>
         <td>

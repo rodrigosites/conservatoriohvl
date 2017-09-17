@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+#gem 'eventmachine', '1.0'
+
 gem 'thin'
 
 gem 'sorcery'

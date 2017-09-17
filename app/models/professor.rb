@@ -50,7 +50,7 @@ class Professor < ActiveRecord::Base
   end
 
   def self.search(search, page, ativo)
-    paginate :per_page => 10, :page => page, :order => 'nome',
+    paginate :per_page => 15, :page => page, :order => 'nome',
              :conditions => ['nome like ? and ativo = ?', "%#{search}%", ativo]
   end
 end

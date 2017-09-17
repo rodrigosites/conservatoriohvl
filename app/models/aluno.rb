@@ -2,6 +2,7 @@ class Aluno < ActiveRecord::Base
   #associações no banco de dados
   belongs_to :cliente
   has_many :matriculas
+  has_many :matinativas
 
   #validações
   validates :cliente_id, :nome, :celular, :nascimento, :pai, :mae, :nacionalidade, presence: true

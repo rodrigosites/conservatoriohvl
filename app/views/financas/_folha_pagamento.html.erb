@@ -1,0 +1,49 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Nº Aulas</th>
+      <th>Valor</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td><b>Totais:</b></td>
+      <td><b><%= @total_aulas %></b></td>
+      <td><b><%= number_to_currency(@total_salarios) %></b></td>
+      <td></td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% @folha_pagamento.each do |professor| %>
+      <% if professor.salario > 0 %>
+        <tr>
+          <td><%= Professor.find(professor.professor_id).nome %></td>
+          <td><%= professor.n_aulas %></td>
+          <td><%= number_to_currency(professor.salario) %></td>
+          <td><center><button value="<%= professor.professor_id %>" class="btn btn-primary btn-xs">Visualizar Aulas</button></center></td>
+        </tr>
+        <tr class="professor<%= professor.professor_id %>" style="display:none;">
+          <td>
+            <table class="table">
+              <% (@aulas.select { |x| x[0] == professor.professor_id }).each do |aula| %>
+                <tr>
+                  <td>Aluno:</td>
+                  <td><%= Aluno.find(aula[1]).nome %></td>
+                  <% if aula.count > 3 %>
+                    <td><%= dia(Horario.find(aula[2]).dia) %> - <%= hora(Horario.find(aula[2]).horario) %></td>
+                    <td><%= aula[3] %> aulas</td>
+                  <% else %>
+                    <td>Matrícula cancelada</td>
+                    <td><%= aula[2] %> aulas</td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -24,7 +24,7 @@ before_action :set_aluno, only: [:show, :edit, :update, :destroy, :alterna_aluno
 
   def create
     @aluno = Aluno.new(aluno_params)
-
+    @aluno.ativo = true
     respond_to do |format|
       if @aluno.save
         gera_notificacao("admin",@aluno, action_name)

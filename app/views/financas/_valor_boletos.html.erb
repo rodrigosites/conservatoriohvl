@@ -1,0 +1,30 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nº Cliente</th>
+      <th>Nome</th>
+      <th>Valor Mensal</th>
+      <th>Matrículas</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dados_cliente.each do |cliente| %>
+      <tr>
+        <td><%= cliente[0] %></td>
+        <td><%= cliente[1] %></td>
+        <td><%= number_to_currency(cliente[2]) %></td>
+        <td><%= cliente[3] %></td>
+        <td><center><%= button_to "Visualizar Matrículas", {controller: "clientes", action: "show", id: cliente[0]}, :class => "btn btn-primary btn-xs", :method => :get  %></center></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td><b>Total:</b></td>
+      <td><b><%= number_to_currency(@total_mensalidades) %></b></td>
+      <td><b><%= @total_matriculas %></td>
+    </tr>
+  </tfoot>
+</table>

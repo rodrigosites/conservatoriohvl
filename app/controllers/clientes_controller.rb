@@ -24,7 +24,7 @@ class ClientesController < ApplicationController
 
   def create
     @cliente = Cliente.new(cliente_params)
-
+    @cliente.ativo = true
     respond_to do |format|
       if @cliente.save
         gera_notificacao("admin",@cliente, action_name)

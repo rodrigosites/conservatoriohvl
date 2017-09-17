@@ -231,7 +231,7 @@ class MatriculasController < ApplicationController
       @inativa.aluno_id = matricula.aluno_id
       @inativa.curso_id = matricula.curso_id
       @inativa.data_matricula = matricula.data_matricula
-      @inativa.termino_matricula = Date.today
+      @inativa.termino_matricula = Date.civil(matricula.data_matricula.to_date.year,-1,-1)
       @inativa.ano = matricula.ano
       @inativa.teoria_ano = matricula.teoria_ano
       @inativa.valor_mensal = matricula.valor_mensal
