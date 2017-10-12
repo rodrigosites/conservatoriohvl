@@ -82,7 +82,7 @@ class FinancasController < ApplicationController
           end
         end
         # Busca nas matrículas inativas e calcula o valor do salário com base na data de matricula
-        Matinativa.where("professor_id = ?", professor.id).each do |inativa|
+        Matinativa.where("professor_id = ? AND termino_matricula >= ?", professor.id, Date.civil(@ano,@mes,1)).each do |inativa|
           if inativa.professor_id == professor.id
             dia = inativa.dia_pratica
           else
