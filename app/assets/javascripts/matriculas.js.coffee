@@ -128,3 +128,4 @@ $ ->
   			data:
   				id: this.name
   				nova_data: $("#encerrada_" + this.name).val()
+  		alert('Alterado com sucesso.')

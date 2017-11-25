@@ -1,4 +1,4 @@
-== README ==
+﻿== README ==
 
 Aplicativo para gerenciamento do Conservatório HVL
 
@@ -38,5 +38,5 @@ Aplicativo para gerenciamento do Conservatório HVL
 
 	- Abertura do sistema: comandar "rails s thin" ou abrir o arquivo "abre servidor.bat";
 	- Backup do banco de dados: comandar mysqldump -u root -p conservatoriohvl_development > conservadev.sql ou abrir o arquivo "backup db.bat";
-	- Importar banco de dados: comandar mysql -u root -p conservatoriohvl_development < conservadev.sql;
+	- Importar banco de dados: comandar mysql -u root -p conservatoriohvl_development < conservadev.sql
 	- Contratos dos alunos são gerados na pasta /private/contratos/ano no formato "id-cliente - nome-cliente - id-matricula".

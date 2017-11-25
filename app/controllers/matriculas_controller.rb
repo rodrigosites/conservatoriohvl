@@ -245,6 +245,15 @@ class MatriculasController < ApplicationController
       @inativa.teoria_ano = matricula.teoria_ano
       @inativa.valor_mensal = matricula.valor_mensal
       @inativa.id_ativa = matricula.id
+      if matricula.horarios.size > 1
+        @inativa.professor_id = matricula.horarios.first.professor_id
+        @inativa.dia_pratica = matricula.horarios.first.dia[0]
+        @inativa.professor_teoria_id = matricula.horarios.last.professor_id
+        @inativa.dia_teoria = matricula.horarios.last.dia[0]
+      else
+        @inativa.professor_id = matricula.horarios.first.professor_id
+        @inativa.dia_pratica = matricula.horarios.first.dia[0]
+      end
       @inativa.save
       #atualiza a data de matricula para a data desejada
       matricula.update_attribute(:data_matricula, params[:data])

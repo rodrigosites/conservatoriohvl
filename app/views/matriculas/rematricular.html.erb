@@ -5,7 +5,7 @@
   <b>Mensalidade Curso Profissional:</b> <%= number_to_currency(@circular.valor_profissionalizante) %><br />
   <b>Mensalidade Instrumento Extra:</b> <%= number_to_currency(@circular.valor_extra) %></h4><br />
   <%= form_tag rematricular_base_path, :method => 'get' do %>
-    <%= label_tag(:data, "Digite a data para rematricular a base de alunos:") %>
+    <%= label_tag(:data, "Digite a data de início desejada para rematricular a base de alunos:") %>
     <%= text_field_tag :data, params[:data], :class => "form-control" %>
     <br />
     <div style="float: left; margin-right: 10px;">
