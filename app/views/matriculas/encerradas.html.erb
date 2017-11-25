@@ -18,7 +18,8 @@
       <th>Teoria</th>
       <th>Valor Mensal</th>
       <th>Data da Matrícula</th>
-      <th>Encerramento da Matrícula</th>
+      <th>Data de Encerramento</th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -32,7 +33,8 @@
         <td><%= matricula.teoria_ano == 0 || matricula.teoria_ano == 99 ? "-" : "#{matricula.teoria_ano}º Ano" %></td>
         <td><%= number_to_currency(matricula.valor_mensal) %></td>
         <td><%= I18n.l(matricula.data_matricula.to_date) %></td>
-        <td><%= I18n.l(matricula.termino_matricula.to_date) %></td>
+        <td><%= text_field 'encerrada', matricula.id, value: I18n.l(matricula.termino_matricula.to_date), class: 'form-control', size: 10 %></td>
+        <td><%= button_tag 'Alterar Encerramento', class: "btn btn-primary btn-xs", id: "encerrada_#{matricula.id}", name: matricula.id %></td>
         <td><%= button_to 'Reativar Matrícula', reativar_matricula_path(matricula), :class => "btn btn-primary btn-xs", :method => :get, data: { confirm: "Tem certeza que deseja reativar a matrícula nº #{matricula.id} - #{matricula.aluno.nome}?" } %></td>    
       </tr>
     <% end %>

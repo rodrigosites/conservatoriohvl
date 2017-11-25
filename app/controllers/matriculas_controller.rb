@@ -206,6 +206,15 @@ class MatriculasController < ApplicationController
     @inativas = Matinativa.search(params[:search], params[:page])
   end
 
+  def altera_encerramento
+    @inativa = Matinativa.find(params[:id])
+    @inativa.update_attribute(:termino_matricula, params[:nova_data])
+    respond_to do |format|
+      format.html { redirect_to matriculas_encerradas_path }
+      format.js
+    end
+  end
+
   def refaz_contrato
     respond_to do |format|
       begin

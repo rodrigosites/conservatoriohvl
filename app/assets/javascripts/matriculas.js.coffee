@@ -118,3 +118,13 @@ $ ->
 	# aplica as máscaras dos campos.
 	$(document).on 'ready page:load', (evt) ->
   		$('#matricula_data_matricula').mask('00/00/0000');
+  		$('input[id^="encerrada"]').mask('00/00/0000');
+
+  	# alterar data de encerramento das matriculas
+  	$(document).on 'click', 'button[id^="encerrada"]', (evt) ->
+  		$.ajax
+  			url: "/altera_encerramento"
+  			type: "GET"
+  			data:
+  				id: this.name
+  				nova_data: $("#encerrada_" + this.name).val()
