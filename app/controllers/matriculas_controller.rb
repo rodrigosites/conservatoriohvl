@@ -267,7 +267,9 @@ class MatriculasController < ApplicationController
       else
         matricula.update_attribute(:valor_mensal, Circular.where(vigente: true).first.valor_extra)
       end
+      gera_contrato(matricula)
     end
+    gera_notificacao("admin","2018", action_name)
     redirect_to matriculas_path, notice: "Base de alunos rematriculada com sucesso para o dia #{params[:data]}."
   end
 

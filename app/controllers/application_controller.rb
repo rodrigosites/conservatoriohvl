@@ -31,8 +31,10 @@ class ApplicationController < ActionController::Base
           @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} cadastrou a Matrícula nº #{modelo.id} - #{modelo.aluno.nome}."
         elsif action_name == "update"
           @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} editou dados da Matrícula nº #{modelo.id} - #{modelo.aluno.nome}."
-        else
+        elsif action_name == "destroy"
           @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} excluiu a Matrícula nº #{modelo.id} - #{modelo.aluno.nome}."
+        else
+          @notificacao.conteudo = "#{I18n.l Date.today} - #{current_user.username.capitalize} rematriculou a base de alunos no exercício de #{modelo}."
         end
       when "horarios"
         if action_name == "create"
