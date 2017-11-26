@@ -144,7 +144,7 @@ DEPENDENCIES
   docx (~> 0.2.07)
   jbuilder (~> 1.2)
   jquery-rails
-  mysql2
+  mysql2 (~> 0.3.16)
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc
