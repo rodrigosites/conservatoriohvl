@@ -120,6 +120,12 @@ class FinancasController < ApplicationController
         p = FolhaPagamento.new(professor_id: professor.id, user_id: current_user.id, mes: @mes, ano: @ano, salario: salario, n_aulas: n_aulas)
         @folha_pagamento << p
         @folha_pagamento.sort! { |a,b| Professor.find(a.professor_id).nome <=> Professor.find(b.professor_id).nome }
+        folha_db = FolhaPagamento.where(professor_id: professor.id, mes: @mes, ano: @ano).first
+        if folha_db.nil?
+          p.save
+        else
+          folha_db.update(professor_id: professor.id, user_id: current_user.id, mes: @mes, ano: @ano, salario: salario, n_aulas: n_aulas)
+        end
         @total_salarios += salario
         @total_aulas += n_aulas
       end
