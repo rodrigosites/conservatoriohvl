@@ -1,0 +1,2 @@
+
+mysql --host=us-cdbr-iron-east-05.cleardb.net --user=bb9b89b104c33b --password=ca6f9ede --reconnect heroku_95f781d9a7983e1 < conservadev-27-11-17.sql

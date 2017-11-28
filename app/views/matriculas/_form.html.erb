@@ -56,13 +56,13 @@
     <% end %>
   </div>
   <div class="form-group">
-    <%= f.label "Valor Mensal", class: "col-sm-0 control-label"  %><br />
+    <%= f.label "Valor Mensal", class: "col-sm-0 control-label"  %><br/>
     <%= f.text_field :valor_mensal, { class: "form-control", :readonly => true }%>
     <%= f.hidden_field :desconto, value: Circular.where(vigente: true).first.desconto %>
-  </div>
-  <div class="form-group">
-    <%= f.label "Aplicar Desconto", class: "col-sm-0 control-label"  %><br />
-    <input type="checkbox" id="desconto_check"> Sim<br>
+    <input type="checkbox" id="destrava_valor" style="transform: scale(1.3)">
+    <%= f.label "Destravar campo valor mensal", class: "col-sm-0 control-label" %><br/>
+    <input type="checkbox" id="desconto_check" style="transform: scale(1.3)">
+    <%= f.label "Aplicar Desconto", class: "col-sm-0 control-label" %><br/>
   </div>
   <div class="form-group">
     <label>Professor do curso Principal:</label><br />

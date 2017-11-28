@@ -2,7 +2,7 @@
   <h2><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Editar Dados da Matrícula</h2>
 </div>
 
-<% if @matricula.valor_mensal == Circular.where(vigente: true).first.valor_extra %>
+<% if @matricula.aulas.size == 1  %>
 
 <%= render 'form_extra' %>
 

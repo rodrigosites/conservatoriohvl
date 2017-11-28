@@ -111,6 +111,13 @@ $ ->
 		else
 			$('#matricula_valor_mensal').val(valor_normal)
 
+	# controla o clique no botão de destravar campo valor.
+	$(document).on 'change', '#destrava_valor', (evt) ->
+		if $('#destrava_valor').prop('checked')
+			$('#matricula_valor_mensal').prop('readonly', false)
+		else
+			$('#matricula_valor_mensal').prop('readonly', true)
+
 	# aplica as máscaras dos campos.
 	$(document).on 'ready page:load', (evt) ->
 		$('#matricula_curso_id').val('')
