@@ -119,7 +119,12 @@ class MatriculasController < ApplicationController
         @matricula.aulas.last.update_attribute(:musicalizacao,true)
         @matricula.aulas.last.update_attribute(:teoria,false)
       end
-      gera_contrato(@matricula)
+      begin
+        gera_contrato(@matricula)
+      rescue Errno::EACCES  
+        render action: 'edit', alert: "Não foi possível gerar o contrato. O arquivo está aberto no Microsoft Word."
+        return
+      end
       respond_to do |format|
         format.html { redirect_to @matricula, notice: "O contrato foi gerado com sucesso e pode ser acessado em 
           \"/Contratos/#{@matricula.data_matricula.to_date.year}/#{@matricula.aluno.cliente.id} - #{@matricula.aluno.cliente.nome} - Matrícula #{@matricula.id}.docx\"" }
@@ -288,6 +293,21 @@ class MatriculasController < ApplicationController
       respond_to do |format|
         format.html { redirect_to edit_matricula_path(@matricula), notice: "Matrícula nº #{@matricula.id} - #{@matricula.aluno.nome} reativada com sucesso." }
       end
+    end
+  end
+
+  def reimprimir_contratos
+    @matriculas = Matricula.all
+    @matriculas.each do |matricula|
+      begin
+        gera_contrato(matricula)
+      rescue Errno::EACCES  
+        redirect_to matriculas_path, alert: "Não foi possível reimprimir os contratos. Um dos arquivos está aberto no Microsoft Word."
+        return
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to matriculas_path, notice: "Os contratos foram reimpressos com sucesso." }
     end
   end
   
