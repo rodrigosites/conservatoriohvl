@@ -26,6 +26,8 @@
             <td><%= aula.matricula.curso.nome %></td>
           <% end %>
           <td><%= aula.matricula.aluno.nome %></td>
+          <td><%= button_to 'Abrir Ficha Matricula', aula.matricula, :class => "btn btn-primary btn-xs", :method => :get  %></td>
+          <td><%= button_to 'Editar Matricula', edit_matricula_path(aula.matricula), :class => "btn btn-primary btn-xs", :method => :get  %></td>
         </tr>
       <% end %>
     <% end %>

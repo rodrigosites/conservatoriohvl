@@ -1,7 +1,7 @@
 $('#professor_id').empty();
 $('#professor_id').append( $('<option value>Selecione um professor</option>'));
-<% if @professores.any? %>
-	<% @professores.each do |professor| %>
+<% if @professores.where(ativo: true).any? %>
+	<% @professores.where(ativo: true).each do |professor| %>
 	  $('#professor_id').append($('<option value="<%= professor.id %>"><%= professor.nome %></option>'));
 	<% end %>
 <% else %>
