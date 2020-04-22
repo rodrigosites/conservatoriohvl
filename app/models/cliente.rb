@@ -3,7 +3,7 @@ class Cliente < ActiveRecord::Base
   has_many :alunos
 
   #validações
-  validates :cpf,:rg, uniqueness: true
+  validates :cpf,:rg, :uniqueness => { :scope => :ativo }
   validates :nome, :endereco, :rg, :cpf, :telefone, :celular, :email, :nascimento, :bairro, :cidade, :uf,
   :cep, :pai, :mae, :nacionalidade, :profissao, presence: true
 
@@ -47,4 +47,5 @@ class Cliente < ActiveRecord::Base
     paginate :per_page => 10, :page => page,
              :conditions => ['nome like ? and ativo = ?', "%#{search}%", ativo]
   end
+
 end

@@ -30,6 +30,7 @@ Conservatoriohvl::Application.routes.draw do
   get 'aluno/busca_dados_cliente', to: "alunos#busca_dados_cliente"
   get 'alunos_inativos', to: "alunos#inativos"
   get 'clientes_inativos', to: "clientes#inativos"
+  get 'email_clientes', to: "clientes#listar_emails"
   get 'professores_inativos', to: "professores#inativos"
   get 'matricula_nova', to: "matriculas#new"
   get 'reimprimir_contratos', to: "matriculas#reimprimir_contratos"

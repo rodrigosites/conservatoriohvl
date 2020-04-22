@@ -109,6 +109,21 @@ class ClientesController < ApplicationController
     redirect_to clientes_path, notice: "Status do cliente #{@cliente.nome} alterado com sucesso."
   end
 
+  def listar_emails
+    @emails = ""
+    @email_ausente = []
+    @clientes = Cliente.all
+    @clientes.each do |cliente|
+      if cliente.alunos.size > 0
+        unless cliente.email == "@"
+          @emails << "#{cliente.email};"
+        else
+          @email_ausente << cliente.nome
+        end
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cliente

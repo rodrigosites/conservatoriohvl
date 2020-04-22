@@ -153,9 +153,12 @@ class MatriculasController < ApplicationController
       @inativa.dia_pratica = @matricula.horarios.first.dia[0]
       @inativa.professor_teoria_id = @matricula.horarios.last.professor_id
       @inativa.dia_teoria = @matricula.horarios.last.dia[0]
-    else
+    elsif !@matricula.horarios.first.nil?
       @inativa.professor_id = @matricula.horarios.first.professor_id
       @inativa.dia_pratica = @matricula.horarios.first.dia[0]
+    elsif !@matricula.horarios.last.nil?
+      @inativa.professor_teoria_id = @matricula.horarios.last.professor_id
+      @inativa.dia_teoria = @matricula.horarios.last.dia[0]
     end
     if @inativa.save
       gera_notificacao("admin",@matricula, action_name)

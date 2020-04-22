@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h2>Lista de e-mail para envio aos Clientes</h2>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Copiar o texto abaixo para colocar no endereço de e-mail do Outlook:</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @emails %></td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Quem não tinha e-mail cadastrado:</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @email_ausente.each do |nome| %>
+      <tr>
+        <td><%= nome %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= button_to 'Voltar', clientes_path, :class => "btn btn-default", :method => :get %>
